@@ -1,9 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import s from './partyList.css';
 
-const partyList = (item) => {
-  console.log(item);
-  return <div className="containerPartyInfo">Это будет список праздников</div>;
-}
+const partyList = data => {
+  const { parties } = data;
+
+  const elParty = parties.map((item, index) => {
+    return (<li key = {index}>{item.name}</li>)
+  })
+  return <ul className="containerPartyInfo">{elParty}</ul>;
+};
 
 export default partyList;

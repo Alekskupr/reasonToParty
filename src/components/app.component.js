@@ -7,10 +7,10 @@ const App = () => {
   const [dataParty, setDataParty] = useState([]);
 
   const getDataParty = () => {
-    fetch('https://murmuring-tor-81614.herokuapp.com/api/goods/')
+    fetch('/api/parties')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         setDataParty(data);
       });
   };
@@ -19,13 +19,13 @@ const App = () => {
     getDataParty();
   }, []);
 
-  console.log(dataParty);
+  // console.log(dataParty);
   return (
     <div className={s.app}>
       <header className={s.header}>Это будет шапка</header>
       <article className={s.nav}>Описание</article>
       <article className={s.partyInfo}>
-        {dataParty? <PartyList item={dataParty}/> : ''}  
+        {dataParty ? <PartyList parties = {dataParty}/> : ''}  
       </article>
       <aside className={s.sidebar}></aside>
       <footer className={s.footer}>Футер</footer>
