@@ -4,14 +4,20 @@ module.exports = {
   entry: './src/index.js',
   mode: 'development',
   output: {
+    path: path.join(__dirname, 'dist'),
     filename: './main.js',
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 9000,
     watchContentBase: true,
     progress: true,
+    port: 9000,
+    open: true,
+    proxy: {
+      '/api': 'http://localhost:8080'
+    }
+
   },
   module: {
     rules: [
@@ -36,7 +42,7 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader']
+        use: ['file-loader'],
       },
     ],
   },

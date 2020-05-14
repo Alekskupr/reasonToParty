@@ -1,10 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import s from './app.component.css';
+import PartyList from './partyList/partyList';
+const { CountryApi } = require('country-api');
 
-class MyComponent extends Component {
-  render() {
-    return <div className={s.intro}>TEST!!!!!!!!!!!!!!</div>;
-  }
-}
+const App = () => {
+  const [dataParty, setDataParty] = useState([]);
 
-export default MyComponent;
+  const getDataParty = () => {
+    fetch('https://murmuring-tor-81614.herokuapp.com/api/goods/')
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setDataParty(data);
+      });
+  };
+
+  useEffect(() => {
+    getDataParty();
+  }, []);
+
+  console.log(dataParty);
+  return (
+    <div className={s.app}>
+      <header className={s.header}>Это будет шапка</header>
+      <article className={s.nav}>Описание</article>
+      <article className={s.partyInfo}>
+        {dataParty? <PartyList item={dataParty}/> : ''}  
+      </article>
+      <aside className={s.sidebar}></aside>
+      <footer className={s.footer}>Футер</footer>
+    </div>
+  );
+};
+
+export default App;

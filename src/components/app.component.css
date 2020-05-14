@@ -1,3 +1,56 @@
-.intro {
+.app {
+  /* background-color: yellow; */
+  border: 1px solid black;
+  display: grid;
+  grid-template-areas:
+  "header header header"
+  "nav article side"
+  "footer footer footer";
+  grid-gap: 5px;
+    grid-template-columns: 200px 1fr 200px;
+    grid-template-rows: 20% 1fr 10%;
+    height: 100vh;
+    margin: 0px;
+}
+
+@media all and (max-width: 767px) {
+  .app {
+    grid-template-areas:
+    "header"
+    "nav"
+    "article"
+    "side"
+    "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 30px 1fr 30px 30px;
+  }
+}
+.header {
+  background-color: blue;
+  grid-area: header;
+}
+
+.nav{
   background-color: yellow;
+  grid-area: nav;
+}
+
+.partyInfo {
+  background-color: rgb(238, 197, 122);
+  grid-area: article;
+}
+
+.sidebar{
+  background-color: orange;
+  grid-area: side;
+}
+
+.footer {
+  background-color: greenyellow;
+  grid-area: footer;
+}
+
+.containerPartyInfo {
+  margin: 0;
+  padding: 0;
 }
