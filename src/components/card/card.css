@@ -1,0 +1,18 @@
+.card {
+  border: 1px solid black;
+  color: red;
+}
+
+.card:first-child{
+  grid-column: 1/4;
+}
+
+.card:nth-child(n+5){
+  display: none;
+}
+
+@media all and (max-width: 767px) {
+  .card:first-child{
+    grid-column: 1/2;
+  }
+}

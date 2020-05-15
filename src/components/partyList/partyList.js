@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import s from './partyList.css';
+import Card from '../card/card';
 
 const partyList = data => {
   const { parties } = data;
 
-  const elParty = parties.map((item, index) => {
-    return (<li key = {index}>{item.name}</li>)
-  })
-  return <ul className="containerPartyInfo">{elParty}</ul>;
+return <div className={s.containerPartyInfo}>{parties ? parties.map((item, index)=>{return <Card {...item} key = {index}/>}) : 'идет загрузка информации'}</div>;
 };
 
 export default partyList;

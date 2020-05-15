@@ -7,10 +7,10 @@
   "nav article side"
   "footer footer footer";
   grid-gap: 5px;
-    grid-template-columns: 200px 1fr 200px;
-    grid-template-rows: 20% 1fr 10%;
-    height: 100vh;
-    margin: 0px;
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-rows: 20% 1fr 10%;
+  height: 100vh;
+  margin: 0px;
 }
 
 @media all and (max-width: 767px) {
@@ -38,6 +38,7 @@
 .partyInfo {
   background-color: rgb(238, 197, 122);
   grid-area: article;
+  height: 100vh;
 }
 
 .sidebar{
