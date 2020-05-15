@@ -11,6 +11,8 @@
   grid-template-rows: 20% 1fr 10%;
   height: 100vh;
   margin: 0px;
+  background-color: rgba(33, 149, 243, 0.15);;
+  
 }
 
 @media all and (max-width: 767px) {
@@ -27,27 +29,27 @@
   }
 }
 .header {
-  background-color: blue;
+  /* background-color: blue; */
   grid-area: header;
 }
 
 .nav{
-  background-color: yellow;
+  /* background-color: yellow; */
   grid-area: nav;
 }
 
 .partyInfo {
-  background-color: rgb(238, 197, 122);
+  /* background-color: rgb(238, 197, 122); */
   grid-area: article;
 }
 
 .sidebar{
-  background-color: orange;
+  /* background-color: orange; */
   grid-area: side;
 }
 
 .footer {
-  background-color: greenyellow;
+  /* background-color: greenyellow; */
   grid-area: footer;
 }
 
