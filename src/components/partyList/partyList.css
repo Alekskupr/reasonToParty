@@ -5,16 +5,14 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 2fr 1fr;
   grid-gap: 5px;
+  border:2px solid red;
   height: 100%;
 }
 
 @media all and (max-width: 767px) {
   .containerPartyInfo {
-    /* display: flex;
-    flex-direction: column;
-    justify-content:  */
-    display:grid;
     grid-template-columns: 1fr;
-    grid-auto-rows: 200px;
+    grid-template-rows: none;
+    grid-auto-rows: 50vw;
   }
 }

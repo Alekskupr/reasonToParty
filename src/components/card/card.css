@@ -15,4 +15,7 @@
   .card:first-child{
     grid-column: 1/2;
   }
+  .card:nth-child(n+5) {
+    display:block;
+  }
 }

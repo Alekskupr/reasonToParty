@@ -10,9 +10,10 @@ const App = () => {
     fetch('/api/parties')
       .then(res => res.json())
       .then(data => {
-        // console.log(data);
+        console.log(data);
         setDataParty(data);
-      });
+      })
+      .catch(console.log('чет не грузится пока'))
   };
 
   useEffect(() => {
