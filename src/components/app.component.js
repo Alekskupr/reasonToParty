@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import s from './app.component.css';
 import PartyList from './partyList/partyList';
+import Header from './header/header';
+
 const { CountryApi } = require('country-api');
 
 const App = () => {
@@ -23,7 +25,8 @@ const App = () => {
   // console.log(dataParty);
   return (
     <div className={s.app}>
-      <header className={s.header}>Это будет шапка</header>
+      {/* <header className={s.header}>Это будет шапка</header> */}
+      <Header />
       <article className={s.nav}>Описание</article>
       <article className={s.partyInfo}>
         {dataParty ? <PartyList parties = {dataParty}/> : ''}  

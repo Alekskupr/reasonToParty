@@ -2,9 +2,13 @@
   /* border: 1px solid black; */
   color: #4a4a4a;
   border-radius: 5px;
-  box-shadow: 0px 3px 3px 1px rgba(34, 60, 80, 0.5), 0px 0px 3px 1px rgba(34, 60, 80, 0.5);
+  /* box-shadow: 0px 3px 3px 1px rgba(34, 60, 80, 0.5), 0px 0px 3px 1px rgba(34, 60, 80, 0.5); */
   margin: 5px;
   background-color: white;
+}
+
+.card:hover {
+  box-shadow: 0px 3px 3px 1px rgba(34, 60, 80, 0.5), 0px 0px 3px 1px rgba(34, 60, 80, 0.5);
 }
 
 .card:first-child {

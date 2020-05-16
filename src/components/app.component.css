@@ -1,6 +1,11 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 .app {
   /* background-color: yellow; */
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: grid;
   grid-template-areas:
   "header header header"
@@ -8,8 +13,8 @@
   "footer footer footer";
   grid-gap: 5px;
   grid-template-columns: 200px 1fr 200px;
-  grid-template-rows: 20% 1fr 10%;
-  height: 100vh;
+  grid-template-rows: 10% 1fr 10%;
+  min-height: 100vh;
   margin: 0px;
   background-color: rgba(33, 149, 243, 0.15);;
   
@@ -28,10 +33,10 @@
     grid-template-rows: 50px 30px 1fr 30px 30px;
   }
 }
-.header {
-  /* background-color: blue; */
+/* .header {
+  background-color: blue;
   grid-area: header;
-}
+} */
 
 .nav{
   /* background-color: yellow; */
