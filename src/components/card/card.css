@@ -2,7 +2,6 @@
   /* border: 1px solid black; */
   color: #4a4a4a;
   border-radius: 5px;
-  /* box-shadow: 0px 3px 3px 1px rgba(34, 60, 80, 0.5), 0px 0px 3px 1px rgba(34, 60, 80, 0.5); */
   margin: 5px;
   background-color: white;
 }
@@ -13,17 +12,68 @@
 
 .card:first-child {
   grid-column: 1/4;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    'nameArea emptyArea flagArea'
+    'infoArea infoArea subflagArea'
+    'infoArea infoArea likeArea';
 }
 
-.card:nth-child(n+5){
+.card:nth-child(n + 5) {
   display: none;
 }
 
 @media all and (max-width: 767px) {
-  .card:first-child{
+  .card:first-child {
     grid-column: 1/2;
   }
-  .card:nth-child(n+5) {
-    display:block;
+  .card:nth-child(n + 5) {
+    display: block;
   }
+}
+
+.nameArea {
+  grid-area: nameArea;
+  border: 1px solid black;
+}
+
+.emptyArea {
+  grid-area: emptyArea;
+  border: 1px solid black;
+}
+
+.flagArea {
+  grid-area: flagArea;
+  border: 1px solid black;
+  position: relative;
+  padding: 10%;
+}
+
+.infoArea {
+  grid-area: infoArea;
+  border: 1px solid black;
+}
+
+.subflagArea {
+  grid-area: subflagArea;
+  border: 1px solid black;
+}
+
+.likeArea {
+  grid-area: likeArea;
+  border: 1px solid black;
+}
+
+.flag {
+  border: 1px solid red;
+  height: 0;
+  padding-bottom: 100%;
+  border-radius: 50%;
+  /* position: absolute; */
+  /* left: 50%; */
+  /* top: 50%; */
+  /* transform: translate(-50%, -50%); */
 }

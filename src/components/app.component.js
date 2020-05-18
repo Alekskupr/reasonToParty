@@ -3,10 +3,10 @@ import s from './app.component.css';
 import PartyList from './partyList/partyList';
 import Header from './header/header';
 
-const { CountryApi } = require('country-api');
 
 const App = () => {
   const [dataParty, setDataParty] = useState([]);
+  const [dataCounty, setDataCountry] = useState([]);
 
   const getDataParty = () => {
     fetch('/api/parties')
@@ -18,8 +18,27 @@ const App = () => {
       .catch(console.log('чет не грузится пока'))
   };
 
+  const getDataCountry = () => {
+    fetch('/api/parties/countries')
+    then(res => {
+      res.json();
+      console.log(res)
+    })
+    // then(data => {
+    //   console.log(data);
+    //   setDataCountry(data);
+    // })
+    .catch(console.log('страны не прогрузились')
+    )
+  };
+
   useEffect(() => {
     getDataParty();
+    
+  }, []);
+
+  useEffect(() => {
+    getDataCountry();
   }, []);
 
   // console.log(dataParty);
