@@ -12,7 +12,7 @@ const App = () => {
     fetch('/api/parties')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         setDataParty(data);
       })
       .catch(console.log('чет не грузится пока'))
@@ -20,35 +20,27 @@ const App = () => {
 
   const getDataCountry = () => {
     fetch('/api/parties/countries')
-    then(res => {
-      res.json();
-      console.log(res)
-    })
-    // then(data => {
-    //   console.log(data);
-    //   setDataCountry(data);
-    // })
+    .then(resp => resp.json())
+    .then(data => setDataCountry(data))
     .catch(console.log('страны не прогрузились')
     )
   };
 
   useEffect(() => {
     getDataParty();
-    
   }, []);
 
   useEffect(() => {
     getDataCountry();
   }, []);
 
-  // console.log(dataParty);
+  // console.log(dataCounty);
   return (
     <div className={s.app}>
-      {/* <header className={s.header}>Это будет шапка</header> */}
       <Header />
       <article className={s.nav}>Описание</article>
       <article className={s.partyInfo}>
-        {dataParty ? <PartyList parties = {dataParty}/> : ''}  
+        {dataParty.length && dataCounty.length && <PartyList parties={dataParty} countries={dataCounty} />}
       </article>
       <aside className={s.sidebar}></aside>
       <footer className={s.footer}>Футер</footer>

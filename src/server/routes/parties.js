@@ -10,10 +10,10 @@ router.get('/', async (req, res) => {
   await res.json(reasons);
 });
 
-router.get('/countries', async (req, res) => {
+router.get('/countries', (req, res) => {
   fetch('https://restcountries.eu/rest/v2/all')
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => res.json(data))
     .catch(err => console.log('Error:', err));
 })
 

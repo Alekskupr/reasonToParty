@@ -4,11 +4,11 @@ import c from './header.css';
 const Header = () => {
   return (
     <header className={c.containerHeader}>
-      <div class="logoDiv">
+      <div className="logoDiv">
         тут будет логотип
       </div>
-      <div class="emptyDiv"></div>
-      <div class="navDiv">кнопочки</div>
+      <div className="emptyDiv"></div>
+      <div className="navDiv">кнопочки</div>
     </header>
   );
 };

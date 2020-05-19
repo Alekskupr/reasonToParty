@@ -1,9 +1,16 @@
 .card {
-  /* border: 1px solid black; */
   color: #4a4a4a;
   border-radius: 5px;
   margin: 5px;
   background-color: white;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 10vw 1fr 10vw;
+  grid-template-areas:
+    'nameArea emptyArea flagArea'
+    'infoArea infoArea subflagArea'
+    'infoArea infoArea likeArea';
 }
 
 .card:hover {
@@ -11,15 +18,16 @@
 }
 
 .card:first-child {
+  /* border: 2px solid red; */
   grid-column: 1/4;
-  display: grid;
+  /* display: grid;
   grid-gap: 5px;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
     'nameArea emptyArea flagArea'
     'infoArea infoArea subflagArea'
-    'infoArea infoArea likeArea';
+    'infoArea infoArea likeArea'; */
 }
 
 .card:nth-child(n + 5) {
@@ -31,7 +39,7 @@
     grid-column: 1/2;
   }
   .card:nth-child(n + 5) {
-    display: block;
+    display: grid;
   }
 }
 
@@ -49,7 +57,7 @@
   grid-area: flagArea;
   border: 1px solid black;
   position: relative;
-  padding: 10%;
+  /* padding: 20%; */
 }
 
 .infoArea {
@@ -68,12 +76,17 @@
 }
 
 .flag {
-  border: 1px solid red;
-  height: 0;
-  padding-bottom: 100%;
-  border-radius: 50%;
-  /* position: absolute; */
-  /* left: 50%; */
-  /* top: 50%; */
-  /* transform: translate(-50%, -50%); */
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+}
+
+.flagImage {
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
