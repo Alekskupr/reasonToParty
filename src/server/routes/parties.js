@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // const Countries = require('Countries-Api');
+const wtf = require('wtf_wikipedia');
 
 const fetch = require('node-fetch');
 
@@ -15,6 +16,13 @@ router.get('/countries', (req, res) => {
     .then(res => res.json())
     .then(data => res.json(data))
     .catch(err => console.log('Error:', err));
+})
+
+router.post('/', (req, res) => {
+  console.log(req.body.party);
+  
+  wtf.fetch(`${req.body.party.name}`).then(data => data.json())
+  .then(data => res.json(data))
 })
 
 module.exports = router;

@@ -42,7 +42,8 @@
     "react-inlinesvg": "^1.2.0",
     "react-router-dom": "^5.2.0",
     "react-svg": "^11.0.21",
-    "react-svg-loader": "^3.0.3"
+    "react-svg-loader": "^3.0.3",
+    "wtf_wikipedia": "^8.2.1"
   },
   "babel": {
     "presets": [
