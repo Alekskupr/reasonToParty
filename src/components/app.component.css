@@ -16,8 +16,7 @@ html, body {
   grid-template-rows: 50px 1fr 50px;
   min-height: 100vh;
   margin: 0px;
-  /* background-color: rgba(30, 31, 32, 0.15); */
-  background-color: #2196f3;
+  background-color: rgba(30, 31, 32, 0.15);
 }
 
 @media all and (max-width: 767px) {

@@ -3,7 +3,6 @@ import s from './app.component.css';
 import PartyList from './partyList/partyList';
 import Header from './header/header';
 
-
 const App = () => {
   const [dataParty, setDataParty] = useState([]);
   const [dataCounty, setDataCountry] = useState([]);
@@ -40,8 +39,7 @@ const App = () => {
         }),
       })
         .then(resp => resp.json())
-        .then(res => setInfoParty(res))
-        .catch(err => setInfoParty({err}));   
+        .then(res => setInfoParty(res));    
     }
   };
 

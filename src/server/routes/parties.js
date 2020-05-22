@@ -21,11 +21,8 @@ router.get('/countries', (req, res) => {
 router.post('/', (req, res) => {
   console.log(req.body.party);
   
-  wtf
-    .fetch(`${req.body.party.name}`)
-    .then(data => data.text().substring(0, 1000))
-    .then(data => res.json(data))
-    .catch(err => res.json({err: 'нет данных о празднике'}));
+  wtf.fetch(`${req.body.party.name}`).then(data => data.json())
+  .then(data => res.json(data))
 })
 
 module.exports = router;
