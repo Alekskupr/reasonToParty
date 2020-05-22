@@ -5,6 +5,8 @@ import Card from '../card/card';
 const partyList = data => {
 
   const { parties, countries, info } = data;
+  
+  
 
   const [combinedDataParties, setcombinedDataParties] = useState([]);
 
@@ -18,14 +20,15 @@ const partyList = data => {
   };
 
   useEffect(() => {
-    combine(parties, countries, info);
+    combine(parties, countries);
   },);
+
 
   return (
     <div className={s.containerPartyInfo}>
       {combinedDataParties
         ? combinedDataParties.map((item, index) => {
-            return <Card party = {item} key={index} info = {index === 0 ? info : ''}/>;
+            return <Card party = {item} key={index} info = {index === 0 ? info : []}/>;
           })
         : 'идет загрузка информации'}
     </div>
