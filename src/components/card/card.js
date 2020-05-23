@@ -1,34 +1,33 @@
 import React, {iseState, useEffect} from 'react';
 import s from './card.css';
 import Like from '../like/like';
-import Cocktail from '../cocktail/cocktail';
-
 
 
 const Card = ({party, info}) => {
   
   return (
     <div className={s.card}>
-      <div className={s.nameArea}>
-        {party.name}
-        {party.date}
-      </div>
-      <div className={s.infoArea}>
-        {/* {info ? <span>{info.sections[0].paragraphs[0].sentences[0].text}</span> : ''} */}
-        {info.length ? <span>{info}</span> : <span>{info.err}</span>}
-        {/* {info} */}
-      </div>
-      <div className={s.emptyArea}>пустая область</div>
       <div className={s.flagArea}>
         <div className={s.flag}>
           {party.flag ? <img className={s.flagImage} src={party.flag} /> : <span>опять не прогрузилось</span>}
         </div>
       </div>
-      <div className={s.subflagArea}>пустое место под флагом</div>
+      <div className={s.nameArea}>
+      <h4>{party.name}</h4>
+      </div>
+      <div className={s.dateArea}>{party.date}</div>
+      {/* <div className={s.infoArea}> */}
+      {/* {info ? <span>{info.sections[0].paragraphs[0].sentences[0].text}</span> : ''} */}
+      {/* {info.length ? <span>{info}</span> : <span>{info.err}</span>} */}
+      {/* {info} */}
+      {/* </div> */}
+      {/* <div className={s.emptyArea}>пустая область</div> */}
+
+      <div className={s.country}>название страны</div>
       <div className={s.likeArea}>
-        {/* <button><Like /></button> */}
+        <button className = {s.infoButton}>INFO</button>
         <button>
-          <Cocktail />
+          <Like />
         </button>
       </div>
     </div>

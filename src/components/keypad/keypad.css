@@ -1,0 +1,13 @@
+.clsKeypad1 {
+  /* fill:#fff; */
+  opacity:0;
+}
+.clsKeypad2 {
+  fill:#fff;
+}
+
+.keypad {
+  width: 20px;
+  height: 20px;
+  margin: auto;
+}

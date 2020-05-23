@@ -1,6 +1,13 @@
 html, body {
   margin: 0;
   padding: 0;
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 16px;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
 }
 
 .app {
@@ -61,4 +68,8 @@ html, body {
 .containerPartyInfo {
   margin: 0;
   padding: 0;
+}
+
+h4 {
+  margin: 0;
 }
