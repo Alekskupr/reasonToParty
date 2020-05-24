@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import s from './partyList.css';
 import Card from '../card/card';
+import CardInfo from '../cardInfo/cardInfo';
 
 const partyList = data => {
 
-  const { parties, countries, info } = data;
+  const { parties, countries } = data;
   
   
 
@@ -28,7 +29,7 @@ const partyList = data => {
     <div className={s.containerPartyInfo}>
       {combinedDataParties
         ? combinedDataParties.map((item, index) => {
-            return <Card party = {item} key={index} info = {index === 0 ? info : []}/>;
+            return <Card party = {item} key={index} />;
           })
         : 'идет загрузка информации'}
     </div>
