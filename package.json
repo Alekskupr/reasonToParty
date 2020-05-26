@@ -34,23 +34,21 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "babel-polyfill": "^6.26.0",
     "clean-webpack-plugin": "^3.0.0",
     "country-api": "0.0.3",
     "html-webpack-plugin": "^4.3.0",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-inlinesvg": "^1.2.0",
+    "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-svg": "^11.0.21",
     "react-svg-loader": "^3.0.3",
+    "redux": "^4.0.5",
     "wtf_wikipedia": "^8.2.1"
-  },
-  "babel": {
-    "presets": [
-      "@babel/env",
-      "@babel/react"
-    ]
   }
 }

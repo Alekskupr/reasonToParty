@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import s from './card.css';
 import Like from '../like/like';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectPartyNameAC } from '../../redux/action';
 
 const Card = ({ party }) => {
+
   const [isOpenCardInfo, setIsOpenCardInfo] = useState(false);
-  const [infoParty, setInfoParty] = useState(0);
+  const dispatch = useDispatch();
 
-
-  const changeCard = e => {
+  const changeCard = () => {
+    dispatch(selectPartyNameAC(party));
     setIsOpenCardInfo(!isOpenCardInfo);
   };
 
-
   return (
     <div className={isOpenCardInfo ? s.cardOpen : s.card}>
+      {/* <div>{JSON.stringify(party.info)}</div> */}
       <div className={s.flagArea}>
         <div className={s.flag}>
           {party.flag ? <img className={s.flagImage} src={party.flag} /> : <span>опять не прогрузилось</span>}
@@ -24,9 +27,10 @@ const Card = ({ party }) => {
       </div>
       <div className={s.dateArea}>{party.date}</div>
       {isOpenCardInfo ? (
-        <div className={s.infoArea}>{infoParty.length ? <span>{infoParty}</span> : <span>{infoParty.err}</span>}</div>
+        <div className={s.infoArea}>
+          <span>{party.info}</span>
+        </div>
       ) : null}
-      {/* {info ? <span>{info.sections[0].paragraphs[0].sentences[0].text}</span> : ''} */}
 
       <div className={s.country}>название страны</div>
       <div className={s.likeArea}>

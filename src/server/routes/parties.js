@@ -16,16 +16,21 @@ router.get('/countries', (req, res) => {
     .then(res => res.json())
     .then(data => res.json(data))
     .catch(err => console.log('Error:', err));
-})
+});
 
 router.post('/', (req, res) => {
-  console.log(req.body.party);
-  
+  const infoObject = { text: null, partyName: null };
+
   wtf
-    .fetch(`${req.body.party.name}`)
+    .fetch(`${req.body.name}`)
     .then(data => data.text().substring(0, 1000))
+    // .then(info => {
+    //   infoObject[text] = info;
+    //   infoObject.partyName = req.body.partyName;
+    //   return infoObject;
+    // })
     .then(data => res.json(data))
-    .catch(err => res.json({err: 'нет данных о празднике'}));
-})
+    .catch(() => res.json({ err: 'нет данных о празднике' }));
+});
 
 module.exports = router;
