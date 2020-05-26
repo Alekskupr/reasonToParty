@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectPartyNameAC } from '../../redux/action';
 
 const Card = ({ party }) => {
-
+  console.log(party);
+  
   const [isOpenCardInfo, setIsOpenCardInfo] = useState(false);
   const dispatch = useDispatch();
 
@@ -19,7 +20,7 @@ const Card = ({ party }) => {
       {/* <div>{JSON.stringify(party.info)}</div> */}
       <div className={s.flagArea}>
         <div className={s.flag}>
-          {party.flag ? <img className={s.flagImage} src={party.flag} /> : <span>опять не прогрузилось</span>}
+          {party.flag ? <img className={s.flagImage} src={party.flag} /> : <span>не прогрузилось</span>}
         </div>
       </div>
       <div className={s.nameArea}>
@@ -32,7 +33,7 @@ const Card = ({ party }) => {
         </div>
       ) : null}
 
-      <div className={s.country}>название страны</div>
+      <div className={s.country}>{party.country}</div>
       <div className={s.likeArea}>
         <button onClick={changeCard} className={s.infoButton}>
           {isOpenCardInfo ? <span>Close</span> : <span>INFO</span>}

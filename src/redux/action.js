@@ -5,4 +5,11 @@ const selectPartyNameAC = party => {
   };
 };
 
-export{ selectPartyNameAC };
+const downloadInfoAC = () => {
+  return { 
+    type: 'DOWNLOAD_INFO', 
+    payload: true,
+  };
+};
+
+export { selectPartyNameAC, downloadInfoAC };

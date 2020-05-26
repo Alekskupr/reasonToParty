@@ -19,7 +19,6 @@ router.get('/countries', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const infoObject = { text: null, partyName: null };
 
   wtf
     .fetch(`${req.body.name}`)
@@ -30,7 +29,7 @@ router.post('/', (req, res) => {
     //   return infoObject;
     // })
     .then(data => res.json(data))
-    .catch(() => res.json({ err: 'нет данных о празднике' }));
+    .catch(() => res.json('Sorry! There is no information about this holiday...'));
 });
 
 module.exports = router;

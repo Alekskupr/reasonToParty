@@ -3,6 +3,7 @@ import s from './app.component.css';
 import PartyList from './partyList/partyList';
 import Header from './header/header';
 import { useSelector, useDispatch } from 'react-redux';
+import { downloadInfoAC } from '../redux/action';
 
 const App = () => {
   const [dataParty, setDataParty] = useState([]);
@@ -20,7 +21,6 @@ const App = () => {
 
   const dispatch = useDispatch();
   const downloadInfo = useSelector(store => store.downloadInfo);
-
 
   const getDataParty = () => {
     fetch('/api/parties')
@@ -58,8 +58,8 @@ const App = () => {
             // setInfoParty(res)
             (party.info = res),
         )
-        .then(() => dispatch({ type: 'DOWNLOAD_INFO', payload: true }))
-        .catch(err => setInfoParty({ err }));
+        .then(() => dispatch(downloadInfoAC()))
+        .catch((err) => console.log(err));
     }
   };
 

@@ -3,9 +3,7 @@ import s from './partyList.css';
 import Card from '../card/card';
 
 const partyList = data => {
-  const { parties, countries, downloadInfo } = data;
-  
-  console.log(downloadInfo);
+  const { parties, countries } = data;
 
   const [combinedDataParties, setcombinedDataParties] = useState([]);
 
@@ -13,6 +11,7 @@ const partyList = data => {
     for (let i = 0; i < partiesArr.length; i++) {
       const countrySearch = countriesArr.filter(item => item.alpha2Code === partiesArr[i].countryCode);
       partiesArr[i].flag = countrySearch[0].flag;
+      partiesArr[i].country = countrySearch[0].name;
     }
     setcombinedDataParties(partiesArr);
   };
