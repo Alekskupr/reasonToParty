@@ -4,13 +4,18 @@ import PartyList from './partyList/partyList';
 import Header from './header/header';
 import { useSelector, useDispatch } from 'react-redux';
 import { downloadInfoAC } from '../redux/action';
+import Footer from './footer/footer';
+import FilterPanel from './filter/filter';
 
 const App = () => {
+
+  // console.log(Footer);
+  
   const [dataParty, setDataParty] = useState([]);
   const [dataCounty, setDataCountry] = useState([]);
 
   // const [selectedParty, setSelectedParty] = useState(0);
-  const [infoParty, setInfoParty] = useState(0);
+
 
   // const [isOpenCardInfo, setIsOpenCardInfo] = useState(true);
   // const selectedParty = useSelector(store => store.selectPartyName);
@@ -78,14 +83,15 @@ const App = () => {
   return (
     <div className={s.app}>
       <Header />
-      <article className={s.nav}>{infoParty}</article>
+      <FilterPanel className={s.nav} countries={dataCounty} />
       <article className={s.partyInfo}>
         {dataParty.length && dataCounty.length && (
           <PartyList parties={dataParty} countries={dataCounty} downloadInfo={downloadInfo} />
         )}
       </article>
       <aside className={s.sidebar}></aside>
-      <footer className={s.footer}>Футер</footer>
+      {/* <footer className={s.footer}>Футер</footer> */}
+      <Footer />
     </div>
   );
 };

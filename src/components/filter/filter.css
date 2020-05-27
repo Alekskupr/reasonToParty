@@ -1,0 +1,9 @@
+.containerFilter {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.containerFilter * {
+  margin: 10px;
+}

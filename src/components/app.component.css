@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-family: 'Pragmatica-Light', Helvetica,Arial,sans-serif;
+  font-family: 'Pragmatica-Light', Helvetica, Arial, sans-serif;
   font-size: 16px;
 }
 
@@ -47,7 +47,6 @@ button {
 } */
 
 .nav{
-  /* background-color: yellow; */
   grid-area: nav;
 }
 
@@ -61,10 +60,9 @@ button {
   grid-area: side;
 }
 
-.footer {
-  /* background-color: greenyellow; */
+/* .footer {
   grid-area: footer;
-}
+} */
 
 .containerPartyInfo {
   margin: 0;

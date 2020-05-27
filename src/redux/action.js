@@ -12,4 +12,11 @@ const downloadInfoAC = () => {
   };
 };
 
-export { selectPartyNameAC, downloadInfoAC };
+const combinedDataPartiesAC = (countryArr) => {
+  return {
+    type: 'COMBINED_DATA',
+    payload: countryArr,
+  }
+}
+
+export { selectPartyNameAC, downloadInfoAC, combinedDataPartiesAC };
