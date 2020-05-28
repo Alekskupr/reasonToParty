@@ -9,6 +9,12 @@ const FilterPanel = data => {
     setSelectCountryFilter(e.target.value);
   };
 
+
+    useEffect(() => {
+      console.log(data);
+    }, []); // <-- should error and offer autofix to [props.name]
+
+
   return (
     <div className={c.containerFilter}>
       <input></input>

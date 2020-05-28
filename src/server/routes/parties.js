@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 // const Countries = require('Countries-Api');
 const wtf = require('wtf_wikipedia');
@@ -13,22 +14,21 @@ router.get('/', async (req, res) => {
 
 router.get('/countries', (req, res) => {
   fetch('https://restcountries.eu/rest/v2/all')
-    .then(res => res.json())
-    .then(data => res.json(data))
-    .catch(err => console.log('Error:', err));
+    .then((resp) => resp.json())
+    .then((data) => res.json(data))
+    .catch((err) => console.log('Error:', err));
 });
 
 router.post('/', (req, res) => {
-
   wtf
     .fetch(`${req.body.name}`)
-    .then(data => data.text().substring(0, 1000))
+    .then((data) => data.text().substring(0, 1000))
     // .then(info => {
     //   infoObject[text] = info;
     //   infoObject.partyName = req.body.partyName;
     //   return infoObject;
     // })
-    .then(data => res.json(data))
+    .then((data) => res.json(data))
     .catch(() => res.json('Sorry! There is no information about this holiday...'));
 });
 

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import s from './card.css';
 import Like from '../like/like';
-import { useSelector, useDispatch } from 'react-redux';
 import { selectPartyNameAC } from '../../redux/action';
 
-const Card = ({ party }) => {
+const Card = (party) => {
   console.log(party);
-  
+
   const [isOpenCardInfo, setIsOpenCardInfo] = useState(false);
   const dispatch = useDispatch();
 
@@ -20,7 +20,11 @@ const Card = ({ party }) => {
       {/* <div>{JSON.stringify(party.info)}</div> */}
       <div className={s.flagArea}>
         <div className={s.flag}>
-          {party.flag ? <img className={s.flagImage} src={party.flag} /> : <span>не прогрузилось</span>}
+          {party.flag ? (
+            <img className={s.flagImage} src={party.flag} alt={party.name} />
+          ) : (
+            <span>не прогрузилось</span>
+          )}
         </div>
       </div>
       <div className={s.nameArea}>
@@ -48,5 +52,5 @@ const Card = ({ party }) => {
 
 export default Card;
 
-/*Icons made by <a href="https://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> */
-/*Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>*/
+/* Icons made by <a href="https://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor Cresnar</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> */
+/* Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> */
