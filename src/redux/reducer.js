@@ -1,6 +1,7 @@
 const initialState = {
   selectPartyName: {},
   downloadInfo: false,
+  selectCountry: null,
 };
 
 export default function (state = initialState, action) {
@@ -18,6 +19,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         downloadInfo: action.payload,
+      };
+    }
+    case 'SELECT_COUNTRY': {
+      return {
+        ...state,
+        selectCountry: action.payload,
       };
     }
     default:

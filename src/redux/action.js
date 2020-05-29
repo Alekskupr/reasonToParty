@@ -12,4 +12,8 @@ const downloadInfoAC = () => {
   };
 };
 
-export { selectPartyNameAC, downloadInfoAC };
+const selectCountryAC = (country) => {
+  return { type: 'SELECT_COUNTRY', payload: country };
+};
+
+export { selectPartyNameAC, downloadInfoAC, selectCountryAC };

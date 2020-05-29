@@ -25,11 +25,6 @@ router.post('/', (req, res) => {
   wtf
     .fetch(`${req.body.name}`)
     .then((data) => data.text().substring(0, 1000))
-    // .then(info => {
-    //   infoObject[text] = info;
-    //   infoObject.partyName = req.body.partyName;
-    //   return infoObject;
-    // })
     .then((data) => res.json(data))
     .catch(() => res.json('Sorry! There is no information about this holiday...'));
 });

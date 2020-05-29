@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import s from './app.component.css';
 import PartyList from './partyList/partyList';
 import Header from './header/header';
-import { downloadInfoAC } from '../redux/action';
+import { downloadInfoAC} from '../redux/action';
 import Footer from './footer/footer';
 import FilterPanel from './filter/filter';
 
@@ -14,7 +14,15 @@ const App = () => {
   const [dataCounty, setDataCountry] = useState([]);
 
   const [combinedDataParties, setcombinedDataParties] = useState([]);
+  const [dataPartiesForList, setDataPartiesForList] = useState([]);
 
+  const [selectCountry, setSelectCountry] = useState([]);
+
+  const selectedCountry = useSelector((store) => {
+    return store.selectCountry;
+  });
+
+  // useEffect(()=> {})
   // const [selectedParty, setSelectedParty] = useState(0);
 
   // const [isOpenCardInfo, setIsOpenCardInfo] = useState(true);
@@ -54,7 +62,6 @@ const App = () => {
 
   useEffect(() => {
     const partyInfoSearch = (party, combinedData) => {
-      console.log('partyInfoSearch func');
       const { name, country } = party;
       if (name) {
         fetch(`/api/parties/`, {
@@ -75,9 +82,7 @@ const App = () => {
             };
           })
           .then((patryWithInfo) => {
-            const index = combinedData.findIndex((item) => item.name === name);
-            console.log(index);
-
+            const index = combinedData.findIndex((item) => item.name === name && item.country === country);
             const newCombinedDataParties = [
               ...combinedData.slice(0, index),
               patryWithInfo,
@@ -85,13 +90,13 @@ const App = () => {
             ];
             return newCombinedDataParties;
           })
-          .then((result) => setcombinedDataParties(result))
+          .then((result) => setDataPartiesForList(result))
           .then(() => dispatch(downloadInfoAC()))
           .catch((err) => console.log(err));
       }
     };
     partyInfoSearch(selectedParty, combinedDataParties);
-  }, [selectedParty, dispatch]);
+  }, [selectedParty, dispatch, combinedDataParties]);
 
   useEffect(() => {
     const combine = (dataPartyArr, dataCountyArr) => {
@@ -108,14 +113,16 @@ const App = () => {
     combine(dataParty, dataCounty);
   }, [dataParty, dataCounty]);
 
+  useEffect(() => {
+    setDataPartiesForList(combinedDataParties);
+  }, [combinedDataParties]);
+
   return (
     <div className={s.app}>
       <Header />
-      <FilterPanel className={s.nav} countries={dataCounty} />
+      <FilterPanel className={s.nav} dataPartiesForList={dataPartiesForList} />
       <article className={s.partyInfo}>
-        {combinedDataParties.length && (
-          <PartyList combinedDataParties={combinedDataParties} downloadInfo={downloadInfo} />
-        )}
+        {dataPartiesForList.length && <PartyList dataPartiesForList={dataPartiesForList} downloadInfo={downloadInfo} />}
       </article>
       <aside className={s.sidebar} />
       <Footer />
