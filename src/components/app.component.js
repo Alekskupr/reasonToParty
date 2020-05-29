@@ -13,6 +13,8 @@ const App = () => {
   const [dataParty, setDataParty] = useState([]);
   const [dataCounty, setDataCountry] = useState([]);
 
+  const [combinedDataParties, setcombinedDataParties] = useState([]);
+
   // const [selectedParty, setSelectedParty] = useState(0);
 
   // const [isOpenCardInfo, setIsOpenCardInfo] = useState(true);
@@ -51,8 +53,9 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const partyInfoSearch = (party) => {
-      const { name } = party;
+    const partyInfoSearch = (party, combinedData) => {
+      console.log('partyInfoSearch func');
+      const { name, country } = party;
       if (name) {
         fetch(`/api/parties/`, {
           method: 'POST',
@@ -71,20 +74,47 @@ const App = () => {
               info: res,
             };
           })
+          .then((patryWithInfo) => {
+            const index = combinedData.findIndex((item) => item.name === name);
+            console.log(index);
+
+            const newCombinedDataParties = [
+              ...combinedData.slice(0, index),
+              patryWithInfo,
+              ...combinedData.slice(index + 1, combinedData.length),
+            ];
+            return newCombinedDataParties;
+          })
+          .then((result) => setcombinedDataParties(result))
           .then(() => dispatch(downloadInfoAC()))
           .catch((err) => console.log(err));
       }
     };
-    partyInfoSearch(selectedParty);
+    partyInfoSearch(selectedParty, combinedDataParties);
   }, [selectedParty, dispatch]);
+
+  useEffect(() => {
+    const combine = (dataPartyArr, dataCountyArr) => {
+      if ((dataPartyArr.length, dataCountyArr.length)) {
+        const parties = [...dataPartyArr];
+        for (let i = 0; i < parties.length; i += 1) {
+          const countrySearch = dataCountyArr.filter((item) => item.alpha2Code === dataPartyArr[i].countryCode);
+          parties[i].flag = countrySearch[0].flag;
+          parties[i].country = countrySearch[0].name;
+        }
+        setcombinedDataParties(parties);
+      }
+    };
+    combine(dataParty, dataCounty);
+  }, [dataParty, dataCounty]);
 
   return (
     <div className={s.app}>
       <Header />
       <FilterPanel className={s.nav} countries={dataCounty} />
       <article className={s.partyInfo}>
-        {dataParty.length && dataCounty.length && (
-          <PartyList parties={dataParty} countries={dataCounty} downloadInfo={downloadInfo} />
+        {combinedDataParties.length && (
+          <PartyList combinedDataParties={combinedDataParties} downloadInfo={downloadInfo} />
         )}
       </article>
       <aside className={s.sidebar} />

@@ -4,8 +4,10 @@ import s from './card.css';
 import Like from '../like/like';
 import { selectPartyNameAC } from '../../redux/action';
 
-const Card = (party) => {
-  console.log(party);
+const Card = (props) => {
+  const party = { ...props };
+  const { flag, name, date, info, country } = party;
+  console.log(`рендер ${info}`);
 
   const [isOpenCardInfo, setIsOpenCardInfo] = useState(false);
   const dispatch = useDispatch();
@@ -20,24 +22,20 @@ const Card = (party) => {
       {/* <div>{JSON.stringify(party.info)}</div> */}
       <div className={s.flagArea}>
         <div className={s.flag}>
-          {party.flag ? (
-            <img className={s.flagImage} src={party.flag} alt={party.name} />
-          ) : (
-            <span>не прогрузилось</span>
-          )}
+          {flag ? <img className={s.flagImage} src={flag} alt={name} /> : <span>не прогрузилось</span>}
         </div>
       </div>
       <div className={s.nameArea}>
-        <h4>{party.name}</h4>
+        <h4>{name}</h4>
       </div>
-      <div className={s.dateArea}>{party.date}</div>
+      <div className={s.dateArea}>{date}</div>
       {isOpenCardInfo ? (
         <div className={s.infoArea}>
-          <span>{party.info}</span>
+          <span>{info}</span>
         </div>
       ) : null}
 
-      <div className={s.country}>{party.country}</div>
+      <div className={s.country}>{country}</div>
       <div className={s.likeArea}>
         <button onClick={changeCard} className={s.infoButton}>
           {isOpenCardInfo ? <span>Close</span> : <span>INFO</span>}

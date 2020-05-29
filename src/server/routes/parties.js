@@ -20,6 +20,8 @@ router.get('/countries', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  console.log(req.body);
+
   wtf
     .fetch(`${req.body.name}`)
     .then((data) => data.text().substring(0, 1000))

@@ -1,36 +1,41 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import s from './partyList.css';
 import Card from '../card/card';
-import { combinedDataPartiesAC } from '../../redux/action';
 
-const partyList = (data) => {
-  const { parties, countries } = data;
 
-  const [combinedDataParties, setcombinedDataParties] = useState([]);
-  const dispatch = useDispatch();
+const PartyList = (props) => {
+  const { combinedDataParties } = props;
+  // console.log(combinedDataParties);
 
-  useEffect(() => {
-    const combine = (partiesArr, countriesArr) => {
-      for (let i = 0; i < partiesArr.length; i++) {
-        const countrySearch = countriesArr.filter((item) => item.alpha2Code === partiesArr[i].countryCode);
-        partiesArr[i].flag = countrySearch[0].flag;
-        partiesArr[i].country = countrySearch[0].name;
-      }
-      setcombinedDataParties(partiesArr);
-    };
-    combine(parties, countries);
-  }, [parties, countries]);
+  // const [combinedDataParties, setcombinedDataParties] = useState([]);
+
+  // useEffect(() => {
+  //   const combine = (partiesArr, countriesArr) => {
+  //     for (let i = 0; i < partiesArr.length; i++) {
+  //       const countrySearch = countriesArr.filter((item) => item.alpha2Code === partiesArr[i].countryCode);
+  //       partiesArr[i].flag = countrySearch[0].flag;
+  //       partiesArr[i].country = countrySearch[0].name;
+  //     }
+  //     setcombinedDataParties(partiesArr);
+  //   };
+  //   combine(parties, countries);
+  // }, [parties, countries]);
 
   return (
     <div className={s.containerPartyInfo}>
       {combinedDataParties
         ? combinedDataParties.map((item, index) => {
-            return <Card party={item} key={index} />;
+            return <Card {...item} key={index} />;
           })
         : 'идет загрузка информации'}
     </div>
   );
 };
 
-export default partyList;
+PartyList.propTypes = {
+  combinedDataParties: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+export default PartyList;

@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import c from './filter.css';
 
-const FilterPanel = data => {
-  const { countries } = data;
+const FilterPanel = (props) => {
+  const { countries } = props;
   const [selectCountyFilter, setSelectCountryFilter] = useState(0);
 
-  const onChangeHandler = e => {
+  const onChangeHandler = (e) => {
     setSelectCountryFilter(e.target.value);
   };
-
-
-    useEffect(() => {
-      console.log(data);
-    }, []); // <-- should error and offer autofix to [props.name]
 
 
   return (
