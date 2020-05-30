@@ -9,6 +9,7 @@ import FilterPanel from './filter/filter';
 
 const App = () => {
   const [dataParty, setDataParty] = useState([]);
+  const [availableCountries, setAvailableCountries] = useState([]);
   const [dataCounty, setDataCountry] = useState([]);
 
   const [combinedDataParties, setcombinedDataParties] = useState([]);
@@ -16,7 +17,7 @@ const App = () => {
 
   // const [selectCountry, setSelectCountry] = useState([]);
 
-  const selectedCountry = useSelector((store) => {
+  const selectedCountryFromFilter = useSelector((store) => {
     return store.selectCountry;
   });
 
@@ -50,6 +51,16 @@ const App = () => {
   useEffect(() => {
     getDataParty();
   }, []);
+
+  useEffect(() => {
+    const getAvailableCountries = () => {
+      fetch('/api/parties/availableCountries')
+        .then((resp) => resp.json())
+        .then((data) => setAvailableCountries(data))
+        .catch(console.log('возможные страны не прогрузились'));
+    };
+    getAvailableCountries();
+  }, [setAvailableCountries]);
 
   useEffect(() => {
     getDataCountry();
@@ -132,8 +143,12 @@ const App = () => {
 
   return (
     <div className={s.app}>
-      <Header />
-      <FilterPanel className={s.nav} dataPartiesForList={dataPartiesForList} />
+      <section className={s.header}>
+        <Header />
+      </section>
+      <section className={s.nav}>
+        <FilterPanel availableCountries={availableCountries} />
+      </section>
       <article className={s.partyInfo}>
         {dataPartiesForList.length ? (
           <PartyList dataPartiesForList={dataPartiesForList} downloadInfo={downloadInfo} />

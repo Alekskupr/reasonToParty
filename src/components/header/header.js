@@ -6,23 +6,23 @@ import Keypad from '../keypad/keypad';
 
 const Header = () => {
   return (
-    <header className={c.containerHeader}>
+    <div className={c.containerHeader}>
       <div className={c.logoDiv}>
         <a href="/" className={c.linkLogo}>
           <Cocktail />
           <span className={c.textLogo}>reason to party!</span>
         </a>
       </div>
-      <div className="emptyDiv"></div>
+      <div className="emptyDiv" />
       <div className={c.navDiv}>
-        <button className={c.navButton}>
+        <button className={c.navButton} type="button">
           <Keypad />
         </button>
-        <button className={c.navButton}>
+        <button className={c.navButton} type="button">
           <Person />
         </button>
       </div>
-    </header>
+    </div>
   );
 };
 

@@ -41,33 +41,31 @@ button {
     grid-template-rows: 50px 30px 1fr 30px 30px;
   }
 }
-/* .header {
-  background-color: blue;
+.header {
+  border: 1px solid green;
   grid-area: header;
-} */
+}
 
 .nav{
   grid-area: nav;
+  border: 1px solid green;
 }
 
 .partyInfo {
-  /* background-color: rgb(238, 197, 122); */
   grid-area: article;
+  border: 1px solid green;
 }
 
 .sidebar{
-  /* background-color: orange; */
   grid-area: side;
+  border: 1px solid green;
 }
 
 /* .footer {
   grid-area: footer;
 } */
 
-.containerPartyInfo {
-  margin: 0;
-  padding: 0;
-}
+
 
 h4 {
   margin: 0;

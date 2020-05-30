@@ -12,6 +12,13 @@ router.get('/', async (req, res) => {
   await res.json(reasons);
 });
 
+router.get('/availableCountries', (req, res) => {
+  fetch('https://date.nager.at/api/v2/AvailableCountries')
+    .then((resp) => resp.json())
+    .then((data) => res.json(data))
+    .catch((err) => console.log('Error:', err));
+});
+
 router.get('/countries', (req, res) => {
   fetch('https://restcountries.eu/rest/v2/all')
     .then((resp) => resp.json())
@@ -20,8 +27,6 @@ router.get('/countries', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log(req.body);
-
   wtf
     .fetch(`${req.body.name}`)
     .then((data) => data.text().substring(0, 1000))
