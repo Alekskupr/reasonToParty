@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const  CleanWebpackPlugin  = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -17,7 +17,7 @@ module.exports = {
     port: 9000,
     open: true,
     proxy: {
-      '/api':'http://localhost:8080',
+      '/api': 'http://localhost:8080',
     },
   },
   module: {
@@ -48,7 +48,7 @@ module.exports = {
     ],
   },
   plugins: [
-    // new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       // favicon: './public/favicon.ico',
