@@ -3,30 +3,26 @@ import { useSelector, useDispatch } from 'react-redux';
 import s from './app.component.css';
 import PartyList from './partyList/partyList';
 import Header from './header/header';
-import { downloadInfoAC} from '../redux/action';
+import { downloadInfoAC } from '../redux/action';
 import Footer from './footer/footer';
 import FilterPanel from './filter/filter';
 
 const App = () => {
-  // console.log(Footer);
-
   const [dataParty, setDataParty] = useState([]);
   const [dataCounty, setDataCountry] = useState([]);
 
   const [combinedDataParties, setcombinedDataParties] = useState([]);
   const [dataPartiesForList, setDataPartiesForList] = useState([]);
 
-  const [selectCountry, setSelectCountry] = useState([]);
+  // const [selectCountry, setSelectCountry] = useState([]);
 
   const selectedCountry = useSelector((store) => {
     return store.selectCountry;
   });
 
-  // useEffect(()=> {})
-  // const [selectedParty, setSelectedParty] = useState(0);
-
-  // const [isOpenCardInfo, setIsOpenCardInfo] = useState(true);
-  // const selectedParty = useSelector(store => store.selectPartyName);
+  const searchWordFromFilter = useSelector((store) => {
+    return store.searchWord;
+  });
 
   const selectedParty = useSelector((store) => {
     return store.selectPartyName;
@@ -40,7 +36,6 @@ const App = () => {
       .then((res) => res.json())
       .then((data) => {
         setDataParty(data);
-        // setSelectedParty(data[0]);
       })
       .catch(console.log('чет не грузится пока'));
   };
@@ -117,12 +112,34 @@ const App = () => {
     setDataPartiesForList(combinedDataParties);
   }, [combinedDataParties]);
 
+  useEffect(() => {
+    const filter = (arrForList, searchWord) => {
+      const filteredList = arrForList.filter(
+        (item) =>
+          item.country.toLowerCase().indexOf(searchWord.toLowerCase()) !== -1 ||
+          item.name.toLowerCase().indexOf(searchWord.toLowerCase()) !== -1 ||
+          item.date.indexOf(searchWord) !== -1,
+      );
+      return filteredList;
+    };
+    const filteredList = filter(combinedDataParties, searchWordFromFilter);
+    setDataPartiesForList(filteredList);
+  }, [combinedDataParties, searchWordFromFilter]);
+
+  // useEffect(() => {
+  //   console.log(dataPartiesForList);
+  // }, [dataPartiesForList]);
+
   return (
     <div className={s.app}>
       <Header />
       <FilterPanel className={s.nav} dataPartiesForList={dataPartiesForList} />
       <article className={s.partyInfo}>
-        {dataPartiesForList.length && <PartyList dataPartiesForList={dataPartiesForList} downloadInfo={downloadInfo} />}
+        {dataPartiesForList.length ? (
+          <PartyList dataPartiesForList={dataPartiesForList} downloadInfo={downloadInfo} />
+        ) : (
+          ''
+        )}
       </article>
       <aside className={s.sidebar} />
       <Footer />

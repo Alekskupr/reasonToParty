@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useSelect, useDispatch } from 'react-redux';
-import { selectCountryAC } from '../../redux/action';
+import { selectCountryAC, searchWordAC } from '../../redux/action';
 import c from './filter.css';
 
 const FilterPanel = (props) => {
   const { dataPartiesForList } = props;
-  console.log(dataPartiesForList);
+  // console.log(dataPartiesForList);
 
-  // const [selectCountryFilter, setSelectCountryFilter] = useState(0);
+  const [searchWord, setSearchWord] = useState('');
   const dispatch = useDispatch();
 
   const onChangeHandler = (e) => {
     dispatch(selectCountryAC(e.target.value));
   };
 
+  const onChangeHandlerSearcher = (e) => {
+    setSearchWord(e.target.value);
+  };
+
+  useEffect(() => {
+    dispatch(searchWordAC(searchWord));
+  }, [searchWord, dispatch]);
+
   return (
     <div className={c.containerFilter}>
-      <input type="text" />
+      <input type="text" onChange={onChangeHandlerSearcher} />
       <label htmlFor="country">
         select country
         <select id="country" onChange={onChangeHandler}>

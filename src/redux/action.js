@@ -16,4 +16,11 @@ const selectCountryAC = (country) => {
   return { type: 'SELECT_COUNTRY', payload: country };
 };
 
-export { selectPartyNameAC, downloadInfoAC, selectCountryAC };
+const searchWordAC = (word) => {
+  return {
+    type: 'SEARCH_WORD',
+    payload: word,
+  };
+};
+
+export { selectPartyNameAC, downloadInfoAC, selectCountryAC, searchWordAC };

@@ -7,7 +7,6 @@ import { selectPartyNameAC } from '../../redux/action';
 const Card = (props) => {
   const party = { ...props };
   const { flag, name, date, info, country } = party;
-  console.log(`рендер ${info}`);
 
   const [isOpenCardInfo, setIsOpenCardInfo] = useState(false);
   const dispatch = useDispatch();
@@ -33,7 +32,9 @@ const Card = (props) => {
         <div className={s.infoArea}>
           <span>{info}</span>
         </div>
-      ) : null}
+      ) : (
+        ''
+      )}
 
       <div className={s.country}>{country}</div>
       <div className={s.likeArea}>

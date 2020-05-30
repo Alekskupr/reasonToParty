@@ -2,6 +2,7 @@ const initialState = {
   selectPartyName: {},
   downloadInfo: false,
   selectCountry: null,
+  searchWord: null,
 };
 
 export default function (state = initialState, action) {
@@ -25,6 +26,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         selectCountry: action.payload,
+      };
+    }
+    case 'SEARCH_WORD': {
+      return {
+        ...state,
+        searchWord: action.payload,
       };
     }
     default:
