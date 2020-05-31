@@ -10,6 +10,8 @@ const FilterPanel = (props) => {
   const [searchWord, setSearchWord] = useState('');
   const [isOpenSelect, setIsOpenSelect] = useState(false);
 
+  const [SelectCountryName, setSelectCountryName] = useState(null);
+
   const dispatch = useDispatch();
 
   // const onChangeHandler = (e) => {
@@ -19,14 +21,14 @@ const FilterPanel = (props) => {
   const onChangeHandlerSearcher = (e) => {
     setSearchWord(e.target.value);
   };
-  
+
   useEffect(() => {
     dispatch(searchWordAC(searchWord));
   }, [searchWord, dispatch]);
 
-  const changeStatusSelect = useCallback(() => {
+  const changeStatusSelect = () => {
     setIsOpenSelect(!isOpenSelect);
-  }, [isOpenSelect]);
+  };
 
   const resetSelectCountryKey = () => {
     dispatch(selectCountryKeyAC(null));
@@ -40,7 +42,7 @@ const FilterPanel = (props) => {
       </p>
 
       <button type="button" onClick={changeStatusSelect}>
-        select country
+        Select country
       </button>
       <div className={c.containerCountryList}>
         {isOpenSelect ? (
@@ -52,7 +54,7 @@ const FilterPanel = (props) => {
             </div>
             {availableCountries.length
               ? availableCountries.map((item, index) => {
-                  return <ListItem data={item} key={index} set={changeStatusSelect} />;
+                  return <ListItem data={item} key={index} changeStatusSelect={changeStatusSelect} />;
                 })
               : ''}
           </ul>

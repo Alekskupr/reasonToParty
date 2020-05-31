@@ -3,14 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectCountryKeyAC } from '../../redux/action';
 
 const ListItem = (props) => {
-  const { data, set } = props;
+  const { data, changeStatusSelect } = props;
   const { value, key } = data;
 
   const dispatch = useDispatch();
 
   const selectCountry = () => {
     dispatch(selectCountryKeyAC(key));
-    set();
+    changeStatusSelect();
   };
 
   return (
