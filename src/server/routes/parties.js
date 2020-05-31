@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/countryParties/:key', (req, res) => {
-  fetch(`https://date.nager.at/api/v2/PublicHolidays/2020/${req.params.key}`)
+  fetch(`https://date.nager.at/api/v2/NextPublicHolidays/${req.params.key}`)
     .then((resp) => resp.json())
     .then((data) => res.json(data))
     .catch((err) => console.log('Error:', err));

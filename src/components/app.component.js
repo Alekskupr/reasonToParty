@@ -142,7 +142,8 @@ const App = () => {
       if (key) {
         fetch(`/api/parties/countryParties/${key}`)
           .then((resp) => resp.json())
-          .then((data) => console.log(data));
+          .then((data) => setDataParty(data))
+          .catch((err) => console.log(err));
       }
     };
     getCountryParties(selectedCountryKeyFromFilter);
@@ -152,6 +153,7 @@ const App = () => {
     <div className={s.app}>
       <section className={s.header}>
         <Header />
+        <div>{JSON.stringify(selectedCountryKeyFromFilter)}</div>
       </section>
       <section className={s.nav}>
         <FilterPanel availableCountries={availableCountries} />

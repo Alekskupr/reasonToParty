@@ -2,6 +2,7 @@ const initialState = {
   selectPartyName: {},
   downloadInfo: false,
   selectCountry: null,
+  isOpenSelect: false,
   searchWord: null,
 };
 

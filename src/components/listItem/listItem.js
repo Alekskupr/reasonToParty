@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useSelect, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectCountryKeyAC } from '../../redux/action';
 
 const ListItem = (props) => {
-  const { data } = props;
+  const { data, set } = props;
   const { value, key } = data;
-  console.log(key);
 
   const [selectedCountryKey, setSelectedCountryKey] = useState('');
   const dispatch = useDispatch();
+
+  const selectedCountryKeyFromFilter = useSelector((store) => {
+    return store.selectCountry;
+  });
 
   const selectCountry = () => {
     setSelectedCountryKey(key);
@@ -16,11 +19,13 @@ const ListItem = (props) => {
 
   useEffect(() => {
     dispatch(selectCountryKeyAC(selectedCountryKey));
-  }, [selectedCountryKey, dispatch]);
+    if (selectedCountryKeyFromFilter) {
+      set();
+    }
+  }, [selectedCountryKey, dispatch, selectedCountryKeyFromFilter, set]);
 
   return (
     <div>
-      <div>{JSON.stringify(selectedCountryKey)}</div>
       <li type="button" onClick={selectCountry}>
         {value}
       </li>

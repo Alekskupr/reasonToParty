@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelect, useDispatch } from 'react-redux';
 import ListItem from '../listItem/listItem';
-import { selectCountryAC, searchWordAC } from '../../redux/action';
+import { searchWordAC } from '../../redux/action';
 import c from './filter.css';
 
 const FilterPanel = (props) => {
+  console.log('powgjwpegjwpefgwpef');
+  
   const { availableCountries } = props;
-  // console.log(availableCountries.length);
 
   const [searchWord, setSearchWord] = useState('');
   const [isOpenSelect, setIsOpenSelect] = useState(false);
@@ -18,15 +19,15 @@ const FilterPanel = (props) => {
   // };
 
   const onChangeHandlerSearcher = (e) => {
-    setSearchWord(e.target.innerHTML);
+    setSearchWord(e.target.value);
   };
   useEffect(() => {
     dispatch(searchWordAC(searchWord));
   }, [searchWord, dispatch]);
 
-  const changeStatusSelect = () => {
+  const changeStatusSelect = useCallback(() => {
     setIsOpenSelect(!isOpenSelect);
-  };
+  }, [isOpenSelect]);
 
   return (
     <div className={c.containerFilter}>
@@ -43,7 +44,7 @@ const FilterPanel = (props) => {
           <ul id="country">
             {availableCountries.length
               ? availableCountries.map((item, index) => {
-                  return <ListItem data={item} key={index} />;
+                  return <ListItem data={item} key={index} set={changeStatusSelect} />;
                 })
               : ''}
           </ul>
