@@ -5,8 +5,6 @@ import Card from '../card/card';
 
 const PartyList = (props) => {
   const { dataPartiesForList } = props;
-  console.log(dataPartiesForList);
-
   return (
     <div className={s.containerPartyInfo}>
       {dataPartiesForList.length

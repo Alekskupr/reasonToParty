@@ -6,23 +6,12 @@ const ListItem = (props) => {
   const { data, set } = props;
   const { value, key } = data;
 
-  const [selectedCountryKey, setSelectedCountryKey] = useState('');
   const dispatch = useDispatch();
 
-  const selectedCountryKeyFromFilter = useSelector((store) => {
-    return store.selectCountry;
-  });
-
   const selectCountry = () => {
-    setSelectedCountryKey(key);
+    dispatch(selectCountryKeyAC(key));
+    set();
   };
-
-  useEffect(() => {
-    dispatch(selectCountryKeyAC(selectedCountryKey));
-    if (selectedCountryKeyFromFilter) {
-      set();
-    }
-  }, [selectedCountryKey, dispatch, selectedCountryKeyFromFilter, set]);
 
   return (
     <div>

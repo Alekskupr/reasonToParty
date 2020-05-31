@@ -9,13 +9,16 @@ import FilterPanel from './filter/filter';
 
 const App = () => {
   const [dataParty, setDataParty] = useState([]);
-  const [availableCountries, setAvailableCountries] = useState([]);
   const [dataCounty, setDataCountry] = useState([]);
-
+  const [availableCountries, setAvailableCountries] = useState([]);
   const [combinedDataParties, setcombinedDataParties] = useState([]);
   const [dataPartiesForList, setDataPartiesForList] = useState([]);
 
-  // const [selectCountry, setSelectCountry] = useState([]);
+  const dispatch = useDispatch();
+
+  const selectedParty = useSelector((store) => {
+    return store.selectPartyName;
+  });
 
   const selectedCountryKeyFromFilter = useSelector((store) => {
     return store.selectCountry;
@@ -25,49 +28,24 @@ const App = () => {
     return store.searchWord;
   });
 
-  const selectedParty = useSelector((store) => {
-    return store.selectPartyName;
-  });
-
-  const dispatch = useDispatch();
   const downloadInfo = useSelector((store) => store.downloadInfo);
 
-  const getDataParty = () => {
-    fetch('/api/parties')
-      .then((res) => res.json())
-      .then((data) => {
-        setDataParty(data);
-      })
-      .catch(console.log('чет не грузится пока'));
-  };
-
-  const getDataCountry = () => {
+  useEffect(() => {
     fetch('/api/parties/countries')
       .then((resp) => resp.json())
       .then((data) => setDataCountry(data))
       .catch(console.log('страны не прогрузились'));
-  };
-
-  useEffect(() => {
-    getDataParty();
   }, []);
 
   useEffect(() => {
-    const getAvailableCountries = () => {
-      fetch('/api/parties/availableCountries')
-        .then((resp) => resp.json())
-        .then((data) => setAvailableCountries(data))
-        .catch(console.log('возможные страны не прогрузились'));
-    };
-    getAvailableCountries();
-  }, [setAvailableCountries]);
-
-  useEffect(() => {
-    getDataCountry();
+    fetch('/api/parties/availableCountries')
+      .then((resp) => resp.json())
+      .then((data) => setAvailableCountries(data))
+      .catch(console.log('возможные страны не прогрузились'));
   }, []);
 
   useEffect(() => {
-    const partyInfoSearch = (party, combinedData) => {
+    const partyInfoSearch = (party, dataParties) => {
       const { name, country } = party;
       if (name) {
         fetch(`/api/parties/`, {
@@ -88,11 +66,11 @@ const App = () => {
             };
           })
           .then((patryWithInfo) => {
-            const index = combinedData.findIndex((item) => item.name === name && item.country === country);
+            const index = dataParties.findIndex((item) => item.name === name && item.country === country);
             const newCombinedDataParties = [
-              ...combinedData.slice(0, index),
+              ...dataParties.slice(0, index),
               patryWithInfo,
-              ...combinedData.slice(index + 1, combinedData.length),
+              ...dataParties.slice(index + 1, dataParties.length),
             ];
             return newCombinedDataParties;
           })
@@ -101,8 +79,8 @@ const App = () => {
           .catch((err) => console.log(err));
       }
     };
-    partyInfoSearch(selectedParty, combinedDataParties);
-  }, [selectedParty, dispatch, combinedDataParties]);
+    partyInfoSearch(selectedParty, dataPartiesForList);
+  }, [selectedParty, dispatch]);
 
   useEffect(() => {
     const combine = (dataPartyArr, dataCountyArr) => {
@@ -138,22 +116,24 @@ const App = () => {
   }, [combinedDataParties, searchWordFromFilter]);
 
   useEffect(() => {
-    const getCountryParties = (key) => {
-      if (key) {
-        fetch(`/api/parties/countryParties/${key}`)
-          .then((resp) => resp.json())
-          .then((data) => setDataParty(data))
-          .catch((err) => console.log(err));
-      }
-    };
-    getCountryParties(selectedCountryKeyFromFilter);
+    if (selectedCountryKeyFromFilter) {
+      fetch(`/api/parties/countryParties/${selectedCountryKeyFromFilter}`)
+        .then((resp) => resp.json())
+        .then((data) => setDataParty(data))
+        .catch((err) => console.log(err));
+    } else {
+      fetch('/api/parties')
+        .then((res) => res.json())
+        .then((data) => setDataParty(data))
+        .catch(console.log('чет не грузится пока'));
+    }
   }, [selectedCountryKeyFromFilter]);
 
   return (
     <div className={s.app}>
       <section className={s.header}>
         <Header />
-        <div>{JSON.stringify(selectedCountryKeyFromFilter)}</div>
+        {/* <div>{JSON.stringify(selectedParty)}</div> */}
       </section>
       <section className={s.nav}>
         <FilterPanel availableCountries={availableCountries} />

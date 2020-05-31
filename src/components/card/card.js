@@ -5,20 +5,27 @@ import Like from '../like/like';
 import { selectPartyNameAC } from '../../redux/action';
 
 const Card = (props) => {
-  const party = { ...props };
-  const { flag, name, date, info, country } = party;
+  const { flag, name, date, info, country } = props;
 
   const [isOpenCardInfo, setIsOpenCardInfo] = useState(false);
   const dispatch = useDispatch();
 
   const changeCard = () => {
-    dispatch(selectPartyNameAC(party));
     setIsOpenCardInfo(!isOpenCardInfo);
   };
 
+  useEffect(() => {
+    setIsOpenCardInfo(false);
+  }, [name]);
+
+  useEffect(() => {
+    if (isOpenCardInfo) {
+      dispatch(selectPartyNameAC(props));
+    }
+  }, [isOpenCardInfo, dispatch]);
+
   return (
     <div className={isOpenCardInfo ? s.cardOpen : s.card}>
-      {/* <div>{JSON.stringify(party.info)}</div> */}
       <div className={s.flagArea}>
         <div className={s.flag}>
           {flag ? <img className={s.flagImage} src={flag} alt={name} /> : <span>не прогрузилось</span>}

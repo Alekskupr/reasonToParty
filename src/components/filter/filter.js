@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelect, useDispatch } from 'react-redux';
 import ListItem from '../listItem/listItem';
-import { searchWordAC } from '../../redux/action';
+import { searchWordAC, selectCountryKeyAC } from '../../redux/action';
 import c from './filter.css';
 
 const FilterPanel = (props) => {
-  console.log('powgjwpegjwpefgwpef');
-  
   const { availableCountries } = props;
 
   const [searchWord, setSearchWord] = useState('');
@@ -21,6 +19,7 @@ const FilterPanel = (props) => {
   const onChangeHandlerSearcher = (e) => {
     setSearchWord(e.target.value);
   };
+  
   useEffect(() => {
     dispatch(searchWordAC(searchWord));
   }, [searchWord, dispatch]);
@@ -29,12 +28,16 @@ const FilterPanel = (props) => {
     setIsOpenSelect(!isOpenSelect);
   }, [isOpenSelect]);
 
+  const resetSelectCountryKey = () => {
+    dispatch(selectCountryKeyAC(null));
+    changeStatusSelect();
+  };
+
   return (
     <div className={c.containerFilter}>
       <p className={c.filterText}>
         Hey! Take advantage of the nearest occasion for a party or find the most suitable one for you:
       </p>
-      <input className={c.searchInput} type="text" onChange={onChangeHandlerSearcher} />
 
       <button type="button" onClick={changeStatusSelect}>
         select country
@@ -42,6 +45,11 @@ const FilterPanel = (props) => {
       <div className={c.containerCountryList}>
         {isOpenSelect ? (
           <ul id="country">
+            <div>
+              <li type="button" onClick={resetSelectCountryKey}>
+                all counties
+              </li>
+            </div>
             {availableCountries.length
               ? availableCountries.map((item, index) => {
                   return <ListItem data={item} key={index} set={changeStatusSelect} />;
@@ -52,8 +60,9 @@ const FilterPanel = (props) => {
           ''
         )}
       </div>
+      <input className={c.searchInput} type="text" onChange={onChangeHandlerSearcher} />
       <input type="date" />
-      <button type="button">favorite holidays</button>
+      <button type="button">my favorite holidays</button>
     </div>
   );
 };
