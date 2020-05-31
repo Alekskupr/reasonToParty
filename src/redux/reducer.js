@@ -22,7 +22,7 @@ export default function (state = initialState, action) {
         downloadInfo: action.payload,
       };
     }
-    case 'SELECT_COUNTRY': {
+    case 'SELECT_COUNTRY_KEY': {
       return {
         ...state,
         selectCountry: action.payload,

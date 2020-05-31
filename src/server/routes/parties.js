@@ -34,4 +34,11 @@ router.post('/', (req, res) => {
     .catch(() => res.json('Sorry! There is no information about this holiday...'));
 });
 
+router.get('/countryParties/:key', (req, res) => {
+  fetch(`https://date.nager.at/api/v2/PublicHolidays/2020/${req.params.key}`)
+    .then((resp) => resp.json())
+    .then((data) => res.json(data))
+    .catch((err) => console.log('Error:', err));
+});
+
 module.exports = router;

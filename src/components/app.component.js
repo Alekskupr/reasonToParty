@@ -17,7 +17,7 @@ const App = () => {
 
   // const [selectCountry, setSelectCountry] = useState([]);
 
-  const selectedCountryFromFilter = useSelector((store) => {
+  const selectedCountryKeyFromFilter = useSelector((store) => {
     return store.selectCountry;
   });
 
@@ -137,9 +137,16 @@ const App = () => {
     setDataPartiesForList(filteredList);
   }, [combinedDataParties, searchWordFromFilter]);
 
-  // useEffect(() => {
-  //   console.log(dataPartiesForList);
-  // }, [dataPartiesForList]);
+  useEffect(() => {
+    const getCountryParties = (key) => {
+      if (key) {
+        fetch(`/api/parties/countryParties/${key}`)
+          .then((resp) => resp.json())
+          .then((data) => console.log(data));
+      }
+    };
+    getCountryParties(selectedCountryKeyFromFilter);
+  }, [selectedCountryKeyFromFilter]);
 
   return (
     <div className={s.app}>

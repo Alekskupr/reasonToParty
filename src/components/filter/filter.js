@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelect, useDispatch } from 'react-redux';
+import ListItem from '../listItem/listItem';
 import { selectCountryAC, searchWordAC } from '../../redux/action';
 import c from './filter.css';
 
@@ -9,7 +10,6 @@ const FilterPanel = (props) => {
 
   const [searchWord, setSearchWord] = useState('');
   const [isOpenSelect, setIsOpenSelect] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState('');
 
   const dispatch = useDispatch();
 
@@ -18,21 +18,11 @@ const FilterPanel = (props) => {
   // };
 
   const onChangeHandlerSearcher = (e) => {
-    setSearchWord(e.target.value);
+    setSearchWord(e.target.innerHTML);
   };
   useEffect(() => {
     dispatch(searchWordAC(searchWord));
   }, [searchWord, dispatch]);
-
-  const selectCountry = (e) => {
-    console.log(e.target.value);
-  };
-  useEffect(
-    (e) => {
-      // dispatch(selectCountryAC(e.target.value));
-    },
-    [selectedCountry, dispatch],
-  );
 
   const changeStatusSelect = () => {
     setIsOpenSelect(!isOpenSelect);
@@ -50,13 +40,13 @@ const FilterPanel = (props) => {
       </button>
       <div className={c.containerCountryList}>
         {isOpenSelect ? (
-          <div className={c.selectDiv} id="country">
+          <ul id="country">
             {availableCountries.length
-              ? availableCountries.map((item) => {
-                  return <input type="button" key={item.key} value={item.value} onClick={selectCountry} />;
+              ? availableCountries.map((item, index) => {
+                  return <ListItem data={item} key={index} />;
                 })
               : ''}
-          </div>
+          </ul>
         ) : (
           ''
         )}

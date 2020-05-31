@@ -59,14 +59,14 @@
   background-color: #fff;
 }
 
-.containerCountryList .selectDiv {
+.containerCountryList ul {
   padding: 0;
   margin: 0;
   background-color: #fff;
   border-radius: 5px;
 }
 
-.containerCountryList input {
+.containerCountryList li {
   padding: 5px;
   border-radius: 5px;
   /* border: 1px solid #2196f3; */
