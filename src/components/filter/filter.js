@@ -30,8 +30,15 @@ const FilterPanel = (props) => {
     setIsOpenSelect(!isOpenSelect);
   };
 
+  const selectedItem = (objCountry) => {
+    dispatch(selectCountryKeyAC(objCountry.key));
+    setSelectCountryName(objCountry.value);
+    changeStatusSelect();
+  };
+
   const resetSelectCountryKey = () => {
     dispatch(selectCountryKeyAC(null));
+    setSelectCountryName(null);
     changeStatusSelect();
   };
 
@@ -42,7 +49,7 @@ const FilterPanel = (props) => {
       </p>
 
       <button type="button" onClick={changeStatusSelect}>
-        Select country
+        {SelectCountryName || 'select country'}
       </button>
       <div className={c.containerCountryList}>
         {isOpenSelect ? (
@@ -54,7 +61,7 @@ const FilterPanel = (props) => {
             </div>
             {availableCountries.length
               ? availableCountries.map((item, index) => {
-                  return <ListItem data={item} key={index} changeStatusSelect={changeStatusSelect} />;
+                  return <ListItem data={item} key={index} selectedItem={selectedItem} />;
                 })
               : ''}
           </ul>
