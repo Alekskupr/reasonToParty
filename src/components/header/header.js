@@ -3,8 +3,15 @@ import c from './header.css';
 import Cocktail from '../cocktail/cocktail';
 import Person from '../person/person';
 import Keypad from '../keypad/keypad';
+import PersonPanel from '../personPanel/personPanel';
 
 const Header = () => {
+  const [isOpenRegPanel, setisOpenRegPanel] = useState(false);
+
+  const changeStatusRegPanel = () => {
+    setisOpenRegPanel(!isOpenRegPanel);
+  };
+
   return (
     <div className={c.containerHeader}>
       <div className={c.logoDiv}>
@@ -18,9 +25,10 @@ const Header = () => {
         <button className={c.navButton} type="button">
           <Keypad />
         </button>
-        <button className={c.navButton} type="button">
+        <button className={c.navButton} type="button" onClick={changeStatusRegPanel}>
           <Person />
         </button>
+        {isOpenRegPanel ? <PersonPanel /> : ''}
       </div>
     </div>
   );

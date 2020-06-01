@@ -6,6 +6,8 @@ const wtf = require('wtf_wikipedia');
 
 const fetch = require('node-fetch');
 
+const User = require('../models/user');
+
 router.get('/', async (req, res) => {
   const resp = await fetch('https://date.nager.at/api/v2/NextPublicHolidaysWorldwide');
   const reasons = await resp.json();

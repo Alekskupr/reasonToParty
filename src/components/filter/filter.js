@@ -14,10 +14,6 @@ const FilterPanel = (props) => {
 
   const dispatch = useDispatch();
 
-  // const onChangeHandler = (e) => {
-  //   dispatch(selectCountryAC(e.target.value));
-  // };
-
   const onChangeHandlerSearcher = (e) => {
     setSearchWord(e.target.value);
   };
@@ -70,7 +66,6 @@ const FilterPanel = (props) => {
         )}
       </div>
       <input className={c.searchInput} type="text" onChange={onChangeHandlerSearcher} />
-      <input type="date" />
       <button type="button">my favorite holidays</button>
     </div>
   );
