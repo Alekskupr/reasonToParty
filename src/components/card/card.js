@@ -45,7 +45,7 @@ const Card = (props) => {
       <div className={s.country}>{country}</div>
       <div className={s.likeArea}>
         <button onClick={changeCard} className={s.infoButton} type="button">
-          {isOpenCardInfo ? <span>Close</span> : <span>INFO</span>}
+          {isOpenCardInfo ? <span>Close</span> : <span>Info</span>}
         </button>
         <button type="button">
           <Like />
