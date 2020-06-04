@@ -23,4 +23,11 @@ const searchWordAC = (word) => {
   };
 };
 
-export { selectPartyNameAC, downloadInfoAC, selectCountryKeyAC, searchWordAC };
+const authorizedUserAC = (userData) => {
+  return {
+    type: 'AUTHORIZED_USER',
+    payload: userData,
+  };
+};
+
+export { selectPartyNameAC, downloadInfoAC, selectCountryKeyAC, searchWordAC, authorizedUserAC };

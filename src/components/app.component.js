@@ -13,6 +13,8 @@ const App = () => {
   const [availableCountries, setAvailableCountries] = useState([]);
   const [combinedDataParties, setcombinedDataParties] = useState([]);
   const [dataPartiesForList, setDataPartiesForList] = useState([]);
+  
+
 
   const dispatch = useDispatch();
 
@@ -29,6 +31,8 @@ const App = () => {
   });
 
   const downloadInfo = useSelector((store) => store.downloadInfo);
+
+  const authorizedUser = useSelector((store) => store.authorizedUser);
 
   useEffect(() => {
     fetch('/api/parties/countries')
@@ -133,7 +137,7 @@ const App = () => {
     <div className={s.app}>
       <section className={s.header}>
         <Header />
-        {/* <div>{JSON.stringify(selectedParty)}</div> */}
+        <div>{JSON.stringify(authorizedUser)}</div>
       </section>
       <section className={s.nav}>
         <FilterPanel availableCountries={availableCountries} />

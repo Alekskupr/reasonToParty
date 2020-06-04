@@ -43,4 +43,21 @@ router.get('/countryParties/:key', (req, res) => {
     .catch((err) => console.log('Error:', err));
 });
 
+router.post('/registration', async (req, res) => {
+  const { email, login, password, subscription } = req.body;
+  try {
+    const newUser = await new User({
+      email,
+      login,
+      password,
+      subscription,
+      favoriteHolidays: [],
+    });
+    await newUser.save();
+    res.json(newUser);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 module.exports = router;

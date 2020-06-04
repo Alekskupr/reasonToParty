@@ -4,6 +4,7 @@ const initialState = {
   selectCountry: null,
   isOpenSelect: false,
   searchWord: null,
+  authorizedUser: null,
 };
 
 export default function (state = initialState, action) {
@@ -33,6 +34,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         searchWord: action.payload,
+      };
+    }
+    case 'AUTHORIZED_USER': {
+      return {
+        ...state,
+        authorizedUser: action.payload,
       };
     }
     default:
