@@ -28,7 +28,7 @@ const Header = () => {
         <button className={c.navButton} type="button" onClick={changeStatusRegPanel}>
           <Person />
         </button>
-        {isOpenRegPanel ? <PersonPanel /> : ''}
+        {isOpenRegPanel ? <PersonPanel changeStatusRegPanel={changeStatusRegPanel} /> : ''}
       </div>
     </div>
   );

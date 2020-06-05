@@ -11,7 +11,16 @@ button {
   cursor: pointer;
   font-family: 'Pragmatica-Light', Helvetica, Arial, sans-serif;
   color: #4a4a4a;
+  background-color: #fff;
+  border: 1px solid #2196f3;
+  border-radius: 5px;
+  color: #2196f3;
+}
 
+/* button:focus, */
+button:hover {
+  background-color:#2196f3;
+  color: #fff;
 }
 
 .app {
