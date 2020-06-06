@@ -60,4 +60,12 @@ router.post('/registration', async (req, res) => {
   }
 });
 
+router.post('/authorization', async (req, res) => {
+  const { login, password } = req.body;
+  const findUser = await User.findOne({ login });
+  const message = 'invalid username or password';
+  // findUser.password === password ? res.json(findUser) : res.json({ message });
+  findUser.password === password ? await res.json(findUser) : await res.json({ message });
+});
+
 module.exports = router;

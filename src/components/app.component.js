@@ -13,8 +13,6 @@ const App = () => {
   const [availableCountries, setAvailableCountries] = useState([]);
   const [combinedDataParties, setcombinedDataParties] = useState([]);
   const [dataPartiesForList, setDataPartiesForList] = useState([]);
-  
-
 
   const dispatch = useDispatch();
 
@@ -136,8 +134,8 @@ const App = () => {
   return (
     <div className={s.app}>
       <section className={s.header}>
-        <Header />
-        <div>{JSON.stringify(authorizedUser)}</div>
+        <Header authorizedUser={authorizedUser} />
+        {/* <div>{JSON.stringify(authorizedUser)}</div> */}
       </section>
       <section className={s.nav}>
         <FilterPanel availableCountries={availableCountries} />

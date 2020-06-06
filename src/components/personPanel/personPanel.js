@@ -5,7 +5,7 @@ import { authorizedUserAC } from '../../redux/action';
 import c from './personPanel.css';
 
 const PersonPanel = (props) => {
-  const [regObject, setRegObject] = useState({
+  const [userData, setUserData] = useState({
     email: null,
     login: null,
     password: null,
@@ -18,62 +18,29 @@ const PersonPanel = (props) => {
   });
 
   const dispatch = useDispatch();
-  // const inputHandler = (e) => {
-  //   switch (e.target.id) {
-  //     case 'email': {
-  //       setRegObject({
-  //         ...regObject,
-  //         email: e.target.value,
-  //       });
-  //       break;
-  //     }
-  //     case 'login': {
-  //       setRegObject({
-  //         ...regObject,
-  //         login: e.target.value,
-  //       });
-  //       break;
-  //     }
-  //     case 'password': {
-  //       setRegObject({
-  //         ...regObject,
-  //         password: e.target.value,
-  //       });
-  //       break;
-  //     }
-  //     case 'subscription': {
-  //       setRegObject({
-  //         ...regObject,
-  //         subscription: e.target.value,
-  //       });
-  //       break;
-  //     }
-  //     default:
-  //       setRegObject(regObject);
-  //   }
-  // };
 
   const inputHandler = (e) => {
     e.target.id === 'email'
-      ? setRegObject({ ...regObject, email: e.target.value })
+      ? setUserData({ ...userData, email: e.target.value })
       : e.target.id === 'login'
-      ? setRegObject({ ...regObject, login: e.target.value })
+      ? setUserData({ ...userData, login: e.target.value })
       : e.target.id === 'password'
-      ? setRegObject({ ...regObject, password: e.target.value })
+      ? setUserData({ ...userData, password: e.target.value })
       : e.target.id === 'subscription'
-      ? setRegObject({ ...regObject, subscription: e.target.subscription })
-      : setRegObject({ ...regObject });
+      ? setUserData({ ...userData, subscription: e.target.subscription })
+      : setUserData({ ...userData });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    fetch('/api/parties/registration', {
+    const partForReq = typePanel.authorization ? 'authorization' : 'registration';
+    fetch(`/api/parties/${partForReq}`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
         accept: 'application/json',
       },
-      body: JSON.stringify(regObject),
+      body: JSON.stringify(userData),
     })
       .then((resp) => resp.json())
       .then((data) => dispatch(authorizedUserAC(data)))
@@ -91,7 +58,7 @@ const PersonPanel = (props) => {
   return (
     <div className={c.containerRegPanel}>
       {/* <h4>{JSON.stringify(regObject.password)}</h4> */}
-      <button className type="button" onClick={changePanelHandler}>
+      <button type="button" onClick={changePanelHandler}>
         <span>{typePanel.authorization ? 'registration' : 'authorization'}</span>
       </button>
 

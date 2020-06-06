@@ -5,7 +5,10 @@ import Person from '../person/person';
 import Keypad from '../keypad/keypad';
 import PersonPanel from '../personPanel/personPanel';
 
-const Header = () => {
+const Header = (props) => {
+  const { authorizedUser } = props;
+  console.log(props);
+
   const [isOpenRegPanel, setisOpenRegPanel] = useState(false);
 
   const changeStatusRegPanel = () => {
@@ -20,7 +23,16 @@ const Header = () => {
           <span className={c.textLogo}>reason to party!</span>
         </a>
       </div>
-      <div className="emptyDiv" />
+      <div className={c.helloUser}>
+        {authorizedUser ? (
+          <span>
+            You are welcome,
+            {authorizedUser.login}!
+          </span>
+        ) : (
+          ''
+        )}
+      </div>
       <div className={c.navDiv}>
         <button className={c.navButton} type="button">
           <Keypad />
