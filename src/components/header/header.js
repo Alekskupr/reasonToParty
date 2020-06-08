@@ -25,8 +25,8 @@ const Header = (props) => {
       </div>
       <div className={c.helloUser}>
         {authorizedUser ? (
-          <span>
-            You are welcome,
+          <span className={c.helloText}>
+            Only important occasions, only public holidays for you,
             {authorizedUser.login}!
           </span>
         ) : (
