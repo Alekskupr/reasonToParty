@@ -1,4 +1,4 @@
-.containerHeader{
+.containerHeader {
   grid-area: header;
   display: grid;
   grid-template-columns: 200px 1fr 200px;
@@ -14,16 +14,15 @@
   display: flex;
   justify-content: flex-start;
   padding: 5px;
-} 
+}
 
 .textLogo {
-  display: block; 
+  display: block;
 }
 
 .logoDiv {
   padding-left: 10px;
 }
-
 
 .navDiv {
   display: flex;
@@ -36,17 +35,16 @@
   position: relative;
   border: 1px solid #fff;
   border-radius: 50%;
-  margin:0;
+  margin: 0;
   padding: 0;
   outline: none;
   cursor: pointer;
   background-color: #2196f3;
   width: 30px;
   height: 30px;
-
 }
 
-.navButton:hover{
+.navButton:hover {
   background-color: #6bb6f3;
 }
 
@@ -56,9 +54,15 @@
   font-size: 18px;
   font-weight: bold;
   margin: 0 auto;
-  display:flex;
+  display: flex;
 }
 
 .helloText {
-  margin:auto;
+  margin: auto;
+
+}
+
+.userName {
+  font-size: 20px;
+  white-space: pre;
 }

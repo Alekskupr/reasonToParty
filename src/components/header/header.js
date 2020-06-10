@@ -25,10 +25,10 @@ const Header = (props) => {
       </div>
       <div className={c.helloUser}>
         {authorizedUser ? (
-          <span className={c.helloText}>
-            Only important occasions, only public holidays for you,
-            {authorizedUser.login}!
-          </span>
+          <p className={c.helloText}>
+            Only important occasions, only national holidays for you,
+            <span className={c.userName}>&nbsp;{authorizedUser.login}!</span>
+          </p>
         ) : (
           ''
         )}
