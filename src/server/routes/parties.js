@@ -44,36 +44,60 @@ router.get('/countryParties/:key', (req, res) => {
     .catch((err) => console.log('Error:', err));
 });
 
-router.post('/registration', async (req, res) => {
+router.post('/registration', (req, res) => {
   const { email, login, password, subscription } = req.body;
-  try {
-    const newUser = await new User({
+
+  User.findOne({ login }, (err, data) => {
+    if (err) {
+      return res.json({
+        status: 400,
+        message: err,
+      });
+    }
+    if (data) {
+      return res.json({
+        status: 400,
+        message: 'User already exist',
+      });
+    }
+    const newUser = new User({
       email,
       login,
       password,
       subscription,
       favoriteHolidays: [],
     });
-    await newUser.save();
-    res.json(newUser);
-  } catch (err) {
-    res.json(err);
-  }
+
+    newUser.save((error, user) => {
+      if (error) {
+        return res.json({
+          status: 400,
+          message: error,
+        });
+      }
+      return res.json({
+        status: 200,
+        message: 'You have succesfully registered.',
+        user,
+      });
+    });
+  });
 });
 
 router.post('/authorization', (req, res) => {
   const { login, password } = req.body;
-
-  // const findUser = await User.findOne({ login });
-  // const message = 'invalid username or password';
-  // findUser.password === password ? await res.json(findUser) : await res.json({ message });
   User.findOne({ login, password }, (err, data) => {
-    // mongoose.disconnect();
-    if (err) {
-      return console.log(err);
+    if (err || !data) {
+      return res.status(401).json({
+        status: 401,
+        message: 'Invalid username or password',
+      });
     }
-    return data;
-  }).then((findUser) => res.json(findUser));
+    return res.status(200).json({
+      message: 'You have succesfully loggedin.',
+      user: data,
+    });
+  });
 });
 
 module.exports = router;
