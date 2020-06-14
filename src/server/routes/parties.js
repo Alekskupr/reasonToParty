@@ -52,14 +52,17 @@ router.post('/registration', (req, res) => {
       return res.json({
         status: 400,
         message: err,
+        authUser: false,
       });
     }
     if (data) {
       return res.json({
         status: 400,
         message: 'User already exist',
+        authUser: false,
       });
     }
+
     const newUser = new User({
       email,
       login,
@@ -67,18 +70,19 @@ router.post('/registration', (req, res) => {
       subscription,
       favoriteHolidays: [],
     });
-
     newUser.save((error, user) => {
       if (error) {
         return res.json({
           status: 400,
           message: error,
+          authUser: false,
         });
       }
       return res.json({
         status: 200,
         message: 'You have succesfully registered.',
         user,
+        authUser: true,
       });
     });
   });

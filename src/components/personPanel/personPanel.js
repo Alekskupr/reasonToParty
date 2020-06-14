@@ -17,6 +17,8 @@ const PersonPanel = (props) => {
     authorization: true,
   });
 
+  const [authMessage, setAuthMessage] = useState('');
+
   const dispatch = useDispatch();
 
   const inputHandler = (e) => {
@@ -43,7 +45,10 @@ const PersonPanel = (props) => {
       body: JSON.stringify(userData),
     })
       .then((resp) => resp.json())
-      .then((data) => dispatch(authorizedUserAC(data)))
+      .then((data) => {
+        console.log(data.message);
+        dispatch(authorizedUserAC(data));
+      })
       .then(() => props.changeStatusRegPanel())
       .catch((err) => console.log('catch ', err));
   };
@@ -57,7 +62,8 @@ const PersonPanel = (props) => {
 
   return (
     <div className={c.containerRegPanel}>
-      {/* <h4>{JSON.stringify(regObject.password)}</h4> */}
+      <h4>{JSON.stringify(authMessage)}</h4>
+      <span className={c.messageUser}>{authMessage}</span>
       <button type="button" onClick={changePanelHandler}>
         <span>{typePanel.authorization ? 'registration' : 'authorization'}</span>
       </button>

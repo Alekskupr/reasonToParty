@@ -4,7 +4,16 @@ const initialState = {
   selectCountry: null,
   isOpenSelect: false,
   searchWord: null,
-  authorizedUser: null,
+  authorizedUser: {
+    authUser: false,
+    message: '',
+    user: {
+      favoriteHolyday: [],
+      login: null,
+      password: null,
+      email: null,
+    },
+  },
 };
 
 export default function (state = initialState, action) {

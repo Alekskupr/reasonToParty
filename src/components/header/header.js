@@ -7,9 +7,11 @@ import PersonPanel from '../personPanel/personPanel';
 
 const Header = (props) => {
   const { authorizedUser } = props;
-  console.log(props);
+
 
   const [isOpenRegPanel, setisOpenRegPanel] = useState(false);
+
+  // const login = authorizedUser.user.login || '';
 
   const changeStatusRegPanel = () => {
     setisOpenRegPanel(!isOpenRegPanel);
@@ -24,10 +26,14 @@ const Header = (props) => {
         </a>
       </div>
       <div className={c.helloUser}>
-        {authorizedUser ? (
+        {authorizedUser.authUser ? (
           <p className={c.helloText}>
             Only important occasions, only national holidays for you,
-            <span className={c.userName}>&nbsp;{authorizedUser.login}!</span>
+            <span className={c.userName}>
+              &nbsp;
+              {authorizedUser.user.login}
+!
+</span>
           </p>
         ) : (
           ''
