@@ -61,6 +61,7 @@
     "react-router-dom": "^5.2.0",
     "react-svg": "^11.0.21",
     "react-svg-loader": "^3.0.3",
+    "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
     "wtf_wikipedia": "^8.2.1"
   }

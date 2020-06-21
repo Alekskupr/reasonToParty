@@ -95,11 +95,13 @@ router.post('/authorization', (req, res) => {
       return res.status(401).json({
         status: 401,
         message: 'Invalid username or password',
+        authUser: false,
       });
     }
     return res.status(200).json({
       message: 'You have succesfully loggedin.',
       user: data,
+      authUser: true,
     });
   });
 });

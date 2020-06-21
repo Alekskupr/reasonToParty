@@ -17,6 +17,23 @@
   box-sizing: border-box;
 }
 
+.containerRegPanel-enter {
+  opacity: 0;
+}
+.containerRegPanel-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms;
+}
+
+.containerRegPanel-exit {
+  opacity: 1;
+}
+
+.containerRegPanel-exit-enter {
+  opacity: 0;
+  transition: opacity 1000ms;
+}
+
 .form {
   width: 100%;
   height: 100%;
@@ -75,15 +92,11 @@
   transition: 0.3s;
 }
 
-
-
-
-
 .form input:focus {
   border-bottom: 1px solid #2196f3;
 }
 
-input:focus ~  label,
+input:focus ~ label,
 input:not(:placeholder-shown) ~ label {
   top: -18px;
   font-size: 12px;
@@ -92,4 +105,15 @@ input:not(:placeholder-shown) ~ label {
 
 .messageUser {
   color: red;
+  font-size: 12px;
+  animation: showMessage 1s forwards;
+}
+
+@keyframes showMessage {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
