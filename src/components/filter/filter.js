@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useSelect, useDispatch } from 'react-redux';
 import ListItem from '../listItem/listItem';
 import { searchWordAC, selectCountryKeyAC } from '../../redux/action';
-import c from './filter.css';
+import './filter.css';
 
 const FilterPanel = (props) => {
   const { availableCountries } = props;
@@ -39,15 +39,15 @@ const FilterPanel = (props) => {
   };
 
   return (
-    <div className={c.containerFilter}>
-      <p className={c.filterText}>
+    <div className="containerFilter">
+      <p className="c.filterText">
         Hey! Take advantage of the nearest occasion for a party or find the most suitable one for you:
       </p>
 
       <button type="button" onClick={changeStatusSelect}>
         {SelectCountryName || 'select country'}
       </button>
-      <div className={c.containerCountryList}>
+      <div className="containerCountryList">
         {isOpenSelect ? (
           <ul id="country">
             <div>
@@ -65,7 +65,7 @@ const FilterPanel = (props) => {
           ''
         )}
       </div>
-      <input className={c.searchInput} type="text" onChange={onChangeHandlerSearcher} />
+      <input className="searchInput" type="text" onChange={onChangeHandlerSearcher} />
       <button type="button">my favorite holidays</button>
     </div>
   );

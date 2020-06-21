@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import c from './header.css';
+import './header.css';
 import Cocktail from '../cocktail/cocktail';
 import Person from '../person/person';
 import Keypad from '../keypad/keypad';
@@ -7,7 +7,6 @@ import PersonPanel from '../personPanel/personPanel';
 
 const Header = (props) => {
   const { authorizedUser } = props;
-
 
   const [isOpenRegPanel, setisOpenRegPanel] = useState(false);
 
@@ -18,35 +17,34 @@ const Header = (props) => {
   };
 
   return (
-    <div className={c.containerHeader}>
-      <div className={c.logoDiv}>
-        <a href="/" className={c.linkLogo}>
+    <div className="containerHeader">
+      <div className="logoDiv">
+        <a href="/" className="linkLogo">
           <Cocktail />
-          <span className={c.textLogo}>reason to party!</span>
+          <span className="textLogo">reason to party!</span>
         </a>
       </div>
-      <div className={c.helloUser}>
+      <div className="helloUser">
         {authorizedUser.authUser ? (
-          <p className={c.helloText}>
+          <p className="helloText">
             Only important occasions, only national holidays for you,
-            <span className={c.userName}>
+            <span className="userName">
               &nbsp;
-              {authorizedUser.user.login}
-!
-</span>
+              {authorizedUser.user.login}!
+            </span>
           </p>
         ) : (
           ''
         )}
       </div>
-      <div className={c.navDiv}>
-        <button className={c.navButton} type="button">
+      <div className="navDiv">
+        <button className="navButton" type="button">
           <Keypad />
         </button>
-        <button className={c.navButton} type="button" onClick={changeStatusRegPanel}>
+        <button className="navButton" type="button" onClick={changeStatusRegPanel}>
           <Person />
         </button>
-        {isOpenRegPanel ? <PersonPanel changeStatusRegPanel={changeStatusRegPanel} /> : ''}
+        <PersonPanel changeStatusRegPanel={changeStatusRegPanel} isOpenRegPanel={isOpenRegPanel} />
       </div>
     </div>
   );

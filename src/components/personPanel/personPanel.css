@@ -1,4 +1,4 @@
-.containerRegPanel {
+.containerPersonPanel {
   position: absolute;
   width: 20vw;
   min-height: 50vh;
@@ -17,21 +17,21 @@
   box-sizing: border-box;
 }
 
-.containerRegPanel-enter {
+.animationRegPanel-enter {
   opacity: 0;
 }
-.containerRegPanel-enter-active {
+.animationRegPanel-enter-active {
   opacity: 1;
-  transition: opacity 1000ms;
+  transition: opacity 3000ms;
 }
 
-.containerRegPanel-exit {
+.animationRegPanel-exit {
   opacity: 1;
 }
 
-.containerRegPanel-exit-enter {
+.animationRegPanel-exit-active {
   opacity: 0;
-  transition: opacity 1000ms;
+  transition: opacity 3000ms;
 }
 
 .form {

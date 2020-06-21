@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import s from './app.component.css';
+import './app.component.css';
 import PartyList from './partyList/partyList';
 import Header from './header/header';
 import { downloadInfoAC } from '../redux/action';
@@ -132,22 +132,22 @@ const App = () => {
   }, [selectedCountryKeyFromFilter]);
 
   return (
-    <div className={s.app}>
-      <section className={s.header}>
-        <Header authorizedUser={authorizedUser} />
+    <div className="app">
+      <section className="header">
+        <Header authorizedUser="authorizedUser" />
         {/* <div>{JSON.stringify(authorizedUser)}</div> */}
       </section>
-      <section className={s.nav}>
+      <section className="nav">
         <FilterPanel availableCountries={availableCountries} />
       </section>
-      <article className={s.partyInfo}>
+      <article className="partyInfo">
         {dataPartiesForList.length ? (
           <PartyList dataPartiesForList={dataPartiesForList} downloadInfo={downloadInfo} />
         ) : (
           ''
         )}
       </article>
-      <aside className={s.sidebar} />
+      <aside className="sidebar" />
       <Footer />
     </div>
   );

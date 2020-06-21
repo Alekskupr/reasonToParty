@@ -1,13 +1,13 @@
 import React from 'react';
-import c from './footer.css';
+import './footer.css';
 
 const Footer = () => {
   return (
-    <header className={c.footer}>
+    <footer className="footer">
       <p>e-mail: leshakuprish@yandex.ru</p>
       <p></p>
       <p></p>
-    </header>
+    </footer>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import s from './card.css';
+import './card.css';
 import Like from '../like/like';
 import { selectPartyNameAC } from '../../redux/action';
 
@@ -25,26 +25,26 @@ const Card = (props) => {
   }, [isOpenCardInfo, dispatch]);
 
   return (
-    <div className={isOpenCardInfo ? s.cardOpen : s.card}>
-      <div className={s.flagArea}>
-        <div className={s.flag}>
-          {flag ? <img className={s.flagImage} src={flag} alt={name} /> : <span>не прогрузилось</span>}
+    <div className={isOpenCardInfo ? 'cardOpen' : 'card'}>
+      <div className="flagArea">
+        <div className="flag">
+          {flag ? <img className="flagImage" src={flag} alt={name} /> : <span>не прогрузилось</span>}
         </div>
       </div>
-      <div className={s.nameArea}>
+      <div className="nameArea">
         <h4>{name}</h4>
       </div>
-      <div className={s.dateArea}>{date}</div>
+      <div className="dateArea">{date}</div>
       {isOpenCardInfo ? (
-        <div className={s.infoArea}>
+        <div className="infoArea">
           <span>{info}</span>
         </div>
       ) : (
         ''
       )}
-      <div className={s.country}>{country}</div>
-      <div className={s.likeArea}>
-        <button onClick={changeCard} className={s.infoButton} type="button">
+      <div className="country">{country}</div>
+      <div className="likeArea">
+        <button onClick={changeCard} className="infoButton" type="button">
           {isOpenCardInfo ? <span>Close</span> : <span>Info</span>}
         </button>
         <button type="button">

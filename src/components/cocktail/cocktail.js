@@ -1,11 +1,14 @@
 import React, { iseState, useEffect } from 'react';
-import s from './cocktail.css';
+import './cocktail.css';
 
 const Cocktail = () => {
   return (
-    <svg className = {s.svgCocktail} xmlns="http://www.w3.org/2000/svg" viewBox="0 2 98 98"
-    //  width="480" height="480"
-     >
+    <svg
+      className="svgCocktail"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 2 98 98"
+      //  width="480" height="480"
+    >
       <linearGradient id="a" gradientUnits="userSpaceOnUse" x1="49" y1="3.333" x2="49" y2="97.669">
         <stop offset="0" stop-color="#00efd1" />
         <stop offset="1" stop-color="#00acea" />
@@ -16,6 +19,6 @@ const Cocktail = () => {
       />
     </svg>
   );
-} 
+};
 
 export default Cocktail;
