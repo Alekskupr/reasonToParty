@@ -46,7 +46,11 @@ const Header = (props) => {
         <button className="navButton" type="button" onClick={changeStatusRegPanel}>
           <Person />
         </button>
-        <PersonPanel changeStatusRegPanel={changeStatusRegPanel} isOpenRegPanel={isOpenRegPanel} />
+        <PersonPanel
+          changeStatusRegPanel={changeStatusRegPanel}
+          isOpenRegPanel={isOpenRegPanel}
+          authorizedUser={authorizedUser}
+        />
       </div>
     </div>
   );

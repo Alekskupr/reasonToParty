@@ -11,7 +11,7 @@ const PersonPanel = (props) => {
   // const { isOpenRegPanel } = props;
 
   // const [isOpen, setIsOpen] = useState(false);
-  const { isOpenRegPanel } = props;
+  const { isOpenRegPanel, authorizedUser } = props;
 
   const [userData, setUserData] = useState({
     email: null,
@@ -79,48 +79,57 @@ const PersonPanel = (props) => {
       // onExited={() => setIsOpen(false)}
     >
       <div className="containerPersonPanel">
-        <div>
-          <div>{authMessage ? <span className="messageUser">{authMessage}</span> : ''}</div>
-          <button type="button" onClick={changePanelHandler}>
-            <span>{typePanel.authorization ? 'registration' : 'authorization'}</span>
-          </button>
+        {!authorizedUser.authUser ? (
+          <div>
+            <div>{authMessage ? <span className="messageUser">{authMessage}</span> : ''}</div>
+            <button type="button" onClick={changePanelHandler}>
+              <span>{typePanel.authorization ? 'registration' : 'authorization'}</span>
+            </button>
 
-          {typePanel.authorization ? (
-            <form className="form" onSubmit={submitHandler}>
-              <h4>Authorization</h4>
-              <div className="inputGroup">
-                <input onChange={inputHandler} id="login" placeholder=" " />
-                <label htmlFor="login">login</label>
-              </div>
-              <div className="inputGroup">
-                <input onChange={inputHandler} id="password" placeholder=" " />
-                <label htmlFor="password">password</label>
-              </div>
-              <button type="submit">log in</button>
-            </form>
-          ) : (
-            <form className="form" onSubmit={submitHandler}>
-              <h4>Registration</h4>
-              <div className="inputGroup">
-                <input onChange={inputHandler} id="email" type="email" placeholder=" " />
-                <label htmlFor="email">email</label>
-              </div>
-              <div className="inputGroup">
-                <input onChange={inputHandler} id="login" placeholder=" " />
-                <label htmlFor="login">create login</label>
-              </div>
-              <div className="inputGroup">
-                <input onChange={inputHandler} id="password" placeholder=" " />
-                <label htmlFor="password">create password</label>
-              </div>
-              <div className={`${'inputGroup'} ${'InputCheckbox'}`}>
-                <input onChange={inputHandler} id="subscription" type="checkbox" />
-                <span>I agree to receive newsletters about my favorite holidays!</span>
-              </div>
-              <button type="submit">sign up</button>
-            </form>
-          )}
-        </div>
+            {typePanel.authorization ? (
+              <form className="form" onSubmit={submitHandler}>
+                <h4>Authorization</h4>
+                <div className="inputGroup">
+                  <input onChange={inputHandler} id="login" placeholder=" " />
+                  <label htmlFor="login">login</label>
+                </div>
+                <div className="inputGroup">
+                  <input onChange={inputHandler} id="password" placeholder=" " />
+                  <label htmlFor="password">password</label>
+                </div>
+                <button type="submit">log in</button>
+              </form>
+            ) : (
+              <form className="form" onSubmit={submitHandler}>
+                <h4>Registration</h4>
+                <div className="inputGroup">
+                  <input onChange={inputHandler} id="email" type="email" placeholder=" " />
+                  <label htmlFor="email">email</label>
+                </div>
+                <div className="inputGroup">
+                  <input onChange={inputHandler} id="login" placeholder=" " />
+                  <label htmlFor="login">create login</label>
+                </div>
+                <div className="inputGroup">
+                  <input onChange={inputHandler} id="password" placeholder=" " />
+                  <label htmlFor="password">create password</label>
+                </div>
+                <div className={`${'inputGroup'} ${'InputCheckbox'}`}>
+                  <input onChange={inputHandler} id="subscription" type="checkbox" />
+                  <span>I agree to receive newsletters about my favorite holidays!</span>
+                </div>
+                <button type="submit">sign up</button>
+              </form>
+            )}
+          </div>
+        ) : (
+          <div>
+            <span>
+              hello,
+              {authorizedUser.user.login}
+            </span>
+          </div>
+        )}
       </div>
     </CSSTransition>
   );
