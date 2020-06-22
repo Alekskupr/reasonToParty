@@ -10,7 +10,8 @@ const PersonPanel = (props) => {
   // const [inProp, setInProp] = useState(false);
   // const { isOpenRegPanel } = props;
 
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
+  const { isOpenRegPanel } = props;
 
   const [userData, setUserData] = useState({
     email: null,
@@ -69,22 +70,17 @@ const PersonPanel = (props) => {
   // console.log('animationRegPanel-enter');
 
   return (
-    <div className="containerPersonPanel">
-      <button type="button" onClick={() => setIsOpen(!isOpen)}>
-        yf;vb
-      </button>
-      {/* <h4>{JSON.stringify(isOpen)}</h4> */}
-      <CSSTransition
-        in={isOpen}
-        timeout={1000}
-        className="animationRegPanel"
-        unmountOnExit
-        // onEnter={() => setIsOpen(true)}
-        // onExited={() => setIsOpen(false)}
-      >
-        {/* <h4>{JSON.stringify(authMessage)}</h4> */}
+    <CSSTransition
+      in={isOpenRegPanel}
+      timeout={5000}
+      classNames="animationRegPanel"
+      unmountOnExit
+      // onEnter={() => setIsOpen(true)}
+      // onExited={() => setIsOpen(false)}
+    >
+      <div className="containerPersonPanel">
         <div>
-          {authMessage ? <span className="messageUser">{authMessage}</span> : ''}
+          <div>{authMessage ? <span className="messageUser">{authMessage}</span> : ''}</div>
           <button type="button" onClick={changePanelHandler}>
             <span>{typePanel.authorization ? 'registration' : 'authorization'}</span>
           </button>
@@ -125,8 +121,8 @@ const PersonPanel = (props) => {
             </form>
           )}
         </div>
-      </CSSTransition>
-    </div>
+      </div>
+    </CSSTransition>
   );
 };
 

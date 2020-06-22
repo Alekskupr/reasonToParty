@@ -134,7 +134,7 @@ const App = () => {
   return (
     <div className="app">
       <section className="header">
-        <Header authorizedUser="authorizedUser" />
+        <Header authorizedUser={authorizedUser} />
         {/* <div>{JSON.stringify(authorizedUser)}</div> */}
       </section>
       <section className="nav">

@@ -7,6 +7,8 @@ import PersonPanel from '../personPanel/personPanel';
 
 const Header = (props) => {
   const { authorizedUser } = props;
+  // console.log(authorizedUser);
+  
 
   const [isOpenRegPanel, setisOpenRegPanel] = useState(false);
 
