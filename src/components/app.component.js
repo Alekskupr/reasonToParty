@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './app.component.css';
 import PartyList from './partyList/partyList';
 import Header from './header/header';
-import { downloadInfoAC } from '../redux/action';
+import { downloadInfoAC, authorizedUserAC } from '../redux/action';
 import Footer from './footer/footer';
 import FilterPanel from './filter/filter';
 
@@ -31,6 +31,15 @@ const App = () => {
   const downloadInfo = useSelector((store) => store.downloadInfo);
 
   const authorizedUser = useSelector((store) => store.authorizedUser);
+  const authUser = useSelector((store) => store.authUser);
+
+  useEffect(() => {
+    fetch('/api/parties/user')
+      .then((resp) => resp.json())
+      .then((user) => {
+        dispatch(authorizedUserAC(user));
+      });
+  }, [authUser, dispatch]);
 
   useEffect(() => {
     fetch('/api/parties/countries')
@@ -134,7 +143,7 @@ const App = () => {
   return (
     <div className="app">
       <section className="header">
-        <Header authorizedUser={authorizedUser} />
+        <Header authorizedUser={authorizedUser} authUser={authUser} />
         {/* <div>{JSON.stringify(authorizedUser)}</div> */}
       </section>
       <section className="nav">

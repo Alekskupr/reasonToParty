@@ -23,11 +23,33 @@ const searchWordAC = (word) => {
   };
 };
 
-const authorizedUserAC = (userData) => {
+const authorizedMessageAC = (message) => {
   return {
-    type: 'AUTHORIZED_USER',
-    payload: userData,
+    type: 'AUTHORIZED_MESSAGE',
+    payload: message,
   };
 };
 
-export { selectPartyNameAC, downloadInfoAC, selectCountryKeyAC, searchWordAC, authorizedUserAC };
+const authorizedUserAC = (user) => {
+  return {
+    type: 'AUTHORIZED_USER',
+    payload: user,
+  };
+};
+
+const authUserAC = (bool) => {
+  return {
+    type: 'AUTH_USER',
+    payload: bool,
+  };
+};
+
+export {
+  selectPartyNameAC,
+  downloadInfoAC,
+  selectCountryKeyAC,
+  searchWordAC,
+  authorizedMessageAC,
+  authorizedUserAC,
+  authUserAC,
+};

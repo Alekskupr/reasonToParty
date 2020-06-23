@@ -6,9 +6,9 @@ import Keypad from '../keypad/keypad';
 import PersonPanel from '../personPanel/personPanel';
 
 const Header = (props) => {
-  const { authorizedUser } = props;
+  const { authorizedUser, authUser } = props;
+  const { login } = authorizedUser;
   // console.log(authorizedUser);
-  
 
   const [isOpenRegPanel, setisOpenRegPanel] = useState(false);
 
@@ -27,12 +27,12 @@ const Header = (props) => {
         </a>
       </div>
       <div className="helloUser">
-        {authorizedUser.authUser ? (
+        {authUser ? (
           <p className="helloText">
             Only important occasions, only national holidays for you,
             <span className="userName">
               &nbsp;
-              {authorizedUser.user.login}!
+              {login}!
             </span>
           </p>
         ) : (

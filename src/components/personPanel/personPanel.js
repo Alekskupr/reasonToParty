@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useSelect, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
-import { authorizedUserAC } from '../../redux/action';
+import { authorizedUserAC, authorizedMessageAC, authUserAC } from '../../redux/action';
 
 import './personPanel.css';
 
@@ -27,6 +27,7 @@ const PersonPanel = (props) => {
 
   const [authMessage, setAuthMessage] = useState('');
 
+  const authUser = useSelector((store) => store.authUser);
   const dispatch = useDispatch();
 
   const inputHandler = (e) => {
@@ -55,8 +56,29 @@ const PersonPanel = (props) => {
       .then((resp) => resp.json())
       .then((data) => {
         setAuthMessage(data.message);
-        dispatch(authorizedUserAC(data));
-        return data.authUser && props.changeStatusRegPanel();
+        dispatch(authorizedMessageAC(data.message));
+        console.log(data);
+
+        if (data.status === 200) {
+          dispatch(authorizedUserAC(data.user));
+          dispatch(authUserAC(true));
+          props.changeStatusRegPanel();
+        }
+      })
+      .catch((err) => console.log('catch ', err));
+  };
+
+  const logOut = () => {
+    fetch('/api/parties/logout')
+      .then((resp) => resp.json())
+      .then((data) => {
+        setAuthMessage(data.message);
+        dispatch(authorizedMessageAC(data.message));
+        console.log(data);
+        if (data.status === 200) {
+          dispatch(authUserAC(false));
+          props.changeStatusRegPanel();
+        }
       })
       .catch((err) => console.log('catch ', err));
   };
@@ -79,7 +101,7 @@ const PersonPanel = (props) => {
       // onExited={() => setIsOpen(false)}
     >
       <div className="containerPersonPanel">
-        {!authorizedUser.authUser ? (
+        {!authUser ? (
           <div>
             <div>{authMessage ? <span className="messageUser">{authMessage}</span> : ''}</div>
             <button type="button" onClick={changePanelHandler}>
@@ -126,8 +148,11 @@ const PersonPanel = (props) => {
           <div>
             <span>
               hello,
-              {authorizedUser.user.login}
+              {authorizedUser.login}
             </span>
+            <button type="button" onClick={logOut}>
+              log out
+            </button>
           </div>
         )}
       </div>

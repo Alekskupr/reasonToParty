@@ -5,14 +5,31 @@ const router = express.Router();
 const wtf = require('wtf_wikipedia');
 
 const fetch = require('node-fetch');
-const mongoose = require('mongoose');
 
 const User = require('../models/user');
 
 router.get('/', async (req, res) => {
+  console.log(req.session);
+
   const resp = await fetch('https://date.nager.at/api/v2/NextPublicHolidaysWorldwide');
   const reasons = await resp.json();
   await res.json(reasons);
+});
+
+router.get('/user', (req, res) => {
+  User.findById(req.session.userId)
+    .then((user) => {
+      if (user) {
+        const userData = {
+          login: user.login,
+          favoriteHolidays: user.favoriteHolidays,
+        };
+        res.json(userData);
+      }
+    })
+    .catch((err) => {
+      console.log('Error user', err);
+    });
 });
 
 router.get('/availableCountries', (req, res) => {
@@ -52,14 +69,14 @@ router.post('/registration', (req, res) => {
       return res.json({
         status: 400,
         message: err,
-        authUser: false,
+        // authUser: false,
       });
     }
     if (data) {
       return res.json({
         status: 400,
         message: 'User already exist',
-        authUser: false,
+        // authUser: false,
       });
     }
 
@@ -75,14 +92,19 @@ router.post('/registration', (req, res) => {
         return res.json({
           status: 400,
           message: error,
-          authUser: false,
+          // authUser: false,
         });
       }
+      req.session.userId = user._id;
+      const userData = {
+        login: user.login,
+        favoriteHolidays: user.favoriteHolidays,
+      };
       return res.json({
         status: 200,
         message: 'You have succesfully registered.',
-        user,
-        authUser: true,
+        user: userData,
+        // authUser: true,
       });
     });
   });
@@ -90,20 +112,43 @@ router.post('/registration', (req, res) => {
 
 router.post('/authorization', (req, res) => {
   const { login, password } = req.body;
-  User.findOne({ login, password }, (err, data) => {
-    if (err || !data) {
-      return res.status(401).json({
+  User.findOne({ login, password }, (err, user) => {
+    if (err || !user) {
+      return res.json({
         status: 401,
         message: 'Invalid username or password',
-        authUser: false,
+        // authUser: false,
       });
     }
-    return res.status(200).json({
+    req.session.userId = user._id;
+    const userData = {
+      login: user.login,
+      favoriteHolidays: user.favoriteHolidays,
+    };
+    return res.json({
+      status: 200,
       message: 'You have succesfully loggedin.',
-      user: data,
-      authUser: true,
+      user: userData,
+      // authUser: true,
     });
   });
+});
+
+router.get('/logout', (req, res) => {
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err) {
+        return {
+          status: 400,
+          message: err,
+        };
+      }
+      return res.json({
+        status: 200,
+        message: 'Goodbye my love, goodbay!',
+      });
+    });
+  }
 });
 
 module.exports = router;

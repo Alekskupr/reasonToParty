@@ -4,16 +4,12 @@ const initialState = {
   selectCountry: null,
   isOpenSelect: false,
   searchWord: null,
+  authUser: false,
   authorizedUser: {
-    authUser: false,
-    message: '',
-    user: {
-      favoriteHolyday: [],
-      login: null,
-      password: null,
-      email: null,
-    },
+    login: '',
+    favoriteHolidays: [],
   },
+  authorizedMessage: {},
 };
 
 export default function (state = initialState, action) {
@@ -45,10 +41,23 @@ export default function (state = initialState, action) {
         searchWord: action.payload,
       };
     }
+    case 'AUTHORIZED_MESSAGE': {
+      return {
+        ...state,
+        authorizedMessage: action.payload,
+      };
+    }
     case 'AUTHORIZED_USER': {
       return {
         ...state,
         authorizedUser: action.payload,
+        authUser: true,
+      };
+    }
+    case 'AUTH_USER': {
+      return {
+        ...state,
+        authUser: action.payload,
       };
     }
     default:
