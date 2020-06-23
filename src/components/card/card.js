@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './card.css';
 import Like from '../like/like';
-import { selectPartyNameAC } from '../../redux/action';
+import { selectPartyNameAC, favoriteHolidayAC } from '../../redux/action';
 
 const Card = (props) => {
   const { flag, name, date, info, country } = props;
@@ -23,6 +23,27 @@ const Card = (props) => {
       dispatch(selectPartyNameAC(props));
     }
   }, [isOpenCardInfo, dispatch]);
+
+  const likeHandler = () => {
+    console.log('dbsfgrgrg');
+    
+    const favoriteHoliday = { flag, name, date, info, country };
+    fetch(`/api/party/`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        accept: 'application/json',
+      },
+      body: JSON.stringify(favoriteHoliday),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data.status === 200) {
+          favoriteHolidayAC(data);
+        }
+      })
+      .catch((err) => console.log('catch', err));
+  };
 
   return (
     <div className={isOpenCardInfo ? 'cardOpen' : 'card'}>
@@ -47,7 +68,7 @@ const Card = (props) => {
         <button onClick={changeCard} className="infoButton" type="button">
           {isOpenCardInfo ? <span>Close</span> : <span>Info</span>}
         </button>
-        <button type="button">
+        <button onClick={likeHandler} type="button">
           <Like />
         </button>
       </div>

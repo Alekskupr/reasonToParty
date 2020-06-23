@@ -62,7 +62,7 @@ const PersonPanel = (props) => {
         if (data.status === 200) {
           dispatch(authorizedUserAC(data.user));
           dispatch(authUserAC(true));
-          props.changeStatusRegPanel();
+          // props.changeStatusRegPanel();
         }
       })
       .catch((err) => console.log('catch ', err));
@@ -77,7 +77,7 @@ const PersonPanel = (props) => {
         console.log(data);
         if (data.status === 200) {
           dispatch(authUserAC(false));
-          props.changeStatusRegPanel();
+          // props.changeStatusRegPanel();
         }
       })
       .catch((err) => console.log('catch ', err));
@@ -89,12 +89,11 @@ const PersonPanel = (props) => {
       authorization: !typePanel.authorization,
     });
   };
-  // console.log('animationRegPanel-enter');
 
   return (
     <CSSTransition
       in={isOpenRegPanel}
-      timeout={5000}
+      timeout={1000}
       classNames="animationRegPanel"
       unmountOnExit
       // onEnter={() => setIsOpen(true)}
@@ -145,11 +144,28 @@ const PersonPanel = (props) => {
             )}
           </div>
         ) : (
-          <div>
-            <span>
+          <div className="form">
+            <h4>
               hello,
               {authorizedUser.login}
-            </span>
+            </h4>
+            <ul>
+              <li>
+                <button type="button">
+                  <span>favorite holiday</span>
+                </button>
+              </li>
+              <li>
+                <button type="button">
+                  <span>favorite holiday</span>
+                </button>
+              </li>
+              <li>
+                <button type="button">
+                  <span>favorite holiday</span>
+                </button>
+              </li>
+            </ul>
             <button type="button" onClick={logOut}>
               log out
             </button>

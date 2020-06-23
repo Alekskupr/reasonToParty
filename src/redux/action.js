@@ -44,6 +44,13 @@ const authUserAC = (bool) => {
   };
 };
 
+const favoriteHolidayAC = (holiday) => {
+  return {
+    type: 'FAVORITE_HOLIDAY',
+    payload: holiday,
+  };
+};
+
 export {
   selectPartyNameAC,
   downloadInfoAC,
@@ -52,4 +59,5 @@ export {
   authorizedMessageAC,
   authorizedUserAC,
   authUserAC,
+  favoriteHolidayAC,
 };

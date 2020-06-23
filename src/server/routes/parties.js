@@ -9,8 +9,6 @@ const fetch = require('node-fetch');
 const User = require('../models/user');
 
 router.get('/', async (req, res) => {
-  console.log(req.session);
-
   const resp = await fetch('https://date.nager.at/api/v2/NextPublicHolidaysWorldwide');
   const reasons = await resp.json();
   await res.json(reasons);
@@ -30,6 +28,12 @@ router.get('/user', (req, res) => {
     .catch((err) => {
       console.log('Error user', err);
     });
+});
+
+router.get('/party', (req, res) => {
+  console.log(req.session);
+  console.log(req.body.favoriteHoliday);
+  res.end();
 });
 
 router.get('/availableCountries', (req, res) => {

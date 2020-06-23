@@ -40,15 +40,15 @@ const FilterPanel = (props) => {
 
   return (
     <div className="containerFilter">
-      <p className="c.filterText">
-        Hey! Take advantage of the nearest occasion for a party or find the most suitable one for you:
-      </p>
+      {/* <div>
+        <span className="helloUser">Find your reason:</span>
+      </div> */}
 
       <button type="button" onClick={changeStatusSelect}>
         {SelectCountryName || 'select country'}
       </button>
-      <div className="containerCountryList">
-        {isOpenSelect ? (
+      {isOpenSelect && (
+        <div className="containerCountryList">
           <ul id="country">
             <div>
               <li type="button" onClick={resetSelectCountryKey}>
@@ -61,10 +61,8 @@ const FilterPanel = (props) => {
                 })
               : ''}
           </ul>
-        ) : (
-          ''
-        )}
-      </div>
+        </div>
+      )}
       <input className="searchInput" type="text" onChange={onChangeHandlerSearcher} />
       <button type="button">my favorite holidays</button>
     </div>

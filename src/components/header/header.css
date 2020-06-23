@@ -48,14 +48,7 @@
   background-color: #6bb6f3;
 }
 
-.helloUser {
-  color: white;
-  font-style: italic;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0 auto;
-  display: flex;
-}
+
 
 .helloText {
   margin: auto;
