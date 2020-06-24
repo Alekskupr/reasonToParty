@@ -30,10 +30,27 @@ router.get('/user', (req, res) => {
     });
 });
 
-router.get('/party', (req, res) => {
-  console.log(req.session);
-  console.log(req.body.favoriteHoliday);
-  res.end();
+router.post('/party', (req, res) => {
+  // console.log(req.session);
+  console.log(req.body.likeHoliday);
+  // const { flag, name, date, country } = req.body;
+  // PersonModel.update({ _id: person._id }, { $push: { friends: friend } }, done);
+  User.findByIdAndUpdate(req.session.userId, { $push: { favoriteHolidays: req.body.likeHoliday } }, (err, user) => {
+    if (err) {
+      res.json({
+        status: 400,
+        message: 'the user is not found',
+      });
+    }
+    res.json({
+      status: 200,
+      message: 'holiday added to the collection',
+      user: {
+        login: user.login,
+        favoriteHolidays: user.favoriteHolidays,
+      },
+    });
+  });
 });
 
 router.get('/availableCountries', (req, res) => {

@@ -7,7 +7,11 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
 
-mongoose.connect('mongodb://localhost:27017/reasonToParty', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/reasonToParty', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+});
 
 const partiesRouter = require('./routes/parties');
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './card.css';
 import Like from '../like/like';
-import { selectPartyNameAC, favoriteHolidayAC } from '../../redux/action';
+import { selectPartyNameAC, authorizedUserAC } from '../../redux/action';
 
 const Card = (props) => {
   const { flag, name, date, info, country } = props;
@@ -26,20 +26,20 @@ const Card = (props) => {
 
   const likeHandler = () => {
     console.log('dbsfgrgrg');
-    
-    const favoriteHoliday = { flag, name, date, info, country };
-    fetch(`/api/party/`, {
+
+    const favoriteHoliday = { flag, name, date, country };
+    fetch(`/api/parties/party`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
         accept: 'application/json',
       },
-      body: JSON.stringify(favoriteHoliday),
+      body: JSON.stringify({ likeHoliday: favoriteHoliday }),
     })
       .then((resp) => resp.json())
       .then((data) => {
         if (data.status === 200) {
-          favoriteHolidayAC(data);
+          authorizedUserAC(data.user);
         }
       })
       .catch((err) => console.log('catch', err));

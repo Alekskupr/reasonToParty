@@ -60,15 +60,15 @@ export default function (state = initialState, action) {
         authUser: action.payload,
       };
     }
-    case 'FAVORITE_HOLIDAY': {
-      return {
-        ...state,
-        authorizedUser: {
-          ...state.authorizedUser,
-          favoriteHolidays: [...state.authorizedUser.favoriteHolidays, action.payload],
-        },
-      };
-    }
+    // case 'FAVORITE_HOLIDAY': {
+    //   return {
+    //     ...state,
+    //     authorizedUser: {
+    //       ...state.authorizedUser,
+    //       favoriteHolidays: [...state.authorizedUser.favoriteHolidays, action.payload],
+    //     },
+    //   };
+    // }
     default:
       return state;
   }

@@ -5,7 +5,7 @@ import { searchWordAC, selectCountryKeyAC } from '../../redux/action';
 import './filter.css';
 
 const FilterPanel = (props) => {
-  const { availableCountries } = props;
+  const { availableCountries, favoriteHolidayHandler } = props;
 
   const [searchWord, setSearchWord] = useState('');
   const [isOpenSelect, setIsOpenSelect] = useState(false);
@@ -64,7 +64,9 @@ const FilterPanel = (props) => {
         </div>
       )}
       <input className="searchInput" type="text" onChange={onChangeHandlerSearcher} />
-      <button type="button">my favorite holidays</button>
+      <button onClick={() => favoriteHolidayHandler()} type="button">
+        my favorite holidays
+      </button>
     </div>
   );
 };

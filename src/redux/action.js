@@ -44,12 +44,12 @@ const authUserAC = (bool) => {
   };
 };
 
-const favoriteHolidayAC = (holiday) => {
-  return {
-    type: 'FAVORITE_HOLIDAY',
-    payload: holiday,
-  };
-};
+// const favoriteHolidayAC = (holiday) => {
+//   return {
+//     type: 'FAVORITE_HOLIDAY',
+//     payload: holiday,
+//   };
+// };
 
 export {
   selectPartyNameAC,
@@ -59,5 +59,5 @@ export {
   authorizedMessageAC,
   authorizedUserAC,
   authUserAC,
-  favoriteHolidayAC,
+  // favoriteHolidayAC,
 };
