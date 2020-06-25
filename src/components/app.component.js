@@ -160,7 +160,13 @@ const App = () => {
           ''
         )}
       </article>
-      <aside className="sidebar" />
+      <aside className="sidebar">
+        <ul>
+          {authorizedUser.favoriteHolidays.map((party, index) => {
+            return <li key={index}>{party.name}</li>;
+          })}
+        </ul>
+      </aside>
       <Footer />
     </div>
   );

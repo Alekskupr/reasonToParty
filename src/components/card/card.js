@@ -39,6 +39,7 @@ const Card = (props) => {
       .then((resp) => resp.json())
       .then((data) => {
         if (data.status === 200) {
+          console.log(data.user);
           authorizedUserAC(data.user);
         }
       })
