@@ -37,6 +37,16 @@ const App = () => {
     setDataPartiesForList(authorizedUser.favoriteHolidays);
   };
 
+  // const mystore = useSelector((store) => store);
+
+  // const [favoriteHolidays, setFavoriteHolidays] = useState([]);
+
+  // useEffect(() => {
+  //   console.log('useeffect');
+
+  //   setFavoriteHolidays(authorizedUser.favoriteHolidays);
+  // }, [authorizedUser.favoriteHolidays.length]);
+
   useEffect(() => {
     fetch('/api/parties/user')
       .then((resp) => resp.json())
@@ -143,6 +153,8 @@ const App = () => {
         .catch(console.log('чет не грузится пока'));
     }
   }, [selectedCountryKeyFromFilter]);
+
+  // console.log(authorizedUser);
 
   return (
     <div className="app">

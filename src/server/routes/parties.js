@@ -35,22 +35,27 @@ router.post('/party', (req, res) => {
   console.log(req.body.likeHoliday);
   // const { flag, name, date, country } = req.body;
   // PersonModel.update({ _id: person._id }, { $push: { friends: friend } }, done);
-  User.findByIdAndUpdate(req.session.userId, { $push: { favoriteHolidays: req.body.likeHoliday } }, (err, user) => {
-    if (err) {
+  User.findByIdAndUpdate(
+    req.session.userId,
+    { $push: { favoriteHolidays: req.body.likeHoliday } },
+    { new: true },
+    (err, user) => {
+      if (err) {
+        res.json({
+          status: 400,
+          message: 'the user is not found',
+        });
+      }
       res.json({
-        status: 400,
-        message: 'the user is not found',
+        status: 200,
+        message: 'holiday added to the collection',
+        user: {
+          login: user.login,
+          favoriteHolidays: user.favoriteHolidays,
+        },
       });
-    }
-    res.json({
-      status: 200,
-      message: 'holiday added to the collection',
-      user: {
-        login: user.login,
-        favoriteHolidays: user.favoriteHolidays,
-      },
-    });
-  });
+    },
+  );
 });
 
 router.get('/availableCountries', (req, res) => {
@@ -164,9 +169,12 @@ router.get('/logout', (req, res) => {
           message: err,
         };
       }
+
+      const userData = { login: '', favoriteHolidays: [] };
       return res.json({
         status: 200,
         message: 'Goodbye my love, goodbay!',
+        user: userData,
       });
     });
   }

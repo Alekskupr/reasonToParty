@@ -74,10 +74,9 @@ const PersonPanel = (props) => {
       .then((data) => {
         setAuthMessage(data.message);
         dispatch(authorizedMessageAC(data.message));
-        console.log(data);
         if (data.status === 200) {
+          dispatch(authorizedUserAC(data.user));
           dispatch(authUserAC(false));
-          // props.changeStatusRegPanel();
         }
       })
       .catch((err) => console.log('catch ', err));

@@ -25,8 +25,6 @@ const Card = (props) => {
   }, [isOpenCardInfo, dispatch]);
 
   const likeHandler = () => {
-    console.log('dbsfgrgrg');
-
     const favoriteHoliday = { flag, name, date, country };
     fetch(`/api/parties/party`, {
       method: 'POST',
@@ -39,8 +37,9 @@ const Card = (props) => {
       .then((resp) => resp.json())
       .then((data) => {
         if (data.status === 200) {
-          console.log(data.user);
-          authorizedUserAC(data.user);
+          console.log(data.user.favoriteHolidays);
+
+          dispatch(authorizedUserAC(data.user));
         }
       })
       .catch((err) => console.log('catch', err));
