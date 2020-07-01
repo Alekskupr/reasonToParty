@@ -5,7 +5,8 @@ import Like from '../like/like';
 import { selectPartyNameAC, authorizedUserAC } from '../../redux/action';
 
 const Card = (props) => {
-  const { flag, name, date, info, country } = props;
+  const { flag, name, date, info, country, like } = props;
+  console.log(props);
 
   const [isOpenCardInfo, setIsOpenCardInfo] = useState(false);
   const dispatch = useDispatch();
@@ -37,8 +38,6 @@ const Card = (props) => {
       .then((resp) => resp.json())
       .then((data) => {
         if (data.status === 200) {
-          console.log(data.user.favoriteHolidays);
-
           dispatch(authorizedUserAC(data.user));
         }
       })
@@ -69,7 +68,7 @@ const Card = (props) => {
           {isOpenCardInfo ? <span>Close</span> : <span>Info</span>}
         </button>
         <button onClick={likeHandler} type="button">
-          <Like />
+          <Like like={like} />
         </button>
       </div>
     </div>

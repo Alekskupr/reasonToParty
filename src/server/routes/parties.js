@@ -11,7 +11,30 @@ const User = require('../models/user');
 router.get('/', async (req, res) => {
   const resp = await fetch('https://date.nager.at/api/v2/NextPublicHolidaysWorldwide');
   const reasons = await resp.json();
-  await res.json(reasons);
+  const user = await User.findById(req.session.userId)
+    .then((data) => {
+      return data;
+    })
+    .catch((err) => console.log(err));
+  const newReasonsArr = reasons.map((item) => {
+    for (let i = 0; i < user.favoriteHolidays.length; i++) {
+      if (item.name === user.favoriteHolidays[i].name) {
+        return {
+          ...item,
+          like: true,
+        };
+      }
+    }
+    if (item.like) {
+      return item;
+    }
+
+    return {
+      ...item,
+      like: false,
+    };
+  });
+  await res.json(newReasonsArr);
 });
 
 router.get('/user', (req, res) => {
@@ -31,10 +54,6 @@ router.get('/user', (req, res) => {
 });
 
 router.post('/party', (req, res) => {
-  // console.log(req.session);
-  console.log(req.body.likeHoliday);
-  // const { flag, name, date, country } = req.body;
-  // PersonModel.update({ _id: person._id }, { $push: { friends: friend } }, done);
   User.findByIdAndUpdate(
     req.session.userId,
     { $push: { favoriteHolidays: req.body.likeHoliday } },

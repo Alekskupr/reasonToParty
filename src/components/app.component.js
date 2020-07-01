@@ -37,24 +37,6 @@ const App = () => {
     setDataPartiesForList(authorizedUser.favoriteHolidays);
   };
 
-  // const mystore = useSelector((store) => store);
-
-  // const [favoriteHolidays, setFavoriteHolidays] = useState([]);
-
-  // useEffect(() => {
-  //   console.log('useeffect');
-
-  //   setFavoriteHolidays(authorizedUser.favoriteHolidays);
-  // }, [authorizedUser.favoriteHolidays.length]);
-
-  useEffect(() => {
-    fetch('/api/parties/user')
-      .then((resp) => resp.json())
-      .then((user) => {
-        dispatch(authorizedUserAC(user));
-      });
-  }, [authUser, dispatch]);
-
   useEffect(() => {
     fetch('/api/parties/countries')
       .then((resp) => resp.json())
@@ -63,11 +45,33 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    if (selectedCountryKeyFromFilter) {
+      fetch(`/api/parties/countryParties/${selectedCountryKeyFromFilter}`)
+        .then((resp) => resp.json())
+        .then((data) => setDataParty(data))
+        .catch((err) => console.log(err));
+    } else {
+      fetch('/api/parties')
+        .then((res) => res.json())
+        .then((data) => setDataParty(data))
+        .catch(console.log('чет не грузится пока'));
+    }
+  }, [selectedCountryKeyFromFilter]);
+
+  useEffect(() => {
     fetch('/api/parties/availableCountries')
       .then((resp) => resp.json())
       .then((data) => setAvailableCountries(data))
       .catch(console.log('возможные страны не прогрузились'));
   }, []);
+
+  useEffect(() => {
+    fetch('/api/parties/user')
+      .then((resp) => resp.json())
+      .then((user) => {
+        dispatch(authorizedUserAC(user));
+      });
+  }, [authUser, dispatch]);
 
   useEffect(() => {
     const partyInfoSearch = (party, dataParties) => {
@@ -115,6 +119,7 @@ const App = () => {
           const countrySearch = dataCountyArr.filter((item) => item.alpha2Code === dataPartyArr[i].countryCode);
           parties[i].flag = countrySearch[0].flag;
           parties[i].country = countrySearch[0].name;
+          // parties[i].like = false;
         }
         setcombinedDataParties(parties);
       }
@@ -139,20 +144,6 @@ const App = () => {
     const filteredList = filter(combinedDataParties, searchWordFromFilter);
     setDataPartiesForList(filteredList);
   }, [combinedDataParties, searchWordFromFilter]);
-
-  useEffect(() => {
-    if (selectedCountryKeyFromFilter) {
-      fetch(`/api/parties/countryParties/${selectedCountryKeyFromFilter}`)
-        .then((resp) => resp.json())
-        .then((data) => setDataParty(data))
-        .catch((err) => console.log(err));
-    } else {
-      fetch('/api/parties')
-        .then((res) => res.json())
-        .then((data) => setDataParty(data))
-        .catch(console.log('чет не грузится пока'));
-    }
-  }, [selectedCountryKeyFromFilter]);
 
   // console.log(authorizedUser);
 
