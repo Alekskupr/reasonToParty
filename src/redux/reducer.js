@@ -1,9 +1,9 @@
 const initialState = {
   selectPartyName: {},
   downloadInfo: false,
-  selectCountry: null,
+  selectCountry: 'all',
   isOpenSelect: false,
-  searchWord: null,
+  searchWord: '',
   authUser: false,
   authorizedUser: {
     login: '',

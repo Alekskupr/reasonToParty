@@ -15,8 +15,10 @@ router.get('/countries', (req, res) => {
     .catch((err) => console.log('Error:', err));
 });
 
-router.get('/', async (req, res) => {
-  const dataHolidays = await fetch('https://date.nager.at/api/v2/NextPublicHolidaysWorldwide')
+router.get('/dataParties/:key', async (req, res) => {
+  const url = req.params.key === 'all' ? 'NextPublicHolidaysWorldwide' : `NextPublicHolidays/${req.params.key}`;
+
+  const dataHolidays = await fetch(`https://date.nager.at/api/v2/${url}`)
     .then((data) => data.json())
     .catch((err) => console.log(err));
 
@@ -65,6 +67,13 @@ router.get('/', async (req, res) => {
   const combineData = combine(dataHolidays, dataCountries, user);
   await res.json(combineData);
 });
+// router.get('/countryParties/:key', (req, res) => {
+//   fetch(`https://date.nager.at/api/v2/NextPublicHolidays/${req.params.key}`)
+//     .then((resp) => resp.json())
+//     .then((data) => res.json(data))
+//     .catch((err) => console.log('Error:', err));
+// });
+
 //     for (let i = 0; i < parties.length; i += 1) {
 //       const countrySearch = dataCountyArr.filter((item) => item.alpha2Code === dataPartyArr[i].countryCode);
 //       parties[i].flag = countrySearch[0].flag;
@@ -157,13 +166,6 @@ router.post('/', (req, res) => {
     .then((data) => data.text().substring(0, 1000))
     .then((data) => res.json(data))
     .catch(() => res.json('Sorry! There is no information about this holiday...'));
-});
-
-router.get('/countryParties/:key', (req, res) => {
-  fetch(`https://date.nager.at/api/v2/NextPublicHolidays/${req.params.key}`)
-    .then((resp) => resp.json())
-    .then((data) => res.json(data))
-    .catch((err) => console.log('Error:', err));
 });
 
 router.post('/registration', (req, res) => {

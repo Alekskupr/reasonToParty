@@ -34,6 +34,10 @@ app.use(
   }),
 );
 
+app.use('/api/parties/dataParties', (req, res, next) => {
+  console.log('dataParties');
+  next();
+});
 // const checkSession = (req, res, next) => {
 //   // console.log(req.session);
 //   if (req.session.user) {

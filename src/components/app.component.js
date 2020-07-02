@@ -11,7 +11,7 @@ const App = () => {
   const [dataParty, setDataParty] = useState([]);
   const [dataCounty, setDataCountry] = useState([]);
   const [availableCountries, setAvailableCountries] = useState([]);
-  const [combinedDataParties, setcombinedDataParties] = useState([]);
+  const [dataPartiesFromServer, setDataPartiesFromServer] = useState([]);
   const [dataPartiesForList, setDataPartiesForList] = useState([]);
 
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const App = () => {
   const authUser = useSelector((store) => store.authUser);
 
   const favoriteHolidayHandler = () => {
-    setDataPartiesForList(authorizedUser.favoriteHolidays);
+    setDataPartiesFromServer(authorizedUser.favoriteHolidays);
   };
 
   // useEffect(() => {
@@ -44,19 +44,23 @@ const App = () => {
   //     .catch(console.log('страны не прогрузились'));
   // }, []);
 
-  useEffect(() => {
-    fetch('/api/parties')
-      .then((res) => res.json())
-      .then((data) => setDataPartiesForList(data))
-      .catch(console.log('чет не грузится пока'));
-  }, []);
+  // useEffect(() => {
+  //   fetch('/api/parties')
+  //     .then((res) => res.json())
+  //     .then((data) => setDataPartiesForList(data))
+  //     .catch(console.log('чет не грузится пока'));
+  // }, []);
 
   useEffect(() => {
-    fetch(`/api/parties/countryParties/${selectedCountryKeyFromFilter}`)
+    fetch(`/api/parties/dataParties/${selectedCountryKeyFromFilter}`)
       .then((resp) => resp.json())
-      .then((data) => setDataParty(data))
+      .then((data) => setDataPartiesFromServer(data))
       .catch((err) => console.log(err));
   }, [selectedCountryKeyFromFilter]);
+
+  useEffect(() => {
+    setDataPartiesForList(dataPartiesFromServer);
+  }, [dataPartiesFromServer]);
 
   useEffect(() => {
     fetch('/api/parties/availableCountries')
@@ -127,9 +131,9 @@ const App = () => {
   //   combine(dataParty, dataCounty);
   // }, [dataParty, dataCounty]);
 
-  useEffect(() => {
-    setDataPartiesForList(combinedDataParties);
-  }, [combinedDataParties]);
+  // useEffect(() => {
+  //   setDataPartiesForList(combinedDataParties);
+  // }, [combinedDataParties]);
 
   useEffect(() => {
     const filter = (arrForList, searchWord) => {
@@ -141,9 +145,9 @@ const App = () => {
       );
       return filteredList;
     };
-    const filteredList = filter(combinedDataParties, searchWordFromFilter);
+    const filteredList = filter(dataPartiesFromServer, searchWordFromFilter);
     setDataPartiesForList(filteredList);
-  }, [combinedDataParties, searchWordFromFilter]);
+  }, [dataPartiesFromServer, searchWordFromFilter]);
 
   // console.log(authorizedUser);
 

@@ -33,8 +33,8 @@ const FilterPanel = (props) => {
   };
 
   const resetSelectCountryKey = () => {
-    dispatch(selectCountryKeyAC(null));
-    setSelectCountryName(null);
+    dispatch(selectCountryKeyAC('all'));
+    setSelectCountryName('');
     changeStatusSelect();
   };
 
