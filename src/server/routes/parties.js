@@ -8,34 +8,101 @@ const fetch = require('node-fetch');
 
 const User = require('../models/user');
 
+router.get('/countries', (req, res) => {
+  fetch('https://restcountries.eu/rest/v2/all')
+    .then((resp) => resp.json())
+    .then((data) => res.json(data))
+    .catch((err) => console.log('Error:', err));
+});
+
 router.get('/', async (req, res) => {
-  const resp = await fetch('https://date.nager.at/api/v2/NextPublicHolidaysWorldwide');
-  const reasons = await resp.json();
+  const dataHolidays = await fetch('https://date.nager.at/api/v2/NextPublicHolidaysWorldwide')
+    .then((data) => data.json())
+    .catch((err) => console.log(err));
+
+  const dataCountries = await fetch('https://restcountries.eu/rest/v2/all')
+    .then((data) => data.json())
+    .catch((err) => console.log(err));
+
   const user = await User.findById(req.session.userId)
     .then((data) => {
       return data;
     })
     .catch((err) => console.log(err));
-  const newReasonsArr = reasons.map((item) => {
-    for (let i = 0; i < user.favoriteHolidays.length; i++) {
-      if (item.name === user.favoriteHolidays[i].name) {
-        return {
-          ...item,
-          like: true,
-        };
-      }
-    }
-    if (item.like) {
-      return item;
-    }
 
-    return {
-      ...item,
-      like: false,
-    };
-  });
-  await res.json(newReasonsArr);
+  const combine = (dataPartyArr, dataCountyArr, userData) => {
+    let combainData = [];
+    if (dataPartyArr.length && dataCountyArr.length) {
+      combainData = dataPartyArr.map((item) => {
+        for (let i = 0; i < dataCountyArr.length; i++) {
+          if (item.countryCode === dataCountyArr[i].alpha2Code) {
+            for (let j = 0; j < userData.favoriteHolidays.length; j++) {
+              if (
+                userData.favoriteHolidays[j].country === dataCountyArr[i].name &&
+                userData.favoriteHolidays[j].name === item.name
+              ) {
+                return {
+                  ...item,
+                  country: dataCountyArr[i].name,
+                  flag: dataCountyArr[i].flag,
+                  like: true,
+                };
+              }
+            }
+            return {
+              ...item,
+              country: dataCountyArr[i].name,
+              flag: dataCountyArr[i].flag,
+              like: false,
+            };
+          }
+        }
+        return item;
+      });
+    }
+    return combainData;
+  };
+  const combineData = combine(dataHolidays, dataCountries, user);
+  await res.json(combineData);
 });
+//     for (let i = 0; i < parties.length; i += 1) {
+//       const countrySearch = dataCountyArr.filter((item) => item.alpha2Code === dataPartyArr[i].countryCode);
+//       parties[i].flag = countrySearch[0].flag;
+//       parties[i].country = countrySearch[0].name;
+//       // parties[i].like = false;
+//     }
+//     setcombinedDataParties(parties);
+//   }
+// };
+// combine(dataParty, dataCounty);
+
+// const resp = await fetch('https://date.nager.at/api/v2/NextPublicHolidaysWorldwide');
+// const reasons = await resp.json();
+// const user = await User.findById(req.session.userId)
+//   .then((data) => {
+//     return data;
+//   })
+//   .catch((err) => console.log(err));
+// const newReasonsArr = reasons.map((item) => {
+//   for (let i = 0; i < user.favoriteHolidays.length; i++) {
+//     if (item.name === user.favoriteHolidays[i].name) {
+//       return {
+//         ...item,
+//         like: true,
+//       };
+//     }
+//   }
+//   if (item.like) {
+//     return item;
+//   }
+
+//   return {
+//     ...item,
+//     like: false,
+//   };
+// });
+// await res.json(newReasonsArr);
+// });
 
 router.get('/user', (req, res) => {
   User.findById(req.session.userId)
@@ -79,13 +146,6 @@ router.post('/party', (req, res) => {
 
 router.get('/availableCountries', (req, res) => {
   fetch('https://date.nager.at/api/v2/AvailableCountries')
-    .then((resp) => resp.json())
-    .then((data) => res.json(data))
-    .catch((err) => console.log('Error:', err));
-});
-
-router.get('/countries', (req, res) => {
-  fetch('https://restcountries.eu/rest/v2/all')
     .then((resp) => resp.json())
     .then((data) => res.json(data))
     .catch((err) => console.log('Error:', err));

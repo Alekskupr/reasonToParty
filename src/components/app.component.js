@@ -37,25 +37,25 @@ const App = () => {
     setDataPartiesForList(authorizedUser.favoriteHolidays);
   };
 
+  // useEffect(() => {
+  //   fetch('/api/parties/countries')
+  //     .then((resp) => resp.json())
+  //     .then((data) => setDataCountry(data))
+  //     .catch(console.log('страны не прогрузились'));
+  // }, []);
+
   useEffect(() => {
-    fetch('/api/parties/countries')
-      .then((resp) => resp.json())
-      .then((data) => setDataCountry(data))
-      .catch(console.log('страны не прогрузились'));
+    fetch('/api/parties')
+      .then((res) => res.json())
+      .then((data) => setDataPartiesForList(data))
+      .catch(console.log('чет не грузится пока'));
   }, []);
 
   useEffect(() => {
-    if (selectedCountryKeyFromFilter) {
-      fetch(`/api/parties/countryParties/${selectedCountryKeyFromFilter}`)
-        .then((resp) => resp.json())
-        .then((data) => setDataParty(data))
-        .catch((err) => console.log(err));
-    } else {
-      fetch('/api/parties')
-        .then((res) => res.json())
-        .then((data) => setDataParty(data))
-        .catch(console.log('чет не грузится пока'));
-    }
+    fetch(`/api/parties/countryParties/${selectedCountryKeyFromFilter}`)
+      .then((resp) => resp.json())
+      .then((data) => setDataParty(data))
+      .catch((err) => console.log(err));
   }, [selectedCountryKeyFromFilter]);
 
   useEffect(() => {
@@ -111,21 +111,21 @@ const App = () => {
     partyInfoSearch(selectedParty, dataPartiesForList);
   }, [selectedParty, dispatch]);
 
-  useEffect(() => {
-    const combine = (dataPartyArr, dataCountyArr) => {
-      if ((dataPartyArr.length, dataCountyArr.length)) {
-        const parties = [...dataPartyArr];
-        for (let i = 0; i < parties.length; i += 1) {
-          const countrySearch = dataCountyArr.filter((item) => item.alpha2Code === dataPartyArr[i].countryCode);
-          parties[i].flag = countrySearch[0].flag;
-          parties[i].country = countrySearch[0].name;
-          // parties[i].like = false;
-        }
-        setcombinedDataParties(parties);
-      }
-    };
-    combine(dataParty, dataCounty);
-  }, [dataParty, dataCounty]);
+  // useEffect(() => {
+  //   const combine = (dataPartyArr, dataCountyArr) => {
+  //     if ((dataPartyArr.length, dataCountyArr.length)) {
+  //       const parties = [...dataPartyArr];
+  //       for (let i = 0; i < parties.length; i += 1) {
+  //         const countrySearch = dataCountyArr.filter((item) => item.alpha2Code === dataPartyArr[i].countryCode);
+  //         parties[i].flag = countrySearch[0].flag;
+  //         parties[i].country = countrySearch[0].name;
+  //         // parties[i].like = false;
+  //       }
+  //       setcombinedDataParties(parties);
+  //     }
+  //   };
+  //   combine(dataParty, dataCounty);
+  // }, [dataParty, dataCounty]);
 
   useEffect(() => {
     setDataPartiesForList(combinedDataParties);
