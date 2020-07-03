@@ -16,6 +16,8 @@ router.get('/countries', (req, res) => {
 });
 
 router.get('/dataParties/:key', async (req, res) => {
+  // console.log(req.session.userId);
+
   const url = req.params.key === 'all' ? 'NextPublicHolidaysWorldwide' : `NextPublicHolidays/${req.params.key}`;
 
   const dataHolidays = await fetch(`https://date.nager.at/api/v2/${url}`)
@@ -28,9 +30,14 @@ router.get('/dataParties/:key', async (req, res) => {
 
   const user = await User.findById(req.session.userId)
     .then((data) => {
-      return data;
+      if (data) {
+        return data;
+      }
+      return {
+        favoriteHolidays: [],
+      };
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log('Err userFind:', err));
 
   const combine = (dataPartyArr, dataCountyArr, userData) => {
     let combainData = [];

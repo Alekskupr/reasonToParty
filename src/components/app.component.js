@@ -56,7 +56,7 @@ const App = () => {
       .then((resp) => resp.json())
       .then((data) => setDataPartiesFromServer(data))
       .catch((err) => console.log(err));
-  }, [selectedCountryKeyFromFilter]);
+  }, [selectedCountryKeyFromFilter, authUser]);
 
   useEffect(() => {
     setDataPartiesForList(dataPartiesFromServer);
