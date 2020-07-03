@@ -12,12 +12,16 @@
 
 .clsLike2 {
   fill: #fff;
-  stroke: #2196f3;
+  stroke: #FF7400;
   stroke-width: 1px;
 }
 
  
 button:hover .clsLike2, .clsLike2Active {
-  fill: #2196f3;
+  fill: #FF7400;
 }
 
+button:hover .clsLike2Active {
+  fill: #fff;
+  stroke: #FF7400;
+}

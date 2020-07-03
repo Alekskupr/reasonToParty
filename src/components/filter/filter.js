@@ -34,7 +34,6 @@ const FilterPanel = (props) => {
 
   return (
     <div className="containerFilter">
-      <div>{JSON.stringify(selectCountryName)}</div>
       <button
         type="button"
         className={selectCountryName === 'all' ? 'active' : undefined}
@@ -43,7 +42,11 @@ const FilterPanel = (props) => {
       >
         holidays coming up
       </button>
-      <button type="button" onClick={changeStatusSelect}>
+      <button
+        className={selectCountryName !== 'all' && selectCountryName !== 'favorite' ? 'active' : undefined}
+        type="button"
+        onClick={changeStatusSelect}
+      >
         select country
       </button>
       {isOpenSelect && (
@@ -59,7 +62,6 @@ const FilterPanel = (props) => {
           </ul>
         </div>
       )}
-      <input className="searchInput" type="text" onChange={onChangeHandlerSearcher} placeholder="search" />
       <button
         value="favorite"
         className={selectCountryName === 'favorite' ? 'active' : undefined}
@@ -68,6 +70,7 @@ const FilterPanel = (props) => {
       >
         my favorite holidays
       </button>
+      <input className="searchInput" type="text" onChange={onChangeHandlerSearcher} placeholder="search" />
     </div>
   );
 };

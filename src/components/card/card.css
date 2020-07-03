@@ -34,7 +34,7 @@
 }
 
 .card:hover {
-  box-shadow: 0px 3px 3px 1px rgba(34, 60, 80, 0.5), 0px 0px 3px 1px rgba(34, 60, 80, 0.5);
+  box-shadow: 0px 3px 3px 1px #A64B00, 0px 0px 3px 1px #A64B00;
 }
 
 /* .card:nth-child(n + 7) {
@@ -61,53 +61,33 @@
 } */
 
 .infoArea {
-  /* grid-area: infoArea; */
   border: 1px solid black;
   overflow: auto;
   width: auto;
 }
 
-/* .subflagArea {
-  grid-area: subflagArea;
-  border: 1px solid black;
-} */
-
 .likeArea {
-  /* grid-area: likeArea; */
   display: flex;
   height: 40px;
 }
 
 .likeArea button {
-  background-color: #fff;
-  border: 1px solid #2196f3;
-  border-radius: 5px;
   font-size: 16px;
+  
+}
+
+.likeButton:hover{
+  background-color: #fff;
 }
 
 .likeArea .infoButton {
-  /* background-color: #fff;
-  border: 1px solid #2196f3;
-  border-radius: 5px; */
   flex-grow: 1;
   margin-right: 5px;
-  color: #2196f3;
-}
 
-.likeArea .infoButton:hover {
-  border: 1px solid #2196f3;
-  background-color: #2196f3;
-  color: #fff;
 }
 
 .infoArea {
   width: 100%;
-}
-
-.flagArea {
-  /* grid-area: flagArea; */
-
-  /* border: 1px solid black; */
 }
 
 .flag {
@@ -115,7 +95,7 @@
   height: 40px;
   margin: 0 auto;
   border-radius: 50%;
-  border: 1px solid #2196f3;
+  border: 1px solid #A64B00;
   position: relative;
   overflow: hidden;
 }

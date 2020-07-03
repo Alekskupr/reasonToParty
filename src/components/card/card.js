@@ -84,7 +84,7 @@ const Card = (props) => {
         <button onClick={changeCard} className="infoButton" type="button">
           {isOpenCardInfo ? <span>Close</span> : <span>Info</span>}
         </button>
-        <button onClick={likeHandler} type="button">
+        <button className="likeButton" onClick={likeHandler} type="button">
           <Like like={like} />
         </button>
       </div>

@@ -11,7 +11,6 @@
   position: sticky;
   top: 0;
   /* width: 100%; */
-
 }
 
 @media all and (max-width: 767px) {
@@ -28,30 +27,38 @@
 .searchInput {
   outline: 0;
   box-shadow: none;
-  border: 1px solid #2196f3;
+  border: 1px solid #a64b00;
   border-radius: 5px;
   height: 40px;
   font-family: 'Pragmatica-Light', Helvetica, Arial, sans-serif;
-  font-style: italic;
-  font-size: 18px;
-  font-weight: bold;
-  color: #4a4a4a;
+  /* font-style: italic; */
+  font-size: 16px;
+  /* font-weight: bold; */
+
   padding: 5px;
   box-sizing: border-box;
 }
 
+.searchInput:focus,
+.searchInput:hover {
+  background-color: #ff7400;
+  color: white;
+}
 
-.filterText {
-  color: #fff; 
-  font-style: italic;
-  font-size: 18px;
+.searchInput:hover::placeholder,
+.searchInput:focus::placeholder {
+  color: white;
+}
+
+.searchInput::placeholder {
+  color: #a64b00;
 }
 
 .containerCountryList {
   display: flex;
   flex-direction: column;
   max-height: 30vh;
-  overflow: auto; 
+  overflow: auto;
 }
 
 .containerFilter button {
@@ -60,7 +67,8 @@
 }
 
 .containerFilter .active {
-  background-color: #2196f3;
+  background-color: #ff7400;
+  color: #fff;
 }
 
 .containerCountryList ul {
@@ -68,16 +76,9 @@
   margin: 0;
   background-color: #fff;
   border-radius: 5px;
+  border: 1px solid #a64b00;
 }
 
-.containerCountryList li {
-  padding: 5px;
-  border-radius: 5px;
-  /* border: 1px solid #2196f3; */
-}
-
-.containerCountryList li:hover {
-  background-color: #2196f3;
-  color: #fff;
-  cursor: pointer;
-}
+/* .containerCountryList ul::-webkit-scrollbar {
+  width: 0;
+} */
