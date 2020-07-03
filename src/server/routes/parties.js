@@ -16,18 +16,6 @@ router.get('/countries', (req, res) => {
 });
 
 router.get('/dataParties/:key', async (req, res) => {
-  // console.log(req.session.userId);
-
-  const url = req.params.key === 'all' ? 'NextPublicHolidaysWorldwide' : `NextPublicHolidays/${req.params.key}`;
-
-  const dataHolidays = await fetch(`https://date.nager.at/api/v2/${url}`)
-    .then((data) => data.json())
-    .catch((err) => console.log(err));
-
-  const dataCountries = await fetch('https://restcountries.eu/rest/v2/all')
-    .then((data) => data.json())
-    .catch((err) => console.log(err));
-
   const user = await User.findById(req.session.userId)
     .then((data) => {
       if (data) {
@@ -39,6 +27,20 @@ router.get('/dataParties/:key', async (req, res) => {
     })
     .catch((err) => console.log('Err userFind:', err));
 
+  if (req.params.key === 'favorite') {
+    res.json(user.favoriteHolidays);
+  }
+
+  const url = req.params.key === 'all' ? 'NextPublicHolidaysWorldwide' : `NextPublicHolidays/${req.params.key}`;
+
+  const dataHolidays = await fetch(`https://date.nager.at/api/v2/${url}`)
+    .then((data) => data.json())
+    .catch((err) => console.log(err));
+
+  const dataCountries = await fetch('https://restcountries.eu/rest/v2/all')
+    .then((data) => data.json())
+    .catch((err) => console.log(err));
+
   const combine = (dataPartyArr, dataCountyArr, userData) => {
     let combainData = [];
     if (dataPartyArr.length && dataCountyArr.length) {
@@ -48,7 +50,8 @@ router.get('/dataParties/:key', async (req, res) => {
             for (let j = 0; j < userData.favoriteHolidays.length; j++) {
               if (
                 userData.favoriteHolidays[j].country === dataCountyArr[i].name &&
-                userData.favoriteHolidays[j].name === item.name
+                userData.favoriteHolidays[j].name === item.name &&
+                userData.favoriteHolidays[j].date === item.date
               ) {
                 return {
                   ...item,
@@ -71,54 +74,10 @@ router.get('/dataParties/:key', async (req, res) => {
     }
     return combainData;
   };
+
   const combineData = combine(dataHolidays, dataCountries, user);
   await res.json(combineData);
 });
-// router.get('/countryParties/:key', (req, res) => {
-//   fetch(`https://date.nager.at/api/v2/NextPublicHolidays/${req.params.key}`)
-//     .then((resp) => resp.json())
-//     .then((data) => res.json(data))
-//     .catch((err) => console.log('Error:', err));
-// });
-
-//     for (let i = 0; i < parties.length; i += 1) {
-//       const countrySearch = dataCountyArr.filter((item) => item.alpha2Code === dataPartyArr[i].countryCode);
-//       parties[i].flag = countrySearch[0].flag;
-//       parties[i].country = countrySearch[0].name;
-//       // parties[i].like = false;
-//     }
-//     setcombinedDataParties(parties);
-//   }
-// };
-// combine(dataParty, dataCounty);
-
-// const resp = await fetch('https://date.nager.at/api/v2/NextPublicHolidaysWorldwide');
-// const reasons = await resp.json();
-// const user = await User.findById(req.session.userId)
-//   .then((data) => {
-//     return data;
-//   })
-//   .catch((err) => console.log(err));
-// const newReasonsArr = reasons.map((item) => {
-//   for (let i = 0; i < user.favoriteHolidays.length; i++) {
-//     if (item.name === user.favoriteHolidays[i].name) {
-//       return {
-//         ...item,
-//         like: true,
-//       };
-//     }
-//   }
-//   if (item.like) {
-//     return item;
-//   }
-
-//   return {
-//     ...item,
-//     like: false,
-//   };
-// });
-// await res.json(newReasonsArr);
-// });
 
 router.get('/user', (req, res) => {
   User.findById(req.session.userId)
@@ -167,6 +126,7 @@ router
       {
         $pull: { favoriteHolidays: { name: req.body.likeHoliday.name, country: req.body.likeHoliday.country } },
       },
+      { new: true },
       (err, user) => {
         if (err) {
           res.json({

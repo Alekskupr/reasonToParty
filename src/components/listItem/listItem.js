@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCountryKeyAC } from '../../redux/action';
+import './listItem.css';
 
 const ListItem = (props) => {
   const { data } = props;
-  const { value, key } = data;
 
-  const dispatch = useDispatch();
-
-  // const selectCountry = () => {
-  //   dispatch(selectCountryKeyAC(key));
-  // };
 
   return (
-    <div>
-      <li
-        type="button"
-        onClick={() => {
-          props.selectedItem(data);
-        }}
-      >
-        {value}
-      </li>
-    </div>
+    <button
+      type="button"
+      value={data.key}
+      onClick={(e) => {
+        props.filterHandler(e);
+      }}
+    >
+      {data.value}
+    </button>
   );
 };
 

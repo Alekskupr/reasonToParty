@@ -33,9 +33,9 @@ const App = () => {
   const authorizedUser = useSelector((store) => store.authorizedUser);
   const authUser = useSelector((store) => store.authUser);
 
-  const favoriteHolidayHandler = () => {
-    setDataPartiesFromServer(authorizedUser.favoriteHolidays);
-  };
+  // const favoriteHolidayHandler = () => {
+  //   setDataPartiesFromServer(authorizedUser.favoriteHolidays);
+  // };
 
   // useEffect(() => {
   //   fetch('/api/parties/countries')
@@ -158,7 +158,7 @@ const App = () => {
         {/* <div>{JSON.stringify(authorizedUser)}</div> */}
       </section>
       <section className="nav">
-        <FilterPanel availableCountries={availableCountries} favoriteHolidayHandler={favoriteHolidayHandler} />
+        <FilterPanel availableCountries={availableCountries} />
       </section>
       <article className="partyInfo">
         {dataPartiesForList.length ? (

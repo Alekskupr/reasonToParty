@@ -26,8 +26,7 @@ const Card = (props) => {
   }, [isOpenCardInfo, dispatch]);
 
   const likeHandler = () => {
-    const favoriteHoliday = { flag, name, date, country, like };
-    console.log(favoriteHoliday);
+    const favoriteHoliday = { flag, name, date, country, like: !like };
     if (!like) {
       fetch(`/api/parties/party`, {
         method: 'POST',

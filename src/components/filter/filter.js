@@ -5,12 +5,12 @@ import { searchWordAC, selectCountryKeyAC } from '../../redux/action';
 import './filter.css';
 
 const FilterPanel = (props) => {
-  const { availableCountries, favoriteHolidayHandler } = props;
+  const { availableCountries } = props;
 
   const [searchWord, setSearchWord] = useState('');
   const [isOpenSelect, setIsOpenSelect] = useState(false);
 
-  const [SelectCountryName, setSelectCountryName] = useState(null);
+  const [selectCountryName, setSelectCountryName] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -26,45 +26,40 @@ const FilterPanel = (props) => {
     setIsOpenSelect(!isOpenSelect);
   };
 
-  const selectedItem = (objCountry) => {
-    dispatch(selectCountryKeyAC(objCountry.key));
-    setSelectCountryName(objCountry.value);
-    changeStatusSelect();
-  };
-
-  const resetSelectCountryKey = () => {
-    dispatch(selectCountryKeyAC('all'));
-    setSelectCountryName('');
-    changeStatusSelect();
+  const filterHandler = (e) => {
+    setSelectCountryName(e.target.value);
+    dispatch(selectCountryKeyAC(e.target.value));
+    setIsOpenSelect(false);
   };
 
   return (
     <div className="containerFilter">
-      {/* <div>
-        <span className="helloUser">Find your reason:</span>
-      </div> */}
-
+      <button type="button" value="all" onClick={filterHandler}>
+        holidays coming up
+      </button>
       <button type="button" onClick={changeStatusSelect}>
-        {SelectCountryName || 'select country'}
+        select country
       </button>
       {isOpenSelect && (
         <div className="containerCountryList">
           <ul id="country">
             <div>
-              <li type="button" onClick={resetSelectCountryKey}>
+              <button type="button" value="all" onClick={filterHandler}>
                 all counties
-              </li>
+              </button>
             </div>
-            {availableCountries.length
-              ? availableCountries.map((item, index) => {
-                  return <ListItem data={item} key={index} selectedItem={selectedItem} />;
-                })
-              : ''}
+            <div>
+              {availableCountries.length
+                ? availableCountries.map((item, index) => {
+                    return <ListItem data={item} key={index} filterHandler={filterHandler} />;
+                  })
+                : ''}
+            </div>
           </ul>
         </div>
       )}
       <input className="searchInput" type="text" onChange={onChangeHandlerSearcher} />
-      <button onClick={() => favoriteHolidayHandler()} type="button">
+      <button value="favorite" onClick={filterHandler} type="button">
         my favorite holidays
       </button>
     </div>
