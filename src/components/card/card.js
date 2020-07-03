@@ -26,22 +26,41 @@ const Card = (props) => {
   }, [isOpenCardInfo, dispatch]);
 
   const likeHandler = () => {
-    const favoriteHoliday = { flag, name, date, country };
-    fetch(`/api/parties/party`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        accept: 'application/json',
-      },
-      body: JSON.stringify({ likeHoliday: favoriteHoliday }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        if (data.status === 200) {
-          dispatch(authorizedUserAC(data.user));
-        }
+    const favoriteHoliday = { flag, name, date, country, like };
+    console.log(favoriteHoliday);
+    if (!like) {
+      fetch(`/api/parties/party`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          accept: 'application/json',
+        },
+        body: JSON.stringify({ likeHoliday: favoriteHoliday }),
       })
-      .catch((err) => console.log('catch', err));
+        .then((resp) => resp.json())
+        .then((data) => {
+          if (data.status === 200) {
+            dispatch(authorizedUserAC(data.user));
+          }
+        })
+        .catch((err) => console.log('catch', err));
+    } else {
+      fetch('/api/parties/party', {
+        method: 'DELETE',
+        headers: {
+          'Content-type': 'application/json',
+          accept: 'application/json',
+        },
+        body: JSON.stringify({ likeHoliday: favoriteHoliday }),
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          if (data.status === 200) {
+            dispatch(authorizedUserAC(data.user));
+          }
+        })
+        .catch((err) => console.log('err delete party:', err));
+    }
   };
 
   return (

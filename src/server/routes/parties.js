@@ -136,29 +136,55 @@ router.get('/user', (req, res) => {
     });
 });
 
-router.post('/party', (req, res) => {
-  User.findByIdAndUpdate(
-    req.session.userId,
-    { $push: { favoriteHolidays: req.body.likeHoliday } },
-    { new: true },
-    (err, user) => {
-      if (err) {
+router
+  .route('/party')
+  .post((req, res) => {
+    User.findByIdAndUpdate(
+      req.session.userId,
+      { $push: { favoriteHolidays: req.body.likeHoliday } },
+      { new: true },
+      (err, user) => {
+        if (err) {
+          res.json({
+            status: 400,
+            message: 'the user is not found',
+          });
+        }
         res.json({
-          status: 400,
-          message: 'the user is not found',
+          status: 200,
+          message: 'holiday added to the collection',
+          user: {
+            login: user.login,
+            favoriteHolidays: user.favoriteHolidays,
+          },
         });
-      }
-      res.json({
-        status: 200,
-        message: 'holiday added to the collection',
-        user: {
-          login: user.login,
-          favoriteHolidays: user.favoriteHolidays,
-        },
-      });
-    },
-  );
-});
+      },
+    );
+  })
+  .delete((req, res) => {
+    User.findByIdAndUpdate(
+      req.session.userId,
+      {
+        $pull: { favoriteHolidays: { name: req.body.likeHoliday.name, country: req.body.likeHoliday.country } },
+      },
+      (err, user) => {
+        if (err) {
+          res.json({
+            status: 400,
+            message: 'the user or holiday is not found',
+          });
+        }
+        res.json({
+          status: 200,
+          message: 'holiday removed from the collection',
+          user: {
+            login: user.login,
+            favoriteHolidays: user.favoriteHolidays,
+          },
+        });
+      },
+    );
+  });
 
 router.get('/availableCountries', (req, res) => {
   fetch('https://date.nager.at/api/v2/AvailableCountries')
