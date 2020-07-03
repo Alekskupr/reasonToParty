@@ -55,12 +55,12 @@
 }
 
 .containerFilter button {
-  /* margin: 5px; */
-  /* border: 1px solid #2196f3; */
-  /* border-radius: 5px; */
   min-height: 40px;
-  /* background-color: #fff; */
   font-size: 16px;
+}
+
+.containerFilter .active {
+  background-color: #2196f3;
 }
 
 .containerCountryList ul {

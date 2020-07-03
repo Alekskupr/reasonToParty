@@ -10,7 +10,7 @@ const FilterPanel = (props) => {
   const [searchWord, setSearchWord] = useState('');
   const [isOpenSelect, setIsOpenSelect] = useState(false);
 
-  const [selectCountryName, setSelectCountryName] = useState(null);
+  const [selectCountryName, setSelectCountryName] = useState('all');
 
   const dispatch = useDispatch();
 
@@ -34,7 +34,13 @@ const FilterPanel = (props) => {
 
   return (
     <div className="containerFilter">
-      <button type="button" value="all" onClick={filterHandler}>
+      <div>{JSON.stringify(selectCountryName)}</div>
+      <button
+        type="button"
+        className={selectCountryName === 'all' ? 'active' : undefined}
+        value="all"
+        onClick={filterHandler}
+      >
         holidays coming up
       </button>
       <button type="button" onClick={changeStatusSelect}>
@@ -43,11 +49,6 @@ const FilterPanel = (props) => {
       {isOpenSelect && (
         <div className="containerCountryList">
           <ul id="country">
-            <div>
-              <button type="button" value="all" onClick={filterHandler}>
-                all counties
-              </button>
-            </div>
             <div>
               {availableCountries.length
                 ? availableCountries.map((item, index) => {
@@ -58,8 +59,13 @@ const FilterPanel = (props) => {
           </ul>
         </div>
       )}
-      <input className="searchInput" type="text" onChange={onChangeHandlerSearcher} />
-      <button value="favorite" onClick={filterHandler} type="button">
+      <input className="searchInput" type="text" onChange={onChangeHandlerSearcher} placeholder="search" />
+      <button
+        value="favorite"
+        className={selectCountryName === 'favorite' ? 'active' : undefined}
+        onClick={filterHandler}
+        type="button"
+      >
         my favorite holidays
       </button>
     </div>
