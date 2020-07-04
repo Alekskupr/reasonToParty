@@ -7,21 +7,41 @@
   color: #ffffff;
   display:flex;
   padding: 40px 40px;
-  border: 1px solid white;
+  /* border: 1px solid white; */
 }
 
 
 .groupInfo {
   flex-grow: 1;
-  border-right: 1px solid black;
+  border-right: 1px solid #fff;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
   max-width: calc(100%/3);
-  border: 1px solid red;
+  /* border: 1px solid red; */
   padding: 10px;
 }
 
+.groupInfo:not(:first-child) a {
+  font-size: 14px;
+}
+
+.groupInfo:last-child{
+  border: none;
+}
+
+.groupInfo:first-child{
+  position: relative;
+  top: -10px;
+}
+
+.groupInfo * {
+  margin: 0 0 10px 0;
+}
+
+.thankstext {
+  font-size: 14px;
+}
 /* .paragraphFooter {
   margin: 0;
   font-size:12px;

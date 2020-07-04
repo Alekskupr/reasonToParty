@@ -28,6 +28,19 @@ const Footer = () => {
         <a href="https://date.nager.at/">Nager.Date</a>
         <a href="https://www.restcountries.eu>">REST Counties</a>
         <a href="https://github.com/spencermountain/wtf_wikipedia">wtf_wikipedia</a>
+        <div className="thankstext">
+          <span>Icons made by </span>
+          <a
+            href="https://www.flaticon.com/free-icon/cocktail_876602?term=cocktail&page=6&position=17"
+            title="Kiranshastry"
+          >
+            <span>Kiranshastry </span>
+          </a>
+          <span>from </span>
+          <a href="https://www.flaticon.com/" title="Flaticon">
+            www.flaticon.com
+          </a>
+        </div>
         <p>Without these services, my project would not be possible. Thanks!</p>
       </div>
     </div>

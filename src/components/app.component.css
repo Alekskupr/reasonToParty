@@ -11,6 +11,11 @@ body {
   width: 0;
 }
 
+a:active, a:hover, a {
+  text-decoration: none;
+  color: #fff;
+}
+
 button {
   outline: none;
   cursor: pointer;
@@ -50,7 +55,8 @@ p {
   grid-template-rows: 50px 1fr 250px;
   min-height: calc(100vh + 250px);
   margin: 0px;
-  background-color: #ffb273;
+  /* background-color: #ffb273; */
+  background: linear-gradient(to bottom, #ffb273,  #ffd3b0);
 }
 
 @media all and (max-width: 767px) {
