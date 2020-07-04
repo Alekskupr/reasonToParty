@@ -30,6 +30,7 @@ const FilterPanel = (props) => {
     setSelectCountryName(e.target.value);
     dispatch(selectCountryKeyAC(e.target.value));
     setIsOpenSelect(false);
+    setSearchWord('');
   };
 
   return (
@@ -70,7 +71,13 @@ const FilterPanel = (props) => {
       >
         my favorite holidays
       </button>
-      <input className="searchInput" type="text" onChange={onChangeHandlerSearcher} placeholder="search" />
+      <input
+        className="searchInput"
+        value={searchWord}
+        type="text"
+        onChange={onChangeHandlerSearcher}
+        placeholder="search"
+      />
     </div>
   );
 };

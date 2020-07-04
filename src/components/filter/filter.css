@@ -7,7 +7,7 @@
   height: auto;
   /* border: 1px solid green; */
   /* height: calc(100vh - 60px); */
-  border: 1px solid red;
+  /* border: 1px solid red; */
   position: sticky;
   top: 0;
   /* width: 100%; */
@@ -31,27 +31,30 @@
   border-radius: 5px;
   height: 40px;
   font-family: 'Pragmatica-Light', Helvetica, Arial, sans-serif;
-  /* font-style: italic; */
   font-size: 16px;
-  /* font-weight: bold; */
-
   padding: 5px;
   box-sizing: border-box;
+  text-align: center;
 }
 
 .searchInput:focus,
 .searchInput:hover {
   background-color: #ff7400;
   color: white;
+  /* text-align: center; */
 }
 
-.searchInput:hover::placeholder,
-.searchInput:focus::placeholder {
+.searchInput:hover::placeholder {
   color: white;
+}
+
+.searchInput:focus::placeholder {
+  color: transparent;
 }
 
 .searchInput::placeholder {
   color: #a64b00;
+  text-align: center;
 }
 
 .containerCountryList {

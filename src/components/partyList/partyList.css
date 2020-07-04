@@ -6,7 +6,7 @@
   grid-gap: 5px;
   height: auto;
   height: 100%;
-  border: 1px solid red;
+  /* border: 1px solid #A64B00; */
 }
 
 @media all and (max-width: 767px) {

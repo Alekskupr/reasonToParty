@@ -27,17 +27,6 @@ const Header = (props) => {
         </a>
       </div>
       <div className="helloUser">
-        {/* {authUser ? (
-          <p className="helloText">
-            Only important occasions, only national holidays for you,
-            <span className="userName">
-              &nbsp;
-              {login}!
-            </span>
-          </p>
-        ) : (
-          ''
-        )} */}
       </div>
       <div className="navDiv">
         <button className="navButton" type="button">
