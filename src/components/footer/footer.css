@@ -1,7 +1,42 @@
-.footer {
+
+
+.containerFooter {
   /* background-color: greenyellow; */
   grid-area: footer;
   background: #A64B00;
   color: #ffffff;
+  display:flex;
+  padding: 40px 40px;
+  border: 1px solid white;
 }
 
+
+.groupInfo {
+  flex-grow: 1;
+  border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: calc(100%/3);
+  border: 1px solid red;
+  padding: 10px;
+}
+
+/* .paragraphFooter {
+  margin: 0;
+  font-size:12px;
+} */
+
+.linkLogoFooter {
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+.textLogo {
+  display: block;
+}

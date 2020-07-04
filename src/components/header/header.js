@@ -23,7 +23,7 @@ const Header = (props) => {
       <div className="logoDiv">
         <a href="/" className="linkLogo">
           <Cocktail />
-          <span className="textLogo">reason to party!</span>
+          <span className="textLogo">reason to party</span>
         </a>
       </div>
       <div className="helloUser">

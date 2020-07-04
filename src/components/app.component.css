@@ -1,9 +1,10 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   font-family: 'Pragmatica-Light', Helvetica, Arial, sans-serif;
   font-size: 16px;
-  color: #A64B00;
+  color: #a64b00;
 }
 
 ::-webkit-scrollbar {
@@ -15,20 +16,24 @@ button {
   cursor: pointer;
   font-family: 'Pragmatica-Light', Helvetica, Arial, sans-serif;
   background-color: #fff;
-  border: 1px solid #A64B00;
+  border: 1px solid #a64b00;
   border-radius: 5px;
-  color: #A64B00;
+  color: #a64b00;
 }
 
 input {
-  color:#A64B00;
+  color: #a64b00;
   font-size: 16px;
 }
 
 /* button:focus, */
 button:hover {
-  background-color:#FF7400;
+  background-color: #ff7400;
   color: #fff;
+}
+p {
+  margin: 0;
+  font-size: 12px;
 }
 
 .app {
@@ -37,39 +42,37 @@ button:hover {
   position: relative;
   display: grid;
   grid-template-areas:
-  "header header header"
-  "nav article side"
-  "footer footer footer";
+    'header header header'
+    'nav article side'
+    'footer footer footer';
   grid-gap: 5px;
   grid-template-columns: 200px 1fr 200px;
-  grid-template-rows: 50px 1fr 50px;
-  min-height: 100vh;
+  grid-template-rows: 50px 1fr 250px;
+  min-height: calc(100vh + 250px);
   margin: 0px;
-  /* background-color: rgba(30, 31, 32, 0.15); */
-  background-color: #FFB273;
+  background-color: #ffb273;
 }
 
 @media all and (max-width: 767px) {
   .app {
     min-height: 100vh;
     grid-template-areas:
-    "header"
-    "nav"
-    "article"
-    "side"
-    "footer";
+      'header'
+      'nav'
+      'article'
+      'side'
+      'footer';
     grid-template-columns: 1fr;
     grid-template-rows: 50px 30px 1fr 30px 30px;
   }
 }
 .header {
-  /* border: 1px solid green; */
   grid-area: header;
-  background-color:#FF7400;
-  border-bottom: 2px solid #A64B00;
+  background-color: #ff7400;
+  border-bottom: 1px solid #a64b00;
 }
 
-.nav{
+.nav {
   grid-area: nav;
   /* border: 1px solid green; */
   position: relative;
@@ -80,7 +83,7 @@ button:hover {
   /* border: 1px solid green; */
 }
 
-.sidebar{
+.sidebar {
   grid-area: side;
   /* border: 1px solid green; */
 }
@@ -88,8 +91,6 @@ button:hover {
 /* .footer {
   grid-area: footer;
 } */
-
-
 
 h4 {
   margin: 0;
