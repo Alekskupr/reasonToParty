@@ -1,0 +1,12 @@
+.sidebarConteiner {
+  padding: 5px;
+  grid-area: sidebar;
+}
+
+.asideContent {
+  width: 100px;
+  height: 100px;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #a64b00;
+}

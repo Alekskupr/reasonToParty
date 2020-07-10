@@ -1,16 +1,23 @@
 .containerFilter {
+  grid-area: nav;
   margin: 0;
   padding: 0;
+  position: relative;
+  height: 100%;
+  
+}
+
+.filterPanel {
+  position: sticky;
+  top: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: auto;
-  /* border: 1px solid green; */
-  /* height: calc(100vh - 60px); */
-  /* border: 1px solid red; */
-  position: sticky;
-  top: 0;
-  /* width: 100%; */
+}
+
+.filterPanel * {
+  margin: 5px;
 }
 
 @media all and (max-width: 767px) {
@@ -18,10 +25,6 @@
     flex-direction: row;
     height: 100%;
   }
-}
-
-.containerFilter * {
-  margin: 5px;
 }
 
 .searchInput {

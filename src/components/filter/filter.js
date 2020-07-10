@@ -35,49 +35,51 @@ const FilterPanel = (props) => {
 
   return (
     <div className="containerFilter">
-      <button
-        type="button"
-        className={selectCountryName === 'all' ? 'active' : undefined}
-        value="all"
-        onClick={filterHandler}
-      >
-        holidays coming up
-      </button>
-      <button
-        className={selectCountryName !== 'all' && selectCountryName !== 'favorite' ? 'active' : undefined}
-        type="button"
-        onClick={changeStatusSelect}
-      >
-        select country
-      </button>
-      {isOpenSelect && (
-        <div className="containerCountryList">
-          <ul id="country">
-            <div>
-              {availableCountries.length
-                ? availableCountries.map((item, index) => {
-                    return <ListItem data={item} key={index} filterHandler={filterHandler} />;
-                  })
-                : ''}
-            </div>
-          </ul>
-        </div>
-      )}
-      <button
-        value="favorite"
-        className={selectCountryName === 'favorite' ? 'active' : undefined}
-        onClick={filterHandler}
-        type="button"
-      >
-        my favorite holidays
-      </button>
-      <input
-        className="searchInput"
-        value={searchWord}
-        type="text"
-        onChange={onChangeHandlerSearcher}
-        placeholder="search"
-      />
+      <div className="filterPanel">
+        <button
+          type="button"
+          className={selectCountryName === 'all' ? 'active' : undefined}
+          value="all"
+          onClick={filterHandler}
+        >
+          holidays coming up
+        </button>
+        <button
+          className={selectCountryName !== 'all' && selectCountryName !== 'favorite' ? 'active' : undefined}
+          type="button"
+          onClick={changeStatusSelect}
+        >
+          select country
+        </button>
+        {isOpenSelect && (
+          <div className="containerCountryList">
+            <ul id="country">
+              <div>
+                {availableCountries.length
+                  ? availableCountries.map((item, index) => {
+                      return <ListItem data={item} key={index} filterHandler={filterHandler} />;
+                    })
+                  : ''}
+              </div>
+            </ul>
+          </div>
+        )}
+        <button
+          value="favorite"
+          className={selectCountryName === 'favorite' ? 'active' : undefined}
+          onClick={filterHandler}
+          type="button"
+        >
+          my favorite holidays
+        </button>
+        <input
+          className="searchInput"
+          value={searchWord}
+          type="text"
+          onChange={onChangeHandlerSearcher}
+          placeholder="search"
+        />
+      </div>
     </div>
   );
 };

@@ -146,11 +146,13 @@ router
     );
   });
 
-router.get('/availableCountries', (req, res) => {
-  fetch('https://date.nager.at/api/v2/AvailableCountries')
-    .then((resp) => resp.json())
-    .then((data) => res.json(data))
-    .catch((err) => console.log('Error:', err));
+router.get('/resume', (req, res) => {
+  console.log('hey this is resume server route');
+
+  res.json({
+    status: 200,
+    resume: 'отправленное резюме',
+  });
 });
 
 router.post('/', (req, res) => {
@@ -159,6 +161,13 @@ router.post('/', (req, res) => {
     .then((data) => data.text().substring(0, 1000))
     .then((data) => res.json(data))
     .catch(() => res.json('Sorry! There is no information about this holiday...'));
+});
+
+router.get('/availableCountries', (req, res) => {
+  fetch('https://date.nager.at/api/v2/AvailableCountries')
+    .then((resp) => resp.json())
+    .then((data) => res.json(data))
+    .catch((err) => console.log('Error:', err));
 });
 
 router.post('/registration', (req, res) => {

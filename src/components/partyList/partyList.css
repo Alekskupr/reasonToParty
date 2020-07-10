@@ -1,12 +1,10 @@
 .containerPartyInfo {
+  grid-area: article;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 5px;
-  height: auto;
-  height: 100%;
-  /* border: 1px solid #A64B00; */
 }
 
 @media all and (max-width: 767px) {

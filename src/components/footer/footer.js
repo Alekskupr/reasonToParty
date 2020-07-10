@@ -12,10 +12,13 @@ const Footer = () => {
           <span className="textLogo">reason to party</span>
         </a>
         <p className="paragraphFooter">
-          Suspendisse hendrerit tellus laoreet luctus pharetra. Aliquam porttitor vitae orci nec ultricies. Curabitur
-          vehicula, libero eget faucibus faucibus, purus erat eleifend enim, porta pellentesque ex mi ut sem.
+          This project helps you find a great reason to organize a themed party with friends. Only serious reasons, only
+          on a national scale. For you.
         </p>
-        <p className="paragraphFooter">&#9786; Kuprishov Inc. All rights reserved</p>
+        <p className="paragraphFooter">
+          &#9786; Kuprishov Inc. All rights reserved.
+          <br /> (Not at all, my rights are not reserved. Use, my friend)
+        </p>
       </div>
 
       <div className="groupInfo">

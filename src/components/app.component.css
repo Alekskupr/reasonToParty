@@ -11,7 +11,9 @@ body {
   width: 0;
 }
 
-a:active, a:hover, a {
+a:active,
+a:hover,
+a {
   text-decoration: none;
   color: #fff;
 }
@@ -31,7 +33,6 @@ input {
   font-size: 16px;
 }
 
-/* button:focus, */
 button:hover {
   background-color: #ff7400;
   color: #fff;
@@ -42,21 +43,18 @@ p {
 }
 
 .app {
-  /* background-color: yellow; */
-  /* border: 1px solid black; */
   position: relative;
   display: grid;
   grid-template-areas:
     'header header header'
-    'nav article side'
+    'nav article sidebar'
     'footer footer footer';
   grid-gap: 5px;
   grid-template-columns: 200px 1fr 200px;
   grid-template-rows: 50px 1fr 250px;
   min-height: calc(100vh + 250px);
   margin: 0px;
-  /* background-color: #ffb273; */
-  background: linear-gradient(to bottom, #ffb273,  #ffd3b0);
+  background: linear-gradient(to bottom, #ffb273, #ffd3b0);
 }
 
 @media all and (max-width: 767px) {
@@ -72,31 +70,6 @@ p {
     grid-template-rows: 50px 30px 1fr 30px 30px;
   }
 }
-.header {
-  grid-area: header;
-  background-color: #ff7400;
-  border-bottom: 1px solid #a64b00;
-}
-
-.nav {
-  grid-area: nav;
-  /* border: 1px solid green; */
-  position: relative;
-}
-
-.partyInfo {
-  grid-area: article;
-  /* border: 1px solid green; */
-}
-
-.sidebar {
-  grid-area: side;
-  /* border: 1px solid green; */
-}
-
-/* .footer {
-  grid-area: footer;
-} */
 
 h4 {
   margin: 0;

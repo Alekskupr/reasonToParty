@@ -8,7 +8,7 @@ import PersonPanel from '../personPanel/personPanel';
 const Header = (props) => {
   const { authorizedUser, authUser } = props;
   const { login } = authorizedUser;
-  // console.log(authorizedUser);
+  console.log(';sldkvlkvh');
 
   const [isOpenRegPanel, setisOpenRegPanel] = useState(false);
 
@@ -26,8 +26,7 @@ const Header = (props) => {
           <span className="textLogo">reason to party</span>
         </a>
       </div>
-      <div className="helloUser">
-      </div>
+      <div className="helloUser"></div>
       <div className="navDiv">
         <button className="navButton" type="button">
           <Keypad />

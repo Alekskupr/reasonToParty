@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './app.component.css';
+import { Router, Route } from 'react-router-dom';
 import PartyList from './partyList/partyList';
 import Header from './header/header';
+import Sidebar from './sidebar/sidebar';
 import { downloadInfoAC, authorizedUserAC } from '../redux/action';
 import Footer from './footer/footer';
 import FilterPanel from './filter/filter';
@@ -32,24 +34,6 @@ const App = () => {
 
   const authorizedUser = useSelector((store) => store.authorizedUser);
   const authUser = useSelector((store) => store.authUser);
-
-  // const favoriteHolidayHandler = () => {
-  //   setDataPartiesFromServer(authorizedUser.favoriteHolidays);
-  // };
-
-  // useEffect(() => {
-  //   fetch('/api/parties/countries')
-  //     .then((resp) => resp.json())
-  //     .then((data) => setDataCountry(data))
-  //     .catch(console.log('страны не прогрузились'));
-  // }, []);
-
-  // useEffect(() => {
-  //   fetch('/api/parties')
-  //     .then((res) => res.json())
-  //     .then((data) => setDataPartiesForList(data))
-  //     .catch(console.log('чет не грузится пока'));
-  // }, []);
 
   useEffect(() => {
     fetch(`/api/parties/dataParties/${selectedCountryKeyFromFilter}`)
@@ -115,26 +99,6 @@ const App = () => {
     partyInfoSearch(selectedParty, dataPartiesForList);
   }, [selectedParty, dispatch]);
 
-  // useEffect(() => {
-  //   const combine = (dataPartyArr, dataCountyArr) => {
-  //     if ((dataPartyArr.length, dataCountyArr.length)) {
-  //       const parties = [...dataPartyArr];
-  //       for (let i = 0; i < parties.length; i += 1) {
-  //         const countrySearch = dataCountyArr.filter((item) => item.alpha2Code === dataPartyArr[i].countryCode);
-  //         parties[i].flag = countrySearch[0].flag;
-  //         parties[i].country = countrySearch[0].name;
-  //         // parties[i].like = false;
-  //       }
-  //       setcombinedDataParties(parties);
-  //     }
-  //   };
-  //   combine(dataParty, dataCounty);
-  // }, [dataParty, dataCounty]);
-
-  // useEffect(() => {
-  //   setDataPartiesForList(combinedDataParties);
-  // }, [combinedDataParties]);
-
   useEffect(() => {
     const filter = (arrForList, searchWord) => {
       const filteredList = arrForList.filter(
@@ -149,32 +113,17 @@ const App = () => {
     setDataPartiesForList(filteredList);
   }, [dataPartiesFromServer, searchWordFromFilter]);
 
-  // console.log(authorizedUser);
-
   return (
     <div className="app">
-      <section className="header">
-        <Header authorizedUser={authorizedUser} authUser={authUser} />
-        {/* <div>{JSON.stringify(authorizedUser)}</div> */}
-      </section>
-      <section className="nav">
-        <FilterPanel availableCountries={availableCountries} />
-      </section>
-      <article className="partyInfo">
-        {dataPartiesForList.length ? (
-          <PartyList dataPartiesForList={dataPartiesForList} downloadInfo={downloadInfo} />
-        ) : (
-          ''
-        )}
-      </article>
-      <aside className="sidebar">
-        <ul>
-          {authorizedUser.favoriteHolidays.map((party, index) => {
-            return <li key={index}>{party.name}</li>;
-          })}
-        </ul>
-      </aside>
-      <Footer />
+      <Route path="/" render={() => <Footer />} />
+      <Route path="/" render={() => <Header authorizedUser={authorizedUser} authUser={authUser} />} />
+      <Route path="/" render={() => <FilterPanel availableCountries={availableCountries} />} />
+      <Route path="/" render={() => <Sidebar />} />
+      <Route
+        exact
+        path="/"
+        render={() => <PartyList dataPartiesForList={dataPartiesForList} downloadInfo={downloadInfo} />}
+      />
     </div>
   );
 };

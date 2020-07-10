@@ -1,4 +1,6 @@
 .containerHeader {
+  background-color: #ff7400;
+  border-bottom: 1px solid #a64b00;
   grid-area: header;
   display: grid;
   grid-template-columns: 200px 1fr 200px;
