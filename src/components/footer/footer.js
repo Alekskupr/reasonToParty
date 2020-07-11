@@ -23,7 +23,7 @@ const Footer = () => {
 
       <div className="groupInfo">
         <span>Menu</span>
-        <Link to="/aboutMe">About me</Link>
+        <Link to="/parties/aboutMe">About me</Link>
         <Link to="/resume">Resume</Link>
       </div>
       <div className="groupInfo">

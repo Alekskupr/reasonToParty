@@ -1,6 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const fs = require('fs');
 // const createError = require('http-errors');
 // const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -18,8 +20,9 @@ const partiesRouter = require('./routes/parties');
 const app = express();
 // app.use(express.static('dist'));
 app.use(morgan('dev'));
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// app.use(cors);
 app.use(cookieParser());
 app.use(
   session({
@@ -37,6 +40,19 @@ app.use(
 app.use('/api/parties/dataParties', (req, res, next) => {
   console.log('dataParties');
   next();
+});
+
+app.get('/api/resume', (req, res) => {
+  fs.readFile(`public/resume.pdf`, (err, data) => {
+    if (data) {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.writeHead(200, { 'Content-Type': 'application/pdf' });
+      res.write(data);
+      res.end();
+    } else {
+      console.log(err);
+    }
+  });
 });
 // const checkSession = (req, res, next) => {
 //   // console.log(req.session);

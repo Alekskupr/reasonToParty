@@ -4,9 +4,12 @@ const router = express.Router();
 // const Countries = require('Countries-Api');
 const wtf = require('wtf_wikipedia');
 
+
 const fetch = require('node-fetch');
 
 const User = require('../models/user');
+const AboutMe = require('../models/aboutMe');
+// const resume = require('../../../public/Купришов Алексей Олегович (1).pdf');
 
 router.get('/countries', (req, res) => {
   fetch('https://restcountries.eu/rest/v2/all')
@@ -146,14 +149,7 @@ router
     );
   });
 
-router.get('/resume', (req, res) => {
-  console.log('hey this is resume server route');
 
-  res.json({
-    status: 200,
-    resume: 'отправленное резюме',
-  });
-});
 
 router.post('/', (req, res) => {
   wtf

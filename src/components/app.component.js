@@ -8,6 +8,7 @@ import Sidebar from './sidebar/sidebar';
 import { downloadInfoAC, authorizedUserAC } from '../redux/action';
 import Footer from './footer/footer';
 import FilterPanel from './filter/filter';
+import ResumePanel from './resumePanel/resumePanel';
 
 const App = () => {
   const [dataParty, setDataParty] = useState([]);
@@ -124,6 +125,7 @@ const App = () => {
         path="/"
         render={() => <PartyList dataPartiesForList={dataPartiesForList} downloadInfo={downloadInfo} />}
       />
+      <Route exact path="/resume" render={() => <ResumePanel />} />
     </div>
   );
 };
