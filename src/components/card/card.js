@@ -6,6 +6,7 @@ import { selectPartyNameAC, authorizedUserAC } from '../../redux/action';
 
 const Card = (props) => {
   const { flag, name, date, info, country, like } = props;
+  // console.log(props);
 
   const [isOpenCardInfo, setIsOpenCardInfo] = useState(false);
   const dispatch = useDispatch();

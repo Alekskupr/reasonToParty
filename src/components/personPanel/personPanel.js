@@ -38,7 +38,7 @@ const PersonPanel = (props) => {
       : e.target.id === 'password'
       ? setUserData({ ...userData, password: e.target.value })
       : e.target.id === 'subscription'
-      ? setUserData({ ...userData, subscription: e.target.subscription })
+      ? setUserData({ ...userData, subscription: !userData.subscription })
       : setUserData({ ...userData });
   };
 
@@ -88,7 +88,7 @@ const PersonPanel = (props) => {
       authorization: !typePanel.authorization,
     });
   };
-
+  console.log(userData);
   return (
     <CSSTransition
       in={isOpenRegPanel}
@@ -135,7 +135,7 @@ const PersonPanel = (props) => {
                   <label htmlFor="password">create password</label>
                 </div>
                 <div className={`${'inputGroup'} ${'InputCheckbox'}`}>
-                  <input onChange={inputHandler} id="subscription" type="checkbox" />
+                  <input onChange={inputHandler} id="subscription" type="checkbox" value={userData.subscription} />
                   <span>I agree to receive newsletters about my favorite holidays!</span>
                 </div>
                 <button type="submit">sign up</button>

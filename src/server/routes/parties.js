@@ -4,7 +4,6 @@ const router = express.Router();
 // const Countries = require('Countries-Api');
 const wtf = require('wtf_wikipedia');
 
-
 const fetch = require('node-fetch');
 
 const User = require('../models/user');
@@ -149,8 +148,6 @@ router
     );
   });
 
-
-
 router.post('/', (req, res) => {
   wtf
     .fetch(`${req.body.name}`)
@@ -168,6 +165,7 @@ router.get('/availableCountries', (req, res) => {
 
 router.post('/registration', (req, res) => {
   const { email, login, password, subscription } = req.body;
+  console.log(req.body);
 
   User.findOne({ login }, (err, data) => {
     if (err) {

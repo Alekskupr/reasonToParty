@@ -3,11 +3,15 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const fs = require('fs');
+const schedule = require('node-schedule');
+
 // const createError = require('http-errors');
 // const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
+const mailer = require('./mailer');
+const User = require('./models/user');
 
 mongoose.connect('mongodb://localhost:27017/reasonToParty', {
   useNewUrlParser: true,
@@ -54,6 +58,44 @@ app.get('/api/resume', (req, res) => {
     }
   });
 });
+
+// app.get('/api/mailer', (req, res) => {
+//   console.log('зашли в мэйлер');
+
+//   const message = {
+//     to: 'leshakuprish@yandex.ru',
+//     subject: 'hey! party time!',
+//     html: `<h2>сегодня праздник из твоего списка любимых поводов!<h2>`,
+//   };
+//   mailer(message);
+//   res.end();
+// });
+
+const rule = new schedule.RecurrenceRule();
+rule.hour = 8;
+
+const j = schedule.scheduleJob(rule, async () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1 < 10 ? `0${now.getMonth() + 1}` : now.getMonth() + 1;
+  const day = now.getDate();
+  const date = `${year}-${month}-${day}`;
+  const subscribers = await User.find({ subscription: true, 'favoriteHolidays.date': date });
+
+  subscribers.forEach((user) => {
+    user.favoriteHolidays.forEach((holiday) => {
+      if (holiday.date === date) {
+        const message = {
+          to: `${user.email}`,
+          subject: 'hey! party time!',
+          html: `hello, ${user.login}! don't forget to celebrate the ${holiday.name} with the people of ${holiday.country} today!`,
+        };
+        mailer(message);
+      }
+    });
+  });
+});
+
 // const checkSession = (req, res, next) => {
 //   // console.log(req.session);
 //   if (req.session.user) {
