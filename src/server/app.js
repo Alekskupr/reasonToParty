@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
@@ -59,20 +60,9 @@ app.get('/api/resume', (req, res) => {
   });
 });
 
-// app.get('/api/mailer', (req, res) => {
-//   console.log('зашли в мэйлер');
-
-//   const message = {
-//     to: 'leshakuprish@yandex.ru',
-//     subject: 'hey! party time!',
-//     html: `<h2>сегодня праздник из твоего списка любимых поводов!<h2>`,
-//   };
-//   mailer(message);
-//   res.end();
-// });
-
 const rule = new schedule.RecurrenceRule();
-rule.hour = 8;
+rule.hour = 17;
+rule.minute = 11;
 
 const j = schedule.scheduleJob(rule, async () => {
   const now = new Date();
@@ -88,7 +78,9 @@ const j = schedule.scheduleJob(rule, async () => {
         const message = {
           to: `${user.email}`,
           subject: 'hey! party time!',
-          html: `hello, ${user.login}! don't forget to celebrate the ${holiday.name} with the people of ${holiday.country} today!`,
+          html: `<h2>hello, ${user.login}! don't forget to celebrate the ${holiday.name} with the people of ${holiday.country} today!<h2>
+          <h4>Learn more about the holiday on <a href = "http://127.0.0.1:9000">reasontoparty</a></h4>
+          `,
         };
         mailer(message);
       }
